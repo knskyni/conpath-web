@@ -4,6 +4,7 @@ services:
     image: mysql:8.0.22
     volumes:
       - ./docker/mysql/data/:/var/lib/mysql/
+      - ./docker/mysql/my.cnf:/etc/my.cnf
     environment:
       MYSQL_ROOT_PASSWORD: password
     ports:
