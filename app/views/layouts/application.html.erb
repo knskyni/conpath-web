@@ -10,20 +10,20 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 
         <!-- Page Vendors Styles(used by this page) -->
-        <link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
 
         <!-- Global Theme Styles(used by all pages) -->
-        <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-        <link href="assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 
         <!-- Layout Themes(used by all pages) -->
-        <link href="assets/css/themes/layout/header/base/light.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/themes/layout/header/menu/light.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/themes/layout/header/base/light.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/themes/layout/header/menu/light.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
 
-        <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+        <link rel="shortcut icon" href="/assets/media/logos/favicon.ico" />
 
         <%= csrf_meta_tags %>
         <%= csp_meta_tag %>
@@ -34,7 +34,7 @@
     <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
         <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
             <%= link_to(root_path) do %>
-                <img alt="Logo" src="assets/conpath_logo.png" />
+                <img alt="Logo" src="/assets/conpath_logo.png" />
             <% end %>
             <div class="d-flex align-items-center">
                 <button class="btn p-0 burger-icon burger-icon-left" id="kt_aside_mobile_toggle">
@@ -61,7 +61,7 @@
                 <div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
                     <div class="brand flex-column-auto" id="kt_brand">
                         <%= link_to(root_path, {class: "brand-logo"}) do %>
-                            <img alt="Logo" src="assets/conpath_logo.png" />
+                            <img alt="Logo" src="/assets/conpath_logo.png" />
                         <% end %>
                         <button class="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
                             <span class="svg-icon svg-icon svg-icon-xl">
@@ -646,16 +646,16 @@
         </script>
 
         <!-- Global Theme Bundle(used by all pages) -->
-        <script src="assets/plugins/global/plugins.bundle.js"></script>
-        <script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
-        <script src="assets/js/scripts.bundle.js"></script>
+        <script src="/assets/plugins/global/plugins.bundle.js"></script>
+        <script src="/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
+        <script src="/assets/js/scripts.bundle.js"></script>
 
         <!-- Page Vendors(used by this page) -->
-        <script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+        <script src="/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
         <script src="https://maps.google.com/maps/api/js?key=AIzaSyBTGnKT7dt597vo9QgeQ7BFhvSRP4eiMSM"></script>
-        <script src="assets/plugins/custom/gmaps/gmaps.js"></script>
+        <script src="/assets/plugins/custom/gmaps/gmaps.js"></script>
 
         <!-- Page Scripts(used by this page) -->
-        <script src="assets/js/pages/widgets.js"></script>
+        <script src="/assets/js/pages/widgets.js"></script>
     </body>
 </html>
