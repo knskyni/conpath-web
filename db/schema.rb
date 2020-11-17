@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_17_024519) do
+ActiveRecord::Schema.define(version: 2020_11_17_025038) do
 
   create_table "courses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "school_id"
@@ -77,6 +77,27 @@ ActiveRecord::Schema.define(version: 2020_11_17_024519) do
 
   create_table "recruit_job_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "recruit_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "recruit_code"
+    t.integer "company_id"
+    t.integer "year"
+    t.integer "job_category_id"
+    t.string "job_description"
+    t.integer "recruitment_numbers"
+    t.text "working_office"
+    t.integer "status"
+    t.integer "employment_status"
+    t.string "employment_status_other"
+    t.integer "salary_2year"
+    t.integer "salary_3year"
+    t.integer "salary_4year"
+    t.text "apply_method"
+    t.string "submit_document"
+    t.text "other_description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

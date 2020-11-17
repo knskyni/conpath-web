@@ -1,0 +1,37 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  recruit_code: MyString
+  company_id: 1
+  year: 1
+  job_category_id: 1
+  job_description: MyString
+  recruitment_numbers: 1
+  working_office: MyText
+  status: 1
+  employment_status: 1
+  employment_status_other: MyString
+  salary_2year: 1
+  salary_3year: 1
+  salary_4year: 1
+  apply_method: MyText
+  submit_document: MyString
+  other_description: MyText
+
+two:
+  recruit_code: MyString
+  company_id: 1
+  year: 1
+  job_category_id: 1
+  job_description: MyString
+  recruitment_numbers: 1
+  working_office: MyText
+  status: 1
+  employment_status: 1
+  employment_status_other: MyString
+  salary_2year: 1
+  salary_3year: 1
+  salary_4year: 1
+  apply_method: MyText
+  submit_document: MyString
+  other_description: MyText
