@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  company_code: MyString
+  name: MyString
+  name_furigana: MyString
+  postal_code: MyString
+  prefecture_id: 1
+  address: MyString
+  found_date: 2020-11-17
+  tel_number: MyString
+  fax_number: MyString
+  stock_list: MyString
+  number_of_employee_male: 1
+  number_of_employee_female: 1
+  capital: 1
+  proceed: 1
+  bisiness_details: MyText
+  url: MyText
+  recruit_url: MyText
+
+two:
+  company_code: MyString
+  name: MyString
+  name_furigana: MyString
+  postal_code: MyString
+  prefecture_id: 1
+  address: MyString
+  found_date: 2020-11-17
+  tel_number: MyString
+  fax_number: MyString
+  stock_list: MyString
+  number_of_employee_male: 1
+  number_of_employee_female: 1
+  capital: 1
+  proceed: 1
+  bisiness_details: MyText
+  url: MyText
+  recruit_url: MyText
