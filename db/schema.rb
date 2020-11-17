@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_17_025310) do
+ActiveRecord::Schema.define(version: 2020_11_17_033321) do
 
   create_table "courses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "school_id"
@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 2020_11_17_025310) do
 
   create_table "students", id: :string, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email"
-    t.string "password"
+    t.string "password_digest"
     t.string "last_name"
     t.string "first_name"
     t.string "last_name_furigana"
@@ -141,7 +141,7 @@ ActiveRecord::Schema.define(version: 2020_11_17_025310) do
 
   create_table "teachers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email"
-    t.string "password"
+    t.string "password_digest"
     t.string "last_name"
     t.string "first_name"
     t.string "last_name_furigana"
