@@ -1,0 +1,2 @@
+class RecruitCompanyTag < ApplicationRecord
+end
