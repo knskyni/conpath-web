@@ -1,0 +1,2 @@
+class RecruitPost < ApplicationRecord
+end
