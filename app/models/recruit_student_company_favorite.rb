@@ -1,0 +1,2 @@
+class RecruitStudentCompanyFavorite < ApplicationRecord
+end
