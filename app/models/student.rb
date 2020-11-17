@@ -8,4 +8,12 @@ class Student < ApplicationRecord
   validates :first_name_furigana, {presence: true, format: {with: /\A[ぁ-んー－]+\z/, message: "ひらがなで入力して下さい"}}
   validates :class_id, {presence: true}
   validates :gender, {presence: true}
+
+  def class
+    return SchoolClass.find_by(id: self.class_id)
+  end
+
+  def favorites
+    return RecruitStudentCompanyFavorite.where(student_id: self.id)
+  end
 end
