@@ -1,4 +1,4 @@
 class StudentController < ApplicationController
-  def createform
+  def create_form
   end
 end
