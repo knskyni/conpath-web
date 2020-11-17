@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card card-custom gutter-b">
+      <div class="card-header h-auto py-4">
+        <div class="card-title">
+          <h3 class="card-label">
+            学校一覧
+            <span class="d-block text-muted pt-2 font-size-sm">Schools</span>
+          </h3>
+        </div>
+      </div>
+      <div class="card-body py-4">
+        <div class="tab-content">
+          <!--begin::Table-->
+          <div class="table-responsive">
+            <table class="table table-head-custom table-head-bg table-borderless table-vertical-center">
+              <thead>
+              <tr class="text-left text-uppercase">
+                <th class="pl-7">
+                  <span class="text-dark-75">学校名</span>
+                </th>
+                <th>学科数</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+                <% @schools.each do |school| %>
+                <tr>
+                  <td class="pl-5 py-8">
+                    <div class="d-flex align-items-center">
+                      <div>
+                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"><%= school.name %></a>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><%= school.courses.count %> 学科</span>
+                  </td>
+                  <td class="px-6 text-right">
+                    <%= link_to("詳細", "/school/#{school.id}", {class: ["btn", "btn-light-primary", "font-weight-bolder", "font-size-sm"]}) %>
+                  </td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <!--end::Table-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
