@@ -16,6 +16,10 @@ class SchoolController < ApplicationController
 
   def show
     @school = School.find_by(id: params[:id])
+    if @school.nil?
+      render :file => "#{Rails.root}/public/404", layout: false, status: :not_found
+      return
+    end
     @sub_header = {
         title: @school.name,
         list: [
