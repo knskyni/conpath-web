@@ -4,9 +4,6 @@
   <title>教員情報登録 | 教員</title>
 </head>
 <body>
-
-//画面切り替え
-<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
   <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
     <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
       <div class="d-flex align-items-center flex-wrap mr-1">
@@ -24,59 +21,68 @@
       </div>
     </div>
   </div>
-</div>
-
-//入力フォーム(教員情報登録)
-<div class="wizard wizard-3" id="kt_wizard_v3" data-wizard-state="first" data-wizard-clickable="true">
-  <div class="d-flex flex-column-fluid">
-    <div class="container">
-      <div class="form-group" style="margin-top: 100px;">
-        <label>苗字
-          <span class="text-danger">*</span></label>
-        <input type="email" class="form-control" placeholder="Last Name">
-      </div>
-      <div class="form-group">
-        <label>名前
-          <span class="text-danger">*</span></label>
-        <input type="email" class="form-control" placeholder="First Name">
-      </div>
-      <div class="form-group">
-        <label>みょうじ
-          <span class="text-danger">*</span></label>
-        <input type="email" class="form-control" placeholder="First Name">
-      </div>
-      <div class="form-group">
-        <label>なまえ
-          <span class="text-danger">*</span></label>
-        <input type="email" class="form-control" placeholder="First Name">
-      </div>
-      <div class="form-group">
-        <label>メールアドレス
-          <span class="text-danger">*</span></label>
-        <input type="email" class="form-control" placeholder="Email">
-      </div>
-      <div class="form-group">
-        <label>パスワード
-          <span class="text-danger">*</span></label>
-        <input type="email" class="form-control" placeholder="Password">
-      </div>
-      <div class="form-group">
-        <label for="exampleSelect1">性別
-          <span class="text-danger">*</span></label>
-        <select class="form-control" id="exampleSelect1">
-          <option>女性</option>
-          <option>男性</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>アイコン
-          <span class="text-danger">*</span></label>
-        <input type="email" class="form-control" placeholder="Icon">
-      </div>
-      <div class="form-group">
-        <label>自己紹介文
-          <span class="text-danger">*</span></label>
-        <input type="email" class="form-control" placeholder="Capital">
+<div class="card card-custom">
+  <div class="card-body p-0">
+    <div class="wizard wizard-3" id="kt_wizard_v3" data-wizard-state="first" data-wizard-clickable="true">
+      <div class="d-flex flex-column-fluid px-8 py-8 px-lg-15 py-lg-3">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-4">
+              <div class="form-group fv-plugins-icon-container">
+                <label>苗字</label>
+                <input type="text" class="form-control" name="width" placeholder="Last Name">
+              </div>
+            </div>
+            <div class="col-xl-4">
+              <div class="form-group fv-plugins-icon-container">
+                <label>名前</label>
+                <input type="text" class="form-control" name="height" placeholder="First Name">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-4">
+              <div class="form-group fv-plugins-icon-container">
+                <label>みょうじ</label>
+                <input type="text" class="form-control" name="width" placeholder="Last Name Furigana">
+              </div>
+            </div>
+            <div class="col-xl-4">
+              <div class="form-group fv-plugins-icon-container">
+                <label>なまえ</label>
+                <input type="text" class="form-control" name="height" placeholder="First Name Furigana">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>メールアドレス
+              <span class="text-danger">*</span></label>
+              <input type="email" class="form-control" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label>パスワード
+              <span class="text-danger">*</span></label>
+              <input type="email" class="form-control" placeholder="Password">
+          </div>
+          <div class="form-group">
+            <label for="exampleSelect1">性別
+              <span class="text-danger">*</span></label>
+              <select class="form-control" id="exampleSelect1">
+                <option>女性</option>
+                <option>男性</option>
+              </select>
+          </div>
+          <div class="form-group">
+            <label>アイコン
+              <span class="text-danger">*</span></label>
+              <input type="email" class="form-control" placeholder="Icon">
+          </div>
+          <div class="form-group">
+            <label>自己紹介文
+              <span class="text-danger">*</span></label>
+              <input type="email" class="form-control" placeholder="Capital">
+          </div>
+        </div>
       </div>
     </div>
   </div>
