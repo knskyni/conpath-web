@@ -10,4 +10,8 @@ class Course < ApplicationRecord
   def school_classes
     return SchoolClass.where(course_id: self.id)
   end
+
+  def school_classes_now
+    return SchoolClass.where(course_id: self.id, graduated: false)
+  end
 end
