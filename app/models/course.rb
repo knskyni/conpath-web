@@ -6,4 +6,8 @@ class Course < ApplicationRecord
   def school
     return School.find_by(id: school_id)
   end
+
+  def school_classes
+    return SchoolClass.where(course_id: self.id)
+  end
 end
