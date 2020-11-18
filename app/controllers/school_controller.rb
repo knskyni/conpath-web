@@ -35,10 +35,10 @@ class SchoolController < ApplicationController
     }
 
     @count_class = 0
+    @count_student = 0
     @school.courses.each do |course|
       school_classes = course.school_classes_now
       @count_class += school_classes.count
-      @count_student = 0
       school_classes.each do |school_class|
         @count_student += school_class.students.count
       end
