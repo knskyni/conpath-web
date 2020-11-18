@@ -1,2 +1,97 @@
-<h1>Student#createform</h1>
-<p>Find me in app/views/student/createform.html.erb</p>
+<div class="card card-custom gutter-b">
+  <div class="card-body">
+    <% @user.errors.full_messages.each do |message| %>
+      <div class="form-error">
+        <%= message %>
+      </div>
+    <% end %>
+    <%= form_tag("/account/student/create") do %>
+      <div class="form-group">
+        <label>学籍番号
+          <span class="text-danger">*</span>
+        </label>
+        <input type="string" class="form-control" name="id" value="<%= @student.student_number %>">
+      </div>
+      <div class="form-group">
+        <label>パスワード
+          <span class="text-danger">*</span>
+        </label>
+        <input type="password" class="form-control" name="password" value="<%= @student.password %>">
+      </div>
+      <div class="form-group">
+        <label>パスワード確認
+          <span class="text-danger">*</span>
+        </label>
+        <input type="password" class="form-control" name="password_confirm">
+      </div>
+      <div class="form-group">
+        <label>学籍番号
+          <span class="text-danger">*</span>
+        </label>
+        <input type="string" class="form-control" name="id" value="<%= @student.student_number %>">
+      </div>
+      <div class="form-group">
+        <label>姓
+          <span class="text-danger">*</span>
+        </label>
+        <input type="string" class="form-control" name="last_name" value="<%= @student.last_name%>">
+        <label>名
+          <span class="text-danger">*</span>
+        </label>
+        <input type="string" class="form-control" name="first_name" value="<%= @student.first_name%>">
+      </div>
+      <div class="form-group">
+        <label>せい
+          <span class="text-danger">*</span>
+        </label>
+        <input type="string" class="form-control" name="last_name_furigana" value="<%= @student.last_name_furigana%>">
+        <label>めい
+          <span class="text-danger">*</span>
+        </label>
+        <input type="string" class="form-control" name="first_name_furigana" value="<%= @student.first_name_furigana%>">
+      </div>
+      <div class="form-group">
+        <label>email
+          <span class="text-danger">*</span>
+        </label>
+        <input type="string" class="form-control" name="email" value="<%= @student.email%>">
+      </div>
+      <div class="form-group">
+        <label>生年月日
+          <span class="text-danger">*</span>
+        </label>
+        <input type="date" class="form-control" name="birthday" value="<%= @student.birthday %>">
+      </div>
+      <div class="form-group">
+        <label for="exampleSelect1">性別
+          <span class="text-danger">*</span>
+        </label>
+        <select name="gender">
+          <option value="0">男</option>
+          <option value="1">女</option>
+          <option value="2">非公開</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>学年
+          <span class="text-danger">*</span>
+        </label>
+        <input type="string" class="form-control" name="grade" value="<%= @student_infomation.grade %>">
+      </div>
+      <div class="form-group">
+        <label>クラス
+          <span class="text-danger">*</span>
+        </label>
+        <input type="string" class="form-control" name="class" value="<%= @student_infomation.class %>">
+      </div>
+      <div class="form-group">
+        <label>入学年
+          <span class="text-danger">*</span>
+        </label>
+        <input type="date" class="form-control" name="joined_year" value="<%= @student_infomation.joined_year %>">
+      </div>
+      <input type="submit" value="作成">
+    <% end %>
+  </div>
+</div>
+
