@@ -1,0 +1,2 @@
+module RecruitPostHelper
+end
