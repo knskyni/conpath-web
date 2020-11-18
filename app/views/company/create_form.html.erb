@@ -1,2 +1,128 @@
-<h1>Company#create_form</h1>
-<p>Find me in app/views/company/create_form.html.erb</p>
+<div class="card card-custom">
+  <%=form_tag("/company/create") do %>
+  <div class="card-body">
+    <div class="form-group">
+      <label>企業コード
+        <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" placeholder="例：12345678">
+    </div>
+    <div class="form-group">
+      <label>企業名
+        <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" placeholder="例：麻生株式会社">
+    </div>
+    <div class="form-group">
+      <label>企業名（ふりがな）
+        <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" placeholder="例：あそうかぶしきがいしゃ">
+    </div>
+    <div class="form-group">
+      <label>郵便番号
+        <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" placeholder="例：123-4567">
+    </div>
+    <div class="form-group">
+      <label>都道府県ID
+        <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" placeholder="例：○○">
+    </div>
+    <div class="form-group">
+      <label>住所
+        <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" placeholder="例：福岡市博多区博多駅南2-12-32">
+    </div>
+    <div class="form-group">
+      <label>設立日
+        <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" placeholder="例：平成　28年">
+    </div>
+    <div class="form-group">
+      <label>電話番号
+        <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" placeholder="例：0120-371-007">
+    </div>
+    <div class="form-group">
+      <label>FAX番号
+        <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" placeholder="例：12-3456-7890">
+    </div>
+    <div class="form-group">
+      <label>株式上場
+        <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" placeholder="例：（○○○○）上場　OR 非上場">
+    </div>
+    <div class="form-group">
+      <label>男性従業員数
+      <input type="text" class="form-control" placeholder="例：50人">
+    </div>
+    <div class="form-group">
+      <label>女性従業員数
+      <input type="text" class="form-control" placeholder="例：50人">
+    </div>
+    <div class="form-group">
+      <label>従業員数
+        <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" placeholder="例：100人">
+    </div>
+    <div class="form-group">
+      <label>資本金
+        <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" placeholder="例：1000万円">
+    </div>
+    <div class="form-group">
+      <label>資本金日付
+        <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" placeholder="例：">
+    </div>
+    <div class="form-group">
+      <label>売上高
+        <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" placeholder="例：1億円">
+    </div>
+    <div class="form-group">
+      <label>売上高日付
+        <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" placeholder="例：">
+    </div>
+    <div class="form-group">
+      <label>事業内容
+        <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" placeholder="例：Webサイト・スマホアプリ開発">
+    </div>
+    <div class="form-group">
+      <label>ホームページ
+        <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" placeholder="例：https://asojuku.ac.jp/abcc/">
+    </div>
+    <div class="form-group">
+      <label>ホームページ
+        <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" placeholder="例：https://asojuku.ac.jp/abcc/">
+    </div>
+    <div class="form-group">
+      <label>採用ページ
+        <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" placeholder="例：https://asojuku.ac.jp/abcc/info/">
+    </div>
+    <div class="form-group">
+      <label>作成日時
+        <span class="text-danger">*</span></label>
+        <div class="input-group date" id="kt_datetimepicker_7_1" data-target-input="nearest">
+          <input type="date" name="briefing_in_school_start" class="form-control datetimepicker-input" placeholder="開始日" />
+        </div>
+    </div>
+    <div class="form-group">
+      <label>更新日時
+        <span class="text-danger">*</span></label>
+      <div class="input-group date" id="kt_datetimepicker_7_1" data-target-input="nearest">
+        <input type="date" name="briefing_in_school_start" class="form-control datetimepicker-input" placeholder="開始日" />
+      </div>
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-success ml-3">登録</button>
+    </div>
+  </div>
+  <% end %>
+</div>
+
+
