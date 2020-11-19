@@ -1,22 +1,9 @@
 class StudentController < ApplicationController
   def create_form
-    @sub_header = {
-        title: "General",
-        list: [
-            {
-                name: "General",
-                url: "/"
-            },
-            {
-                name: "Empty Page",
-                url: "/test"
-            }
-        ]
-    }
     @student = Student.new
   end
 
-  def create_form
+  def create
     @student = Student.new(
         id: params[:id],
         email: params[:email],
@@ -27,7 +14,7 @@ class StudentController < ApplicationController
         firstNameFurigana: params[:first_name_furigana],
         classId: params[:class_id],
         gender: params[:gender],
-        icon: "default_user.jpg"
+        icon: "default_user.jpg",
     )
     if @student.save
       flash[:notice] = "ユーザー登録が完了しました"
