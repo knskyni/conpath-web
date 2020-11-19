@@ -9,7 +9,7 @@ class Student < ApplicationRecord
   validates :class_id, {presence: true}
   validates :gender, {presence: true}
 
-  def class
+  def student_class
     return SchoolClass.find_by(id: self.class_id)
   end
 
