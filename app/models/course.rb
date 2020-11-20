@@ -1,4 +1,6 @@
 class Course < ApplicationRecord
+  has_many :school_classes
+
   validates :school_id, {presence: true, numericality: {only_integer: true}}
   validates :name, {presence: true, uniqueness: true}
   validates :number_of_enrolled_year, {presence: true}
