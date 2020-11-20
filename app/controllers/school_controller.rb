@@ -68,4 +68,12 @@ class SchoolController < ApplicationController
       render("school/new")
     end
   end
+
+  def edit
+
+  end
+
+  def update
+    
+  end
 end
