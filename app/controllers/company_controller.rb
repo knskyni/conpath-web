@@ -43,4 +43,21 @@ class CompanyController < ApplicationController
       render("company/create_form")
     end
   end
+  def recruit_company_show
+    @recruit_company = RecruitCompany.find_by(id:params[:id])
+
+    @sub_header = {
+        title: "企業情報",
+        list: [
+            {
+                name: "General",
+                url: "/"
+            },
+            {
+                name: "Empty Page",
+                url: "/test"
+            }
+        ]
+    }
+    end
 end
