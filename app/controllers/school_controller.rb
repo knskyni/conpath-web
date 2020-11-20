@@ -58,4 +58,14 @@ class SchoolController < ApplicationController
 
     @school = School.new
   end
+
+  def create
+    @school = School.new(name: params[:school][:name])
+    if @school.save
+      flash[:notice] = "学校の登録に成功しました。"
+      redirect_to("/school/#{@school.id}")
+    else
+      render("school/new")
+    end
+  end
 end
