@@ -1,5 +1,6 @@
 class TeacherController < ApplicationController
   def new
+
   end
 
   def create
@@ -12,6 +13,7 @@ class TeacherController < ApplicationController
     @teacher = Teacher.new(gender: params[:gender])
     @teacher = Teacher.new(biography: params[:biography])
     @teacher.save
+    redirect_to("/")
   end
 
 end
