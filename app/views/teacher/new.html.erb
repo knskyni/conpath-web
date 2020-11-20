@@ -11,16 +11,17 @@
           <h5 class="text-dark font-weight-bold my-1 mr-5">教員情報登録</h5>
             <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
               <li class="breadcrumb-item">
-                <a href="" class="text-muted">教員情報詳細</a>
+                <%= link_to("就サポ", "/") %>>
               </li>
               <li class="breadcrumb-item">
-                <a href="" class="text-muted">就活アドミントップ</a>
+                <%= link_to("教員情報登録", "/teacher/new") %>>
               </li>
             </ul>
         </div>
       </div>
     </div>
   </div>
+
 <div class="card card-custom">
   <div class="card-body p-0">
     <div class="wizard wizard-3" id="kt_wizard_v3" data-wizard-state="first" data-wizard-clickable="true">
@@ -28,13 +29,13 @@
         <%=form_tag('/teacher/create') do %>
           <div class="container">
             <div class="row">
-              <div class="col-xl-4" name="lastName">
+              <div class="col-xl-4" name="last_name">
                 <div class="form-group fv-plugins-icon-container">
                   <label>苗字</label>
                   <input type="text" class="form-control" name="width" placeholder="Last Name">
                 </div>
               </div>
-              <div class="col-xl-4" name="firstName">
+              <div class="col-xl-4" name="first_name">
                 <div class="form-group fv-plugins-icon-container">
                   <label>名前</label>
                   <input type="text" class="form-control" name="height" placeholder="First Name">
@@ -42,13 +43,13 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-xl-4" name="lastNameFurigana">
+              <div class="col-xl-4" name="last_name_furigana">
                 <div class="form-group fv-plugins-icon-container">
                   <label>みょうじ</label>
                   <input type="text" class="form-control" name="width" placeholder="Last Name Furigana">
                 </div>
               </div>
-              <div class="col-xl-4" name="firstNameFurigana">
+              <div class="col-xl-4" name="first_name_furigana">
                 <div class="form-group fv-plugins-icon-container">
                   <label>なまえ</label>
                   <input type="text" class="form-control" name="height" placeholder="First Name Furigana">
