@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12">
-    <%= form_for(school_path(@school)) do |f| %>
+    <%= form_for(@school, url: {controller: 'school', action: 'create'}) do |f| %>
       <div class="card card-custom gutter-b">
         <div class="card-header h-auto py-4">
           <div class="card-title">
@@ -13,7 +13,7 @@
           <% if @school.errors.any? %>
             <div class="form-group row mb-4 bg-danger text-white p-5">
               <ul class="m-0">
-                <%= @school.errors.full_messages.each do |message| %>
+                <% @school.errors.full_messages.each do |message| %>
                   <li><%= message %></li>
                 <% end %>
               </ul>
