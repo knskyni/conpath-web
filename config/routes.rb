@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'student/create', to: 'student#create_form'
+  get 'student/new', to: 'student#new'
   post 'student/create', to: 'student#create'
 
   root to: 'home#index'

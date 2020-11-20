@@ -1,5 +1,14 @@
 class StudentController < ApplicationController
-  def create_form
+  def new
+    @sub_header = {
+        title: "学生登録",
+        list: [
+            {
+                name: "学生登録",
+                url: "/"
+            }
+        ]
+    }
     @student = Student.new
   end
 
@@ -8,23 +17,23 @@ class StudentController < ApplicationController
         id: params[:id],
         email: params[:email],
         password: params[:password],
-        lastName: params[:last_name],
-        firstName: params[:first_name],
-        lastNameFurigana: params[:last_name_furigana],
-        firstNameFurigana: params[:first_name_furigana],
-        classId: params[:class_id],
+        last_name: params[:last_name],
+        first_name: params[:first_name],
+        last_name_furigana: params[:last_name_furigana],
+        first_name_furigana: params[:first_name_furigana],
+        class_id: params[:class_id],
         gender: params[:gender],
         icon: "default_user.jpg",
     )
-    if @student.save
+    if params[:password] != params[:password_confirm]
+      @error_message = "パスワードが一致しません"
+    end
+
+    if @student.save and @error_message.nil?
       flash[:notice] = "ユーザー登録が完了しました"
-      redirect_to("/student/create")
-    elsif params[:password] == params[:password_confirm]
-      @error_message = "パスワードとパスワード確認が違います"
-      render("student/create")
+      redirect_to("/student/new")
     else
-      @error_message = ""
-      render("student/create")
+      render("student/new")
     end
   end
 end
