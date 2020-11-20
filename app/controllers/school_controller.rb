@@ -44,4 +44,18 @@ class SchoolController < ApplicationController
       end
     end
   end
+
+  def new
+    @sub_header = {
+        title: "登録フォーム",
+        list: [
+            {
+                name: "学校",
+                url: "/school"
+            }
+        ]
+    }
+
+    @school = School.new
+  end
 end
