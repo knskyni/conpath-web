@@ -16,4 +16,8 @@ class Course < ApplicationRecord
   def school_classes_now
     return SchoolClass.where(course_id: self.id, graduated: false)
   end
+
+  def count_student
+    return Course.joins(school_classes: :students).where(courses: {id: self.id}).count
+  end
 end
