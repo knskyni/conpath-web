@@ -79,4 +79,36 @@
       </div>
     </div>
   </div>
+  <div class="col-xl-9">
+    <% @courses.each_slice(3) do |courses_sliced| %>
+      <div class="row">
+        <% courses_sliced.each do |course| %>
+          <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+            <div class="card card-custom gutter-b card-stretch">
+              <div class="card-body pt-4">
+                <div class="d-flex align-items-end my-7">
+                  <div class="d-flex align-items-center">
+                    <div class="d-flex flex-column">
+                      <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0"><%= course.name %></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-7">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-dark-75 font-weight-bolder mr-2">年次:</span>
+                    <span class="text-muted text-hover-primary"><%= course.number_of_enrolled_year %>年次</span>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-cente my-1">
+                    <span class="text-dark-75 font-weight-bolder mr-2">学生:</span>
+                    <span class="text-muted text-hover-primary"><%= course.count_student.to_s(:delimited) %>名</span>
+                  </div>
+                </div>
+                <%= link_to("学科ページ", "/course/#{course.id}", {class: %w(btn btn-block btn-sm btn-light-success font-weight-bolder text-uppercase py-4)}) %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
