@@ -70,10 +70,28 @@ class SchoolController < ApplicationController
   end
 
   def edit
+    @school = School.find_by(id: params[:id])
 
+    @sub_header = {
+        title: "更新フォーム",
+        list: [
+            {
+                name: "学校",
+                url: "/school"
+            },
+            {
+                name: @school.name,
+                url: "/school/#{@school.id}"
+            },
+            {
+                name: "更新",
+                url: nil
+            }
+        ]
+    }
   end
 
   def update
-    
+
   end
 end
