@@ -26,10 +26,6 @@ class SchoolController < ApplicationController
             {
                 name: "学校",
                 url: "/school"
-            },
-            {
-                name: "詳細",
-                url: "/school/#{@school.id}"
             }
         ]
     }
