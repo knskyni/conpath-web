@@ -39,6 +39,8 @@ class SchoolController < ApplicationController
         @count_student += school_class.students.count
       end
     end
+
+    @courses = Course.where(school_id: @school.id)
   end
 
   def new
