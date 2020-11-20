@@ -92,6 +92,13 @@ class SchoolController < ApplicationController
   end
 
   def update
-
+    @school = School.find_by(id: params[:id])
+    @school.name = params[:school][:name]
+    if @school.save
+      flash[:notice] = "学校情報の更新に成功しました。"
+      redirect_to("/school/#{@school.id}")
+    else
+      render("school/edit")
+    end
   end
 end
