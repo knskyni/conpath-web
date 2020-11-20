@@ -669,3 +669,7 @@
   border: 1px solid #EBEDF3;
   border-radius: 0.42rem;
 }
+
+.wizard[data-wizard-state=between] [data-wizard-type=action-next] {
+  display: inline-block;
+}
