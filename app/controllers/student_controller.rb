@@ -1,14 +1,15 @@
 class StudentController < ApplicationController
   def new
     @sub_header = {
-        title: "学生登録",
+        title: "登録ページ",
         list: [
             {
-                name: "学生登録",
-                url: "/"
+                name: "学生",
+                url: "/student"
             }
         ]
     }
+
     @student = Student.new
   end
 
@@ -38,6 +39,16 @@ class StudentController < ApplicationController
   end
 
   def edit
+    @sub_header = {
+        title: "登録ページ",
+        list: [
+            {
+                name: "学生",
+                url: "/student"
+            }
+        ]
+    }
+
     @student = Student.find_by(id: params[:id])
   end
 
