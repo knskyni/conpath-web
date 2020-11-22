@@ -1,6 +1,8 @@
 class Student < ApplicationRecord
   has_secure_password
 
+  belongs_to :school_class, foreign_key: :class_id
+  
   validates :email, {presence: true, length: {maximum: 128}}
   validates :last_name, {presence: true, length: {maximum: 64}}
   validates :first_name, {presence: true, length: {maximum: 64}}

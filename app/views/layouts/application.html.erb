@@ -657,5 +657,27 @@
 
         <!-- Page Scripts(used by this page) -->
         <script src="/assets/js/pages/widgets.js"></script>
+        <% if !flash[:notice].nil? %>
+          <script>
+              $.notify({
+                  message: '<%= flash[:notice] %>'
+              },{
+                  placement: {
+                      from: 'top',
+                      align: 'right'
+                  },
+                  animate: {
+                      enter: 'animate__animated animate__fadeInRight',
+                      exit: 'animate__animated animate__fadeOutRight'
+                  },
+                  offset: {
+                      x: 30,
+                      y: 30
+                  },
+                  timer: 2000,
+                  type: 'success'
+              });
+          </script>
+        <% end %>
     </body>
 </html>

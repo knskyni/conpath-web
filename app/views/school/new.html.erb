@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-12">
+    <%= form_for(@school, url: {controller: 'school', action: 'create'}) do |f| %>
+      <div class="card card-custom gutter-b">
+        <div class="card-header h-auto py-4">
+          <div class="card-title">
+            <h3 class="card-label">
+              学校情報を入力してください。
+            </h3>
+          </div>
+        </div>
+        <div class="card-body py-4">
+          <% if @school.errors.any? %>
+            <div class="form-group row mb-4 bg-danger text-white p-5">
+              <ul class="m-0">
+                <% @school.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <div class="form-group row my-2">
+            <label class="col-2 col-form-label text-right">学校名:</label>
+            <div class="col-10">
+              <%= f.text_field(:name, {class: ["form-control"]}) %>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <%= f.submit("送信", {class: %w(btn btn-primary)}) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
