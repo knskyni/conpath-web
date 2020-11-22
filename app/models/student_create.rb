@@ -1,0 +1,2 @@
+class StudentCreate < ApplicationRecord
+end
