@@ -1,5 +1,5 @@
 class SchoolClass < ApplicationRecord
-  belongs_to :course
+  belongs_to :course, foreign_key: :course_id
   has_many :students, foreign_key: :class_id
 
   def course

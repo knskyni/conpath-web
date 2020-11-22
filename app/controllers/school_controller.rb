@@ -20,6 +20,7 @@ class SchoolController < ApplicationController
       render :file => "#{Rails.root}/public/404", layout: false, status: :not_found
       return
     end
+
     @sub_header = {
         title: @school.name,
         list: [
@@ -29,16 +30,6 @@ class SchoolController < ApplicationController
             }
         ]
     }
-
-    @count_class = 0
-    @count_student = 0
-    @school.courses.each do |course|
-      school_classes = course.school_classes_now
-      @count_class += school_classes.count
-      school_classes.each do |school_class|
-        @count_student += school_class.students.count
-      end
-    end
 
     @courses = Course.where(school_id: @school.id)
   end
