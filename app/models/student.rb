@@ -1,11 +1,11 @@
 class Student < ApplicationRecord
   has_secure_password
 
-  validates :email, {presence: true}, length: {maximum: 128}
-  validates :last_name, {presence: true}, length: {maximum: 64}
-  validates :first_name, {presence: true}, length: {maximum: 64}
-  validates :last_name_furigana, {presence: true, format: {with: /\A[ぁ-んー－]+\z/, message: "ひらがなで入力して下さい"}}, length: {maximum: 64}
-  validates :first_name_furigana, {presence: true, format: {with: /\A[ぁ-んー－]+\z/, message: "ひらがなで入力して下さい"}}, length: {maximum: 64}
+  validates :email, {presence: true, length: {maximum: 128}}
+  validates :last_name, {presence: true, length: {maximum: 64}}
+  validates :first_name, {presence: true, length: {maximum: 64}}
+  validates :last_name_furigana, {presence: true, length: {maximum: 64}, format: {with: /\A[ぁ-んー－]+\z/, message: "ひらがなで入力して下さい"}}
+  validates :first_name_furigana, {presence: true, length: {maximum: 64}, format: {with: /\A[ぁ-んー－]+\z/, message: "ひらがなで入力して下さい"}}
   validates :class_id, {presence: true}
   validates :gender, {presence: true}
   validates :biography, length: {maximum: 1024}
