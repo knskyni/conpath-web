@@ -1,4 +1,8 @@
 class StudentController < ApplicationController
+  def new
+
+  end
+  
   def activate
     @sub_header = {
         title: "登録ページ",
