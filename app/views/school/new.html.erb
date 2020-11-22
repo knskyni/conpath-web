@@ -11,7 +11,8 @@
         </div>
         <div class="card-body py-4">
           <% if @school.errors.any? %>
-            <div class="form-group row mb-4 bg-danger text-white p-5">
+            <div class="alert alert-danger" role="alert">
+              <h4 class="alert-heading">エラー</h4>
               <ul class="m-0">
                 <% @school.errors.full_messages.each do |message| %>
                   <li><%= message %></li>

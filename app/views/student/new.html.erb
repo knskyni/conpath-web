@@ -1,11 +1,14 @@
 <div class="card card-custom gutter-b">
   <div class="card-body">
-    <% if @student.errors %>
-      <ul>
-        <% @student.errors.full_messages.each do |message| %>
-          <li><span class="form-text text-danger"><%= message %></span></li>
-        <% end %>
-      </ul>
+    <% if @student.errors.any? %>
+      <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">エラー</h4>
+        <ul class="m-0">
+          <% @student.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
     <%= form_tag("/student/create") do %>
       <div class="form-group">
