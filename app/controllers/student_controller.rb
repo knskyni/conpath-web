@@ -1,8 +1,22 @@
 class StudentController < ApplicationController
   def new
+    @sub_header = {
+        title: "登録ページ",
+        list: [
+            {
+                name: "学生",
+                url: "/student"
+            }
+        ]
+    }
+
+    @student = StudentCreate.new
+  end
+
+  def create_temp
 
   end
-  
+
   def activate
     @sub_header = {
         title: "登録ページ",
