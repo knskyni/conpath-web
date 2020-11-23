@@ -1,0 +1,87 @@
+<div class="card card-custom gutter-b">
+  <div class="card-body">
+    <% if @student.errors.any? %>
+      <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">エラー</h4>
+        <ul class="m-0">
+          <% @student.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= form_tag("/student/activate/#{@student_temp.auth_key}") do %>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label>姓
+            <span class="text-danger">*</span>
+          </label>
+          <input type="string" class="form-control" name="last_name" value="<%= @student.last_name%>">
+        </div>
+        <div class="form-group col-md-6">
+          <label>名
+            <span class="text-danger">*</span>
+          </label>
+          <input type="string" class="form-control" name="first_name" value="<%= @student.first_name%>">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label>せい
+            <span class="text-danger">*</span>
+          </label>
+          <input type="string" class="form-control" name="last_name_furigana" value="<%= @student.last_name_furigana%>">
+        </div>
+        <div class="form-group col-md-6">
+          <label>めい
+            <span class="text-danger">*</span>
+          </label>
+          <input type="string" class="form-control" name="first_name_furigana" value="<%= @student.first_name_furigana%>">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>性別
+          <span class="text-danger">*</span>
+        </label>
+        <select class="form-control form-control" id="exampleSelects" name="gender">
+          <option value="0">男性</option>
+          <option value="1">女性</option>
+          <option value="2">非公開</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label>クラス
+            <span class="text-danger">*</span>
+          </label>
+          <input type="string" class="form-control" value="<%= @student.school_class.full_name%>" disabled>
+        </div>
+        <div class="form-group col-md-6">
+          <label>学籍番号
+            <span class="text-danger">*</span>
+          </label>
+          <input type="string" class="form-control" value="<%= @student.id %>" disabled>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>メールアドレス
+          <span class="text-danger">*</span>
+        </label>
+        <input type="string" class="form-control" value="<%= @student.email%>" disabled>
+      </div>
+      <div class="form-group">
+        <label>パスワード
+          <span class="text-danger">*</span>
+        </label>
+        <input type="password" class="form-control" name="password">
+      </div>
+      <div class="form-group">
+        <label>パスワード確認
+          <span class="text-danger">*</span>
+        </label>
+        <input type="password" class="form-control" name="password_confirm">
+      </div>
+      <input type="submit" value="登録" class="btn btn-primary float-right">
+    <% end %>
+  </div>
+</div>
