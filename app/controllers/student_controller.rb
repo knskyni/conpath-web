@@ -28,6 +28,16 @@ class StudentController < ApplicationController
     @student_temp.auth_key = SecureRandom.uuid
 
     unless @student_temp.save
+      @sub_header = {
+          title: "登録ページ",
+          list: [
+              {
+                  name: "学生",
+                  url: "/student"
+              }
+          ]
+      }
+      
       render("student/new")
     end
   end
