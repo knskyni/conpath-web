@@ -11,7 +11,8 @@ class StudentTemp < ApplicationRecord
   end
 
   def check_invite_code
-    if SchoolClass.find_by(invite_code: self.invite_code).nil?
+    school_class = SchoolClass.find_by(invite_code: self.invite_code)
+    if school_class.nil?
       errors.add(:invite_code, "この招待コードは存在しません。")
     else
       self.class_id = school_class.id
