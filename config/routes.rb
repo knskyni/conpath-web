@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'student/new', to: 'student#new'
-  post 'student/create', to: 'student#create'
+  post 'student/new', to: 'student#create_temp'
+  get 'student/activate/:auth_key', to: 'student#activate'
+  post 'student/activate/:auth_key', to: 'student#create'
   get 'student/edit/:id', to: 'student#edit'
   post 'student/update/:id', to: 'student#update'
 
