@@ -10,24 +10,24 @@ class StudentController < ApplicationController
         ]
     }
 
-    @student = StudentTemp.new
+    @student_temp = StudentTemp.new
   end
 
   def create_temp
-    @student = StudentTemp.find_by(student_id: params[:student_create][:student_id])
+    @student_temp = StudentTemp.find_by(student_id: params[:student_temp][:student_id])
 
-    if @student
-      @student.invite_code = params[:student_create][:invite_code]
+    if @student_temp
+      @student_temp.invite_code = params[:student_temp][:invite_code]
     else
-      @student = StudentTemp.new(
-          student_id: params[:student_create][:student_id],
-          invite_code: params[:student_create][:invite_code]
+      @student_temp = StudentTemp.new(
+          student_id: params[:student_temp][:student_id],
+          invite_code: params[:student_temp][:invite_code]
       )
     end
 
-    @student.auth_key = SecureRandom.uuid
+    @student_temp.auth_key = SecureRandom.uuid
 
-    if !@student.save
+    if !@student_temp.save
       render("student/new")
     end
   end
