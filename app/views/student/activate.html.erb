@@ -11,24 +11,6 @@
       </div>
     <% end %>
     <%= form_tag("/student/create") do %>
-      <div class="form-group">
-        <label>学籍番号
-          <span class="text-danger">*</span>
-        </label>
-        <input type="string" class="form-control" name="id" value="<%= @student.id %>">
-      </div>
-      <div class="form-group">
-        <label>パスワード
-          <span class="text-danger">*</span>
-        </label>
-        <input type="password" class="form-control" name="password">
-      </div>
-      <div class="form-group">
-        <label>パスワード確認
-          <span class="text-danger">*</span>
-        </label>
-        <input type="password" class="form-control" name="password_confirm">
-      </div>
       <div class="form-row">
         <div class="form-group col-md-6">
           <label>姓
@@ -67,17 +49,37 @@
           <option value="2">非公開</option>
         </select>
       </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label>クラス
+            <span class="text-danger">*</span>
+          </label>
+          <input type="string" class="form-control" value="<%= @student.school_class.full_name%>" disabled>
+        </div>
+        <div class="form-group col-md-6">
+          <label>学籍番号
+            <span class="text-danger">*</span>
+          </label>
+          <input type="string" class="form-control" value="<%= @student.id %>" disabled>
+        </div>
+      </div>
       <div class="form-group">
         <label>メールアドレス
           <span class="text-danger">*</span>
         </label>
-        <input type="string" class="form-control" name="email" value="<%= @student.email%>">
+        <input type="string" class="form-control" value="<%= @student.email%>" disabled>
       </div>
       <div class="form-group">
-        <label>クラス
+        <label>パスワード
           <span class="text-danger">*</span>
         </label>
-        <input type="string" class="form-control" name="class_id" value="<%= @student.class_id%>">
+        <input type="password" class="form-control" name="password">
+      </div>
+      <div class="form-group">
+        <label>パスワード確認
+          <span class="text-danger">*</span>
+        </label>
+        <input type="password" class="form-control" name="password_confirm">
       </div>
       <input type="submit" value="登録" class="btn btn-primary float-right">
     <% end %>
