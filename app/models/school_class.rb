@@ -20,4 +20,8 @@ class SchoolClass < ApplicationRecord
       return "#{grade}年"
     end
   end
+
+  def full_name
+    return self.course.name + " " + self.name
+  end
 end
