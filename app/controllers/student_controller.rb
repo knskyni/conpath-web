@@ -10,16 +10,16 @@ class StudentController < ApplicationController
         ]
     }
 
-    @student = StudentCreate.new
+    @student = StudentTemp.new
   end
 
   def create_temp
-    @student = StudentCreate.find_by(student_id: params[:student_create][:student_id])
+    @student = StudentTemp.find_by(student_id: params[:student_create][:student_id])
 
     if @student
       @student.invite_code = params[:student_create][:invite_code]
     else
-      @student = StudentCreate.new(
+      @student = StudentTemp.new(
           student_id: params[:student_create][:student_id],
           invite_code: params[:student_create][:invite_code]
       )

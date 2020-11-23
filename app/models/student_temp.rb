@@ -1,4 +1,4 @@
-class StudentCreate < ApplicationRecord
+class StudentTemp < ApplicationRecord
   validate :exist_student, :check_invite_code
   validates :student_id, {presence: true, uniqueness: true, length: {is: 7}, format: {with: /\A[0-9]+\z/, message: "半角数字で入力して下さい"}}
   validates :invite_code, {presence: true}
