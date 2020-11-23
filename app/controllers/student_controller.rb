@@ -27,7 +27,7 @@ class StudentController < ApplicationController
 
     @student_temp.auth_key = SecureRandom.uuid
 
-    if !@student_temp.save
+    unless @student_temp.save
       render("student/new")
     end
   end
