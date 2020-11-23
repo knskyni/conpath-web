@@ -37,7 +37,7 @@ class StudentController < ApplicationController
               }
           ]
       }
-      
+
       render("student/new")
     end
   end
@@ -53,7 +53,17 @@ class StudentController < ApplicationController
         ]
     }
 
-    @student = Student.new
+    student_temp = StudentTemp.find_by(auth_key: params[:auth_key])
+    if student_temp.nil?
+      render :file => "#{Rails.root}/public/404", layout: false, status: :not_found
+      return
+    end
+
+    @student = Student.new(
+        id: student_temp.student_id,
+        email: student_temp.student_id + "@s.asojuku.ac.jp",
+        class_id: student_temp.class_id
+    )
   end
 
   def create
