@@ -14,7 +14,22 @@ class StudentController < ApplicationController
   end
 
   def create_temp
+    @student = StudentCreate.find_by(student_id: params[:student_create][:student_id])
 
+    if @student
+      @student.invite_code = params[:student_create][:invite_code]
+    else
+      @student = StudentCreate.new(
+          student_id: params[:student_create][:student_id],
+          invite_code: params[:student_create][:invite_code]
+      )
+    end
+
+    @student.auth_key = SecureRandom.uuid
+
+    if !@student.save
+      render("student/new")
+    end
   end
 
   def activate
