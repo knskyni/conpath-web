@@ -1,7 +1,7 @@
 <div class="card card-custom">
   <%=form_tag("/company/create") do %>
   <div class="card-body">
-    <% if @recruit_company.errors.any? %>
+    <% if @recruit_company.errors.full_messages.any? %>
       <div class="alert alert-danger" role="alert">
         <h4 class="alert-heading">エラー</h4>
         <ul class="m-0">

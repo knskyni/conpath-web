@@ -1,5 +1,6 @@
 class CompanyController < ApplicationController
   def create_form
+    @recruit_company = RecruitCompany.new
     @sub_header = {
         title: "企業情報追加",
         list: [
@@ -33,9 +34,7 @@ class CompanyController < ApplicationController
         proceed: params[:proceed],
         bisiness_details: params[:bisiness_details],
         url: params[:url],
-        recruit_url: params[:recruit_url],
-        created_at: params[:created_at],
-        updated_at: params[:updated_at]
+        recruit_url: params[:recruit_url]
     )
     if @recruit_company.save
       flash[:notice] = "企業情報の登録が完了しました"
@@ -65,6 +64,6 @@ class CompanyController < ApplicationController
     @recruit_company = RecruitCompany.find_by(id: params[:id])
   end
   def update
-    redirect_to("/company/recruit_company_show")
+    redirect_to("/company/:id")
   end
 end
