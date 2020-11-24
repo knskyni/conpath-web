@@ -28,6 +28,7 @@ class CompanyController < ApplicationController
         stock_list: params[:stock_list],
         number_of_employee_male: params[:number_of_employee_male],
         number_of_employee_female: params[:number_of_employee_female],
+        number_of_employee: params[:number_of_employee],
         capital: params[:capital],
         proceed: params[:proceed],
         bisiness_details: params[:bisiness_details],
