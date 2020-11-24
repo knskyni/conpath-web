@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_17_054623) do
+ActiveRecord::Schema.define(version: 2020_11_24_065002) do
 
   create_table "courses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "school_id"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2020_11_17_054623) do
     t.string "tel_number"
     t.string "fax_number"
     t.string "stock_list"
+    t.integer "number_of_employee"
     t.integer "number_of_employee_male"
     t.integer "number_of_employee_female"
     t.integer "capital"
