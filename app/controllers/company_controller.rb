@@ -38,7 +38,7 @@ class CompanyController < ApplicationController
     )
     if @recruit_company.save
       flash[:notice] = "企業情報の登録が完了しました"
-      redirect_to("/campany/#{@recruit_company.id}")
+      redirect_to("/company/#{@recruit_company.id}")
     else
       render("company/create_form")
     end
@@ -64,5 +64,6 @@ class CompanyController < ApplicationController
     @recruit_company = RecruitCompany.find_by(id: params[:id])
   end
   def update
+    redirect_to("/company/recruit_company_show")
   end
 end
