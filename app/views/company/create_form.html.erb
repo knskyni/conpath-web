@@ -1,141 +1,149 @@
 <div class="card card-custom">
   <%=form_tag("/company/create") do %>
   <div class="card-body">
+    <% if @recruit_company.errors.any? %>
+      <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">エラー</h4>
+        <ul class="m-0">
+          <% @recruit_company.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
     <div class="form-group">
       <label>企業コード
         <span class="text-danger">*</span></label>
-      <input type="text" class="form-control" placeholder="例：12345678">
+      <input type="text" name="company_code" class="form-control" placeholder="例：12345678">
     </div>
     <div class="form-group">
       <label>企業名
         <span class="text-danger">*</span></label>
-      <input type="text" class="form-control" placeholder="例：麻生株式会社">
+      <input type="text" name="name"class="form-control" placeholder="例：麻生株式会社">
     </div>
     <div class="form-group">
       <label>企業名（ふりがな）
         <span class="text-danger">*</span></label>
-      <input type="text" class="form-control" placeholder="例：あそうかぶしきがいしゃ">
+      <input type="text" name="name_furigana" class="form-control" placeholder="例：あそうかぶしきがいしゃ">
     </div>
     <div class="form-group">
       <label>郵便番号
         <span class="text-danger">*</span></label>
-      <input type="text" class="form-control" placeholder="例：123-4567">
+      <input type="text" name="postal_code" class="form-control" placeholder="例：123-4567">
     </div>
     <div class="form-group">
       <label>都道府県
         <span class="text-danger">*</span></label>
-      <select name="international_student" class="form-control">
-        <option value="0">北海道</option>
-        <option value="1">青森県</option>
-        <option value="2">岩手県</option>
-        <option value="3">宮城県</option>
-        <option value="4">秋田県</option>
-        <option value="5">山形県</option>
-        <option value="6">福島県</option>
-        <option value="7">茨城県</option>
-        <option value="8">栃木県</option>
-        <option value="9">群馬県</option>
-        <option value="10">埼玉県</option>
-        <option value="11">千葉県</option>
-        <option value="12">東京都</option>
-        <option value="13">神奈川県</option>
-        <option value="0">新潟県</option>
-        <option value="">富山県</option>
-        <option value="1">石川県</option>
-        <option value="0">福井県</option>
-        <option value="">山梨県</option>
-        <option value="1">長野県</option>
-        <option value="0">岐阜県</option>
-        <option value="">静岡県</option>
-        <option value="1">愛知県</option>
-        <option value="0">三重県</option>
-        <option value="">滋賀県</option>
-        <option value="1">京都府</option>
-        <option value="0">大阪府</option>
-        <option value="">兵庫県</option>
-        <option value="1">奈良県</option>
-        <option value="0">和歌山県</option>
-        <option value="">鳥取県</option>
-        <option value="1">島根県</option>
-        <option value="0">岡山県</option>
-        <option value="">広島県</option>
-        <option value="1">山口県</option>
-        <option value="0">徳島県</option>
-        <option value="">香川県</option>
-        <option value="1">愛媛県</option>
-        <option value="0">高知県</option>
-        <option value="">福岡県</option>
-        <option value="1">佐賀県</option>
-        <option value="0">長崎県</option>
-        <option value="">熊本県</option>
-        <option value="1">大分県</option>
-        <option value="0">宮崎県</option>
-        <option value="">鹿児島県</option>
-        <option value="1">沖縄県</option>
+      <select  name="prefecture_id" class="form-control">
+        <option value="1">北海道</option>
+        <option value="2">青森県</option>
+        <option value="3">岩手県</option>
+        <option value="4">宮城県</option>
+        <option value="5">秋田県</option>
+        <option value="6">山形県</option>
+        <option value="7">福島県</option>
+        <option value="8">茨城県</option>
+        <option value="9">栃木県</option>
+        <option value="10">群馬県</option>
+        <option value="11">埼玉県</option>
+        <option value="12">千葉県</option>
+        <option value="13">東京都</option>
+        <option value="14">神奈川県</option>
+        <option value="15">新潟県</option>
+        <option value="16">富山県</option>
+        <option value="17">石川県</option>
+        <option value="18">福井県</option>
+        <option value="19">山梨県</option>
+        <option value="20">長野県</option>
+        <option value="21">岐阜県</option>
+        <option value="22">静岡県</option>
+        <option value="23">愛知県</option>
+        <option value="24">三重県</option>
+        <option value="25">滋賀県</option>
+        <option value="26">京都府</option>
+        <option value="27">大阪府</option>
+        <option value="28">兵庫県</option>
+        <option value="29">奈良県</option>
+        <option value="30">和歌山県</option>
+        <option value="31">鳥取県</option>
+        <option value="32">島根県</option>
+        <option value="33">岡山県</option>
+        <option value="34">広島県</option>
+        <option value="35">山口県</option>
+        <option value="36">徳島県</option>
+        <option value="37">香川県</option>
+        <option value="38">愛媛県</option>
+        <option value="39">高知県</option>
+        <option value="40">福岡県</option>
+        <option value="41">佐賀県</option>
+        <option value="42">長崎県</option>
+        <option value="43">熊本県</option>
+        <option value="44">大分県</option>
+        <option value="45">宮崎県</option>
+        <option value="46">鹿児島県</option>
+        <option value="47">沖縄県</option>
       </select>
     </div>
     <div class="form-group">
       <label>住所
         <span class="text-danger">*</span></label>
-      <input type="text" class="form-control" placeholder="例：福岡市博多区博多駅南2-12-32">
+      <input type="text" name="address" class="form-control" placeholder="例：福岡市博多区博多駅南2-12-32">
     </div>
     <div class="form-group">
       <label>設立日
         <span class="text-danger">*</span></label>
-      <input type="text" class="form-control" placeholder="例：平成　28年">
+      <input type="text" name="found_date" class="form-control" placeholder="例：平成　28年">
     </div>
     <div class="form-group">
       <label>電話番号
         <span class="text-danger">*</span></label>
-      <input type="text" class="form-control" placeholder="例：0120-371-007">
+      <input type="text" name="tel_number" class="form-control" placeholder="例：0120-371-007">
     </div>
     <div class="form-group">
       <label>FAX番号
         <span class="text-danger">*</span></label>
-      <input type="text" class="form-control" placeholder="例：12-3456-7890">
+      <input type="text" name="fax_number" class="form-control" placeholder="例：12-3456-7890">
     </div>
     <div class="form-group">
       <label>株式上場
         <span class="text-danger">*</span></label>
-      <input type="text" class="form-control" placeholder="例：（○○○○）上場　OR 非上場">
+      <input type="text" name="stock_list" class="form-control" placeholder="例：（○○○○）上場　OR 非上場">
     </div>
     <div class="form-group">
       <label>従業員数
         <span class="text-danger">*</span></label>
-      <input type="text" class="form-control" placeholder="例：100人">
+      <input type="text" name="number_of_employee_male" class="form-control" placeholder="例：100人">
     </div>
     <div class="form-group">
       <label>男性従業員数</label>
-      <input type="text" class="form-control" placeholder="例：50人">
+      <input type="text" name="number_of_employee_female" class="form-control" placeholder="例：50人">
     </div>
     <div class="form-group">
       <label>女性従業員数</label>
-      <input type="text" class="form-control" placeholder="例：50人">
+      <input type="text" name="number_of_employee" class="form-control" placeholder="例：50人">
     </div>
     <div class="form-group">
       <label>資本金
         <span class="text-danger">*</span></label>
-      <input type="text" class="form-control" placeholder="例：1000万円">
+      <input type="text" name="capital" class="form-control" placeholder="例：1000万円">
     </div>
     <div class="form-group">
       <label>売上高
         <span class="text-danger">*</span></label>
-      <input type="text" class="form-control" placeholder="例：1億円">
+      <input type="text" name="proceed" class="form-control" placeholder="例：1億円">
     </div>
     <div class="form-group">
       <label>事業内容
         <span class="text-danger">*</span></label>
-      <input type="text" class="form-control" placeholder="例：Webサイト・スマホアプリ開発">
+      <input type="text" name="bisiness_details" class="form-control" placeholder="例：Webサイト・スマホアプリ開発">
     </div>
     <div class="form-group">
-      <label>ホームページ
-        <span class="text-danger">*</span></label>
-      <input type="text" class="form-control" placeholder="例：https://asojuku.ac.jp/abcc/">
+      <label>ホームページ</label>
+      <input type="text" name="url" class="form-control" placeholder="例：https://asojuku.ac.jp/abcc/">
     </div>
     <div class="form-group">
-      <label>採用ページ
-        <span class="text-danger">*</span></label>
-      <input type="text" class="form-control" placeholder="例：https://asojuku.ac.jp/abcc/info/">
+      <label>採用ページ</label>
+      <input type="text" name="recruit_url" class="form-control" placeholder="例：https://asojuku.ac.jp/abcc/info/">
     </div>
     <div class="text-center">
       <button type="submit" class="btn btn-success ml-3">登録</button>
