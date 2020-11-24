@@ -4,22 +4,22 @@
       <div class="form-group">
         <label>企業コード
           <span class="text-danger">*</span></label>
-          <input type="text"<%= @recruit_company.company_code %>
+          <input type="text" class="form-control"<%= @recruit_company.company_code %>>
       </div>
       <div class="form-group">
         <label>企業名
           <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" placeholder="例：麻生株式会社">
+        <input type="text" class="form-control"<%= @recruit_company.name %>>
       </div>
       <div class="form-group">
         <label>企業名（ふりがな）
           <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" placeholder="例：あそうかぶしきがいしゃ">
+        <input type="text" class="form-control"<%= @recruit_company.name_furigana %>>
       </div>
       <div class="form-group">
         <label>郵便番号
           <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" placeholder="例：123-4567">
+        <input type="text" class="form-control"<%= @recruit_company.postal_code %>>
       </div>
       <div class="form-group">
         <label>都道府県
@@ -77,94 +77,70 @@
       <div class="form-group">
         <label>住所
           <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" placeholder="例：福岡市博多区博多駅南2-12-32">
+        <input type="text" class="form-control"<%= @recruit_company.address %>>
       </div>
       <div class="form-group">
         <label>設立日
           <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" placeholder="例：平成　28年">
+        <input type="text" class="form-control"<%= @recruit_company.found_date %>>
       </div>
       <div class="form-group">
         <label>電話番号
           <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" placeholder="例：0120-371-007">
+        <input type="text" class="form-control"<%= @recruit_company.tel_number %>>
       </div>
       <div class="form-group">
         <label>FAX番号
           <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" placeholder="例：12-3456-7890">
+        <input type="text" class="form-control"<%= @recruit_company.fax_number %>>
       </div>
       <div class="form-group">
         <label>株式上場
           <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" placeholder="例：（○○○○）上場　OR 非上場">
+        <input type="text" class="form-control"<%= @recruit_company.stock_list %>>
       </div>
       <div class="form-group">
         <label>男性従業員数</label>
-          <input type="text" class="form-control" placeholder="例：50人">
+        <input type="text" class="form-control"<%= @recruit_company.number_of_employee_male %>>
       </div>
       <div class="form-group">
         <label>女性従業員数</label>
-          <input type="text" class="form-control" placeholder="例：50人">
+        <input type="text" class="form-control"<%= @recruit_company.number_of_employee_female %>>
       </div>
       <div class="form-group">
         <label>従業員数
           <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" placeholder="例：100人">
+        <input type="text" class="form-control"<%= @recruit_company.number_of_employee %>>
       </div>
       <div class="form-group">
         <label>資本金
           <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" placeholder="例：1000万円">
-      </div>
-      <div class="form-group">
-        <label>資本金日付
-          <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" placeholder="例：">
+        <input type="text" class="form-control"<%= @recruit_company.capital %>>
       </div>
       <div class="form-group">
         <label>売上高
           <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" placeholder="例：1億円">
-      </div>
-      <div class="form-group">
-        <label>売上高日付
-          <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" placeholder="例：">
+        <input type="text" class="form-control"<%= @recruit_company.company_code %>>
       </div>
       <div class="form-group">
         <label>事業内容
           <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" placeholder="例：Webサイト・スマホアプリ開発">
+        <input type="text" class="form-control"<%= @recruit_company.company_code %>>
       </div>
       <div class="form-group">
         <label>ホームページ
           <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" placeholder="例：https://asojuku.ac.jp/abcc/">
+        <input type="text" class="form-control"<%= @recruit_company.company_code %>>
       </div>
       <div class="form-group">
         <label>ホームページ
           <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" placeholder="例：https://asojuku.ac.jp/abcc/">
+        <input type="text" class="form-control"<%= @recruit_company.company_code %>>
       </div>
       <div class="form-group">
         <label>採用ページ
           <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" placeholder="例：https://asojuku.ac.jp/abcc/info/">
-      </div>
-      <div class="form-group">
-        <label>作成日時
-          <span class="text-danger">*</span></label>
-        <div class="input-group date" id="kt_datetimepicker_7_1" data-target-input="nearest">
-          <input type="date" name="briefing_in_school_start" class="form-control datetimepicker-input" placeholder="開始日" />
-        </div>
-      </div>
-      <div class="form-group">
-        <label>更新日時
-          <span class="text-danger">*</span></label>
-        <div class="input-group date" id="kt_datetimepicker_7_1" data-target-input="nearest">
-          <input type="date" name="briefing_in_school_start" class="form-control datetimepicker-input" placeholder="開始日" />
-        </div>
+        <input type="text" class="form-control"<%= @recruit_company.company_code %>>
       </div>
       <div class="text-center">
         <button type="submit" class="btn btn-success ml-3">登録</button>
