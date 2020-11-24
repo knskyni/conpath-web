@@ -63,4 +63,6 @@ class CompanyController < ApplicationController
   def edit
     @recruit_company = RecruitCompany.find_by(id: params[:id])
   end
+  def update
+  end
 end
