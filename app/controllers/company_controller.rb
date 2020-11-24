@@ -31,7 +31,7 @@ class CompanyController < ApplicationController
         number_of_employee: params[:number_of_employee],
         capital: params[:capital],
         proceed: params[:proceed],
-        bisiness_details: params[:bisiness_details],
+        business_details: params[:business_details],
         url: params[:url],
         recruit_url: params[:recruit_url],
         created_at: params[:created_at],
