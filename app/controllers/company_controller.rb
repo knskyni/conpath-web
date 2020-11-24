@@ -59,5 +59,8 @@ class CompanyController < ApplicationController
             }
         ]
     }
-    end
+  end
+  def edit
+    @recruit_company = RecruitCompany.find_by(id: params[:id])
+  end
 end
