@@ -43,7 +43,7 @@ class CompanyController < ApplicationController
       render("company/create_form")
     end
   end
-  def recruit_company_show
+  def show
     @recruit_company = RecruitCompany.find_by(id:params[:id])
 
     @sub_header = {
