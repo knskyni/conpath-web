@@ -40,6 +40,20 @@ class CompanyController < ApplicationController
       flash[:notice] = "企業情報の登録が完了しました"
       redirect_to("/company/#{@recruit_company.id}")
     else
+      @sub_header = {
+          title: "企業情報追加",
+          list: [
+              {
+                  name: "General",
+                  url: "/"
+              },
+              {
+                  name: "Empty Page",
+                  url: "/test"
+              }
+          ]
+      }
+      
       render("company/create_form")
     end
   end
