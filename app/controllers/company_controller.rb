@@ -53,7 +53,7 @@ class CompanyController < ApplicationController
               }
           ]
       }
-      
+
       render("company/create_form")
     end
   end
@@ -110,7 +110,26 @@ class CompanyController < ApplicationController
     @recruit_company.bisiness_details = params[:bisiness_details]
     @recruit_company.url = params[:url]
     @recruit_company.recruit_url = params[:recruit_url]
-    @recruit_company.save
-    redirect_to("/company/#{@recruit_company.id}")
+
+    if @recruit_company.save
+      flash[:notice] = "企業情報の修正が完了しました"
+      redirect_to("/company/#{@recruit_company.id}")
+    else
+      @sub_header = {
+          title: "企業情報修正",
+          list: [
+              {
+                  name: "General",
+                  url: "/"
+              },
+              {
+                  name: "Empty Page",
+                  url: "/test"
+              }
+          ]
+      }
+
+      render("company/edit")
+    end
   end
 end
