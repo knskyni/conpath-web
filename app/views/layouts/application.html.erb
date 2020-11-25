@@ -505,7 +505,7 @@
                                 <div class="topbar-item">
                                     <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
                                         <span class="text-muted font-weight-bold font-size-base mr-1">ようこそ、</span>
-                                        <span class="text-dark-50 font-weight-bolder font-size-base mr-1">山田 太郎</span>
+                                        <span class="text-dark-50 font-weight-bolder font-size-base mr-1"><%= @current_user.last_name + " " + @current_user.first_name %></span>
                                         <span class="text-muted font-weight-bold font-size-base mr-3">さん</span>
                                         <span class="symbol symbol-lg-35 symbol-25">
                                             <div class="symbol-label" style="background-image:url('/assets/media/users/blank.png')"></div>
