@@ -62,6 +62,19 @@ class CompanyController < ApplicationController
   end
   def edit
     @recruit_company = RecruitCompany.find_by(id: params[:id])
+    @sub_header = {
+        title: "企業情報修正",
+        list: [
+            {
+                name: "General",
+                url: "/"
+            },
+            {
+                name: "Empty Page",
+                url: "/test"
+            }
+        ]
+    }
   end
   def update
     @recruit_company = RecruitCompany.find_by(id: params[:id])
