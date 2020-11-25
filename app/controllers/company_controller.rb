@@ -34,7 +34,8 @@ class CompanyController < ApplicationController
         proceed: params[:proceed],
         bisiness_details: params[:bisiness_details],
         url: params[:url],
-        recruit_url: params[:recruit_url]
+        recruit_url: params[:recruit_url],
+        teacher_comment: params[:teacher_comment]
     )
     if @recruit_company.save
       flash[:notice] = "企業情報の登録が完了しました"
