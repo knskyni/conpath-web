@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :authenticate
   def authenticate
     if session[:user_type]
       if session[:user_type] == :student
