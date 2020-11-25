@@ -7,7 +7,7 @@ class StudentController < ApplicationController
     @student = Student.find_by(email: params[:email])
 
     if @student && @student.authenticate(params[:password])
-      session[:user_type] = :student
+      session[:user_type] = "student"
       session[:user_id] = @student.id
       flash[:notice] = "ログインしました。"
       redirect_to("/")
