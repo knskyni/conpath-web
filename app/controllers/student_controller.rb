@@ -3,6 +3,21 @@ class StudentController < ApplicationController
     render(layout: false)
   end
 
+  def auth
+    @student = Student.find_by(email: params[:email])
+
+    if @student && @student.authenticate(params[:password])
+      session[:user_type] = :student
+      session[:user_id] = @student.id
+      flash[:notice] = "ログインしました。"
+      redirect_to("/")
+    else
+      @error_message = "メールアドレスまたはパスワードが間違っています。"
+      @email = params[:email]
+      render("student/login", layout: false)
+    end
+  end
+
   def new
     @sub_header = {
         title: "登録ページ",
