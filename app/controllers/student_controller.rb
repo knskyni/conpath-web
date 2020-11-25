@@ -1,4 +1,8 @@
 class StudentController < ApplicationController
+  def login
+    render(layout: false)
+  end
+
   def new
     @sub_header = {
         title: "登録ページ",
