@@ -18,6 +18,12 @@ class StudentController < ApplicationController
     end
   end
 
+  def logout
+    session[:user_type] = nil
+    session[:user_id] = nil
+    redirect_to("/")
+  end
+
   def new
     @sub_header = {
         title: "登録ページ",
