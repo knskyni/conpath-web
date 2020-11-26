@@ -103,7 +103,7 @@ class StudentController < ApplicationController
         first_name_furigana: params[:first_name_furigana],
         class_id: student_temp.class_id,
         gender: params[:gender],
-        icon: "default_user.jpg",
+        icon: "/assets/media/users/blank.png",
     )
     if params[:password] != params[:password_confirm]
       @error_message = "パスワードが一致しません"
