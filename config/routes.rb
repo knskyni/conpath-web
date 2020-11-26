@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
-  get 'company/create', to: 'company#create_form'
-  post 'company/create', to: 'company#create'
-  get 'company/:id', to: 'company#show'
-  get 'company/:id/edit', to: 'company#edit'
-  post "company/:id/update", to: 'company#update'
+  root to: 'home#index'
 
   get 'student/login', to: 'student#login'
   post 'student/login', to: 'student#auth'
@@ -17,8 +13,6 @@ Rails.application.routes.draw do
   get 'student/password_edit/:id', to: 'student#password_edit'
   post 'student/password_update/:id', to: 'student#password_update'
 
-  root to: 'home#index'
-
   get 'school', to: 'school#index'
   get 'school/new', to: 'school#new'
   post 'school/create', to: 'school#create'
@@ -31,5 +25,11 @@ Rails.application.routes.draw do
   get 'course/:id', to: 'course#show'
   get 'course/:id/edit', to: 'course#edit'
   patch 'course/:id/update', to: 'course#update'
+
+  get 'company/new', to: 'company#new'
+  post 'company/create', to: 'company#create'
+  get 'company/:id', to: 'company#show'
+  get 'company/:id/edit', to: 'company#edit'
+  post "company/:id/update", to: 'company#update'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

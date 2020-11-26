@@ -1,5 +1,5 @@
 class CompanyController < ApplicationController
-  def create_form
+  def new
     @recruit_company = RecruitCompany.new
     @sub_header = {
         title: "企業情報追加",
@@ -55,7 +55,7 @@ class CompanyController < ApplicationController
           ]
       }
 
-      render("company/create_form")
+      render("company/new")
     end
   end
   def show
