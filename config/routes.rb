@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   post 'student/activate/:auth_key', to: 'student#create'
   get 'student/edit/:id', to: 'student#edit'
   post 'student/update/:id', to: 'student#update'
+  get 'student/password_edit/:id', to: 'student#password_edit'
+  post 'student/password_update/:id', to: 'student#password_update'
 
   root to: 'home#index'
 
