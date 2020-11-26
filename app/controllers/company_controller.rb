@@ -32,7 +32,7 @@ class CompanyController < ApplicationController
         number_of_employee: params[:number_of_employee],
         capital: params[:capital],
         proceed: params[:proceed],
-        bisiness_details: params[:bisiness_details],
+        business_details: params[:business_details],
         url: params[:url],
         recruit_url: params[:recruit_url],
         teacher_comment: params[:teacher_comment]
@@ -108,7 +108,7 @@ class CompanyController < ApplicationController
     @recruit_company.number_of_employee = params[:number_of_employee]
     @recruit_company.capital = params[:capital]
     @recruit_company.proceed = params[:proceed]
-    @recruit_company.bisiness_details = params[:bisiness_details]
+    @recruit_company.business_details = params[:business_details]
     @recruit_company.url = params[:url]
     @recruit_company.recruit_url = params[:recruit_url]
 
