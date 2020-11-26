@@ -15,6 +15,7 @@ class CompanyController < ApplicationController
         ]
     }
   end
+
   def create
     @recruit_company = RecruitCompany.new(
         company_code: params[:company_code],
@@ -58,6 +59,7 @@ class CompanyController < ApplicationController
       render("company/new")
     end
   end
+
   def show
     @recruit_company = RecruitCompany.find_by(id:params[:id])
 
@@ -75,6 +77,7 @@ class CompanyController < ApplicationController
         ]
     }
   end
+
   def edit
     @recruit_company = RecruitCompany.find_by(id: params[:id])
     @sub_header = {
@@ -91,6 +94,7 @@ class CompanyController < ApplicationController
         ]
     }
   end
+
   def update
     @recruit_company = RecruitCompany.find_by(id: params[:id])
     @recruit_company.company_code = params[:company_code]
