@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="col-xl-3">
+    <div class="card card-custom gutter-b">
+      <div class="card-body">
+        <div class="d-flex justify-content-between flex-column h-100">
+          <div class="h-100">
+            <div class="d-flex flex-column flex-center">
+              <div class="bgi-no-repeat bgi-size-cover rounded min-h-180px w-100" style="background-image: url(/assets/media/users/blank.png)"></div>
+              <span class="card-title font-weight-bolder text-dark-75 font-size-h4 m-0 pt-7 pb-1"><%= @school_class.name %></span>
+            </div>
+            <hr class="my-5">
+            <div>
+              <div class="d-flex align-items-center pb-9">
+                <div class="symbol symbol-45 symbol-light mr-4">
+                  <span class="symbol-label">
+                    <span class="svg-icon svg-icon-2x svg-icon-dark-50">
+                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                          <rect x="0" y="0" width="24" height="24"/>
+                          <path d="M3,16 L5,16 C5.55228475,16 6,15.5522847 6,15 C6,14.4477153 5.55228475,14 5,14 L3,14 L3,12 L5,12 C5.55228475,12 6,11.5522847 6,11 C6,10.4477153 5.55228475,10 5,10 L3,10 L3,8 L5,8 C5.55228475,8 6,7.55228475 6,7 C6,6.44771525 5.55228475,6 5,6 L3,6 L3,4 C3,3.44771525 3.44771525,3 4,3 L10,3 C10.5522847,3 11,3.44771525 11,4 L11,19 C11,19.5522847 10.5522847,20 10,20 L4,20 C3.44771525,20 3,19.5522847 3,19 L3,16 Z" fill="#000000" opacity="0.3"/>
+                          <path d="M16,3 L19,3 C20.1045695,3 21,3.8954305 21,5 L21,15.2485298 C21,15.7329761 20.8241635,16.200956 20.5051534,16.565539 L17.8762883,19.5699562 C17.6944473,19.7777745 17.378566,19.7988332 17.1707477,19.6169922 C17.1540423,19.602375 17.1383289,19.5866616 17.1237117,19.5699562 L14.4948466,16.565539 C14.1758365,16.200956 14,15.7329761 14,15.2485298 L14,5 C14,3.8954305 14.8954305,3 16,3 Z" fill="#000000"/>
+                        </g>
+                      </svg>
+                    </span>
+                  </span>
+                </div>
+                <div class="d-flex flex-column flex-grow-1">
+                  <a href="#" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">学生</a>
+                  <span class="text-muted font-weight-bold">Students</span>
+                </div>
+                <span class="font-weight-bolder label label-xl label-light-primary label-inline py-5 min-w-45px"><%= @school_class.students.count.to_s(:delimited) %></span>
+              </div>
+            </div>
+            <div class="pb-4">
+              学生招待コード:
+              <div class="input-group">
+                <input type="text" class="form-control" id="kt_clipboard_1" value="<%= @school_class.invite_code %>" readonly>
+                <div class="input-group-append">
+                  <a href="#" class="btn btn-secondary" data-clipboard="true" data-clipboard-target="#kt_clipboard_1">
+                    <i class="la la-copy"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-center" id="kt_sticky_toolbar_chat_toggler_2" data-toggle="tooltip" title="" data-placement="right">
+            <%= link_to("編集", "/school/#{@school_class.id}/edit", {class: ["btn", "btn-primary", "font-weight-bolder", "font-size-sm", "py-3", "px-14"]}) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-9">
+    <div class="row">
+      <% @school_class.students.each do |student| %>
+        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-custom gutter-b card-stretch">
+            <div class="card-body text-center pt-4">
+              <div class="mt-7">
+                <div class="symbol symbol-circle symbol-lg-75">
+                  <img src="<%= student.icon %>" alt="image">
+                </div>
+              </div>
+              <div class="my-2">
+                <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4"><%= "#{student.last_name} #{student.first_name}" %></a>
+              </div>
+              <span class="label label-inline label-lg label-light-primary btn-sm font-weight-bold">在学中</span>
+              <div class="mt-9 mb-6">
+                <%= link_to("プロフィール", "/student/#{student.id}", {class: %w(btn btn-primary font-weight-bolder font-size-sm py-3 px-14)}) %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
