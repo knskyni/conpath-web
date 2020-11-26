@@ -2,6 +2,11 @@ class SchoolClass < ApplicationRecord
   belongs_to :course, foreign_key: :course_id
   has_many :students, foreign_key: :class_id
 
+  validates :begin_year, {presence: true, format: {with: /(19|20)\d{2}/i, message: "西暦で入力してください。"}, uniqueness: { scope: [:course_id, :school_class] }}
+  validates :course_id, {presence: true}
+  validates :graduated, {inclusion: {in: [true, false]}}
+  validates :invite_code, {presence: true}
+
   def course
     return Course.find_by(id: self.course_id)
   end
