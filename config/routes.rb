@@ -17,5 +17,11 @@ Rails.application.routes.draw do
   get 'school/:id', to: 'school#show'
   get 'school/:id/edit', to: 'school#edit'
   patch 'school/:id/update', to: 'school#update'
+
+  get 'course/new/:school_id', to: 'course#new'
+  post 'course/new/:school_id', to: 'course#create'
+  get 'course/:id', to: 'course#show'
+  get 'course/:id/edit', to: 'course#edit'
+  patch 'course/:id/update', to: 'course#update'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
