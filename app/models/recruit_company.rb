@@ -7,5 +7,5 @@ class RecruitCompany < ApplicationRecord
   validates :address, {presence: true}
   validates :found_date, {presence: true}
   validates :tel_number, {presence: true, format: {with: /\A\d{10,11}\z/, message: "ハイフンなしの電話番号を入力して下さい"}}
-  validates :fax_number, {format: {with: /\A\d{10,11}\z/, message: "ハイフンなしの電話番号を入力して下さい"}}
+  validates :fax_number, {format: {with: /\A\d{10,11}|\A\z/, message: "ハイフンなしの電話番号を入力して下さい"}}
 end
