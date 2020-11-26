@@ -1,0 +1,176 @@
+<div class="card card-custom gutter-b">
+  <div class="card-body">
+    <div class="d-flex">
+      <div class="flex-shrink-0 mr-7">
+        <div class="symbol symbol-50 symbol-lg-120">
+          <img alt="Pic" src="assets/media/users/blank.png">
+        </div>
+      </div>
+      <div class="flex-grow-1">
+        <div class="d-flex align-items-center justify-content-between flex-wrap">
+          <div class="mr-3">
+            <div class="d-flex align-items-center mr-3">
+              <span class="d-flex align-items-center text-dark font-size-h5 font-weight-bold mr-3"><%= @recruit_company.name %></span>
+            </div>
+            <div class="d-flex flex-wrap my-2">
+              <span class="text-muted font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
+                <i class="fas fa-map-marked-alt mr-2"></i><%= @recruit_company.prefecture_id %>
+              </span>
+              <span class="text-muted font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
+                <i class="fas fa-tag mr-2"></i><%= @recruit_company.bisiness_details %>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex align-items-center flex-wrap justify-content-between">
+          <div class="flex-grow-1 font-weight-bold text-dark-50 py-2 py-lg-2 mr-5">
+            <%= @recruit_company.teacher_comment %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xl-12">
+    <div class="card card-custom gutter-b">
+      <div class="card-header card-header-tabs-line">
+        <div class="card-title">
+          <h3 class="card-label">
+            企業情報
+            <span class="d-block text-muted pt-2 font-size-sm">Job Posting</span>
+          </h3>
+        </div>
+        <div class="card-toolbar">
+          <ul class="nav nav-tabs nav-bold nav-tabs-line">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">年度選択</a>
+                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" style="">
+                  <a class="dropdown-item" data-toggle="tab" href="#kt_tab_pane_1_2">2021年度</a>
+                  <a class="dropdown-item" data-toggle="tab" href="#kt_tab_pane_2_2">2020年度</a>
+                  <a class="dropdown-item" data-toggle="tab" href="#kt_tab_pane_3_2">2019年度</a>
+                </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="tab-content">
+          <div class="tab-pane fade active show" id="kt_tab_pane_1_2" role="tabpanel">
+            <div class="form-group row my-2">
+              <label class="col-4 col-form-label">企業コード:</label>
+              <div class="col-8">
+                <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.company_code %></span>
+              </div>
+            </div>
+            <div class="form-group row my-2">
+              <label class="col-4 col-form-label">企業名:</label>
+              <div class="col-8">
+                <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.name %></span>
+              </div>
+            </div>
+            <div class="form-group row my-2">
+              <label class="col-4 col-form-label">企業名（ふりがな）:</label>
+              <div class="col-8">
+                <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.name_furigana %></span>
+              </div>
+            </div>
+            <div class="form-group row my-2">
+              <label class="col-4 col-form-label">郵便番号:</label>
+              <div class="col-8">
+                <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.postal_code %></span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row my-2">
+            <label class="col-4 col-form-label">都道府県ID:</label>
+            <div class="col-8">
+              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.prefecture_id %></span>
+            </div>
+          </div>
+          <div class="form-group row my-2">
+            <label class="col-4 col-form-label">住所:</label>
+            <div class="col-8">
+              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.address %></span>
+            </div>
+          </div>
+          <div class="form-group row my-2">
+            <label class="col-4 col-form-label">設立日:</label>
+            <div class="col-8">
+              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.found_date %></span>
+            </div>
+          </div>
+          <div class="form-group row my-2">
+            <label class="col-4 col-form-label">電話番号:</label>
+            <div class="col-8">
+              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.tel_number %></span>
+            </div>
+          </div>
+          <div class="form-group row my-2">
+            <label class="col-4 col-form-label">FAX番号:</label>
+            <div class="col-8">
+              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.fax_number %></span>
+            </div>
+          </div>
+          <div class="form-group row my-2">
+            <label class="col-4 col-form-label">株式上場:</label>
+            <div class="col-8">
+              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.stock_list %></span>
+            </div>
+          </div>
+          <div class="form-group row my-2">
+            <label class="col-4 col-form-label">男性従業員数:</label>
+            <div class="col-8">
+              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.	number_of_employee_male %></span>
+            </div>
+          </div>
+          <div class="form-group row my-2">
+            <label class="col-4 col-form-label">女性従業員数:</label>
+            <div class="col-8">
+              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.number_of_employee_female %></span>
+            </div>
+          </div>
+          <div class="form-group row my-2">
+            <label class="col-4 col-form-label">従業員数:</label>
+            <div class="col-8">
+              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.number_of_employee %></span>
+            </div>
+          </div>
+          <div class="form-group row my-2">
+            <label class="col-4 col-form-label">資本金:</label>
+            <div class="col-8">
+              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.capital %></span>
+            </div>
+          </div>
+          <div class="form-group row my-2">
+            <label class="col-4 col-form-label">売上高:</label>
+            <div class="col-8">
+              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.proceed %></span>
+            </div>
+          </div>
+          <div class="form-group row my-2">
+            <label class="col-4 col-form-label">事業内容:</label>
+            <div class="col-8">
+              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.bisiness_details %></span>
+            </div>
+          </div>
+          <div class="form-group row my-2">
+            <label class="col-4 col-form-label">ホームページ:</label>
+            <div class="col-8">
+              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.url %></span>
+            </div>
+          </div>
+          <div class="form-group row my-2">
+            <label class="col-4 col-form-label">採用ページ:</label>
+            <div class="col-8">
+              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.recruit_url %></span>
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-success ml-3"><%= link_to("修正","/company/#{@recruit_company.id}/edit") %></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

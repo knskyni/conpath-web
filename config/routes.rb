@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'company/create', to: 'company#create_form'
+  post 'company/create', to: 'company#create'
+  get 'company/:id', to: 'company#show'
+  get 'company/:id/edit', to: 'company#edit'
+  post "company/:id/update", to: 'company#update'
+
   get 'student/login', to: 'student#login'
   post 'student/login', to: 'student#auth'
   post 'student/logout', to: 'student#logout'
