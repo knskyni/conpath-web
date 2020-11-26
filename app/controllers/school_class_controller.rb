@@ -29,7 +29,8 @@ class SchoolClassController < ApplicationController
   end
 
   def show
-
+    @school_class = SchoolClass.find_by(id: params[:id])
+    render(file: "#{Rails.root}/public/404", layout: false, status: :not_found) if @school_class.nil?
   end
 
   def edit
