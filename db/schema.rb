@@ -115,12 +115,23 @@ ActiveRecord::Schema.define(version: 2020_11_25_071614) do
     t.integer "begin_year"
     t.integer "course_id"
     t.string "school_class"
+    t.boolean "graduated", default: false
+    t.string "invite_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "schools", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "student_temps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "class_id"
+    t.string "student_id"
+    t.string "invite_code"
+    t.string "auth_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
