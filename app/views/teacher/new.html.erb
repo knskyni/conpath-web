@@ -2,11 +2,11 @@
   <div class="card-body">
     <% if @teacher.errors.full_messages.any? %>
       <h4 class="alert-heading">エラー</h4>
-      <% @teacher.errors.full_messages.each do |message| %>
-        <div class="form-error">
+      <ul class="m-0">
+        <% @teacher.errors.full_messages.each do |message| %>
           <li><%= message %></li>
-        </div>
-      <% end %>
+        <% end %>
+      </ul>
     <% end %>
     <%=form_tag('/teacher/create') do %>
       <div class="container">
