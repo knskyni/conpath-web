@@ -5,7 +5,7 @@ class TeacherController < ApplicationController
 
         list: [
             {
-                name: "教員登録",
+                name: "教員情報登録",
                 url: "/teacher/new"
             }
         ]
@@ -33,7 +33,7 @@ class TeacherController < ApplicationController
     end
 
     if @teacher.save
-      flash[:notice] = "教員登録を完了いたしました"
+      flash[:notice] = "教員情報の登録を完了いたしました"
       redirect_to("/")
     else
       @teacher.last_name = params[:last_name]
