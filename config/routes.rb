@@ -3,5 +3,7 @@ Rails.application.routes.draw do
 
   get 'teacher/new', to: 'teacher#new'
   post 'teacher/create', to: 'teacher#create'
-  get 'teacher/:id', to: 'teacher#show'
+  get 'teacher/edit/:id', to: 'teacher#edit'
+  post 'teacher/update/:id', to: 'teacher#update'
+
 end
