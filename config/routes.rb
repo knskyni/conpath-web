@@ -36,6 +36,6 @@ Rails.application.routes.draw do
   post 'company/create', to: 'company#create'
   get 'company/:id', to: 'company#show'
   get 'company/:id/edit', to: 'company#edit'
-  post "company/:id/update", to: 'company#update'
+  patch "company/:id/update", to: 'company#update'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
