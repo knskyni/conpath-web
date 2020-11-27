@@ -1,0 +1,71 @@
+<div class="card card-custom">
+  <div class="card-body">
+    <% if @teacher.errors.full_messages.any? %>
+      <h4 class="alert-heading">エラー</h4>
+      <% @teacher.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    <% end %>
+    <%=form_tag("/teacher/update/#{@teacher.id}", {multipart: true}) do %>
+      <div class="container">
+        <div class="form-row">
+          <div class="form-group col-xl-6">
+            <label>性
+              <span class="text-danger">*</span>
+            </label>
+            <input type="String" class="form-control" name="last_name" value="<%= @teacher.last_name %>">
+          </div>
+          <div class="form-group col-xl-6">
+            <label>名
+              <span class="text-danger">*</span>
+            </label>
+            <input type="String" class="form-control" name="first_name" value="<%= @teacher.first_name %>">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-xl-6">
+            <label>せい
+              <span class="text-danger">*</span>
+            </label>
+            <input type="String"  class="form-control" name="last_name_furigana" value="<%= @teacher.last_name_furigana %>">
+          </div>
+          <div class="form-group col-xl-6">
+            <label>めい
+              <span class="text-danger">*</span>
+            </label>
+            <input type="String" name="first_name_furigana" class="form-control" value="<%= @teacher.first_name_furigana %>">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>メールアドレス
+            <span class="text-danger">*</span>
+          </label>
+          <input type="email" class="form-control" name="email" value="<%= @teacher.email %>">
+        </div>
+        <div class="form-group">
+          <label>性別
+            <span class="text-danger">*</span>
+          </label>
+          <select class="form-control"  name="gender" id="exampleSelects">
+            <option value=0>男性</option>
+            <option value=1>女性</option>
+            <option value=2>非公開</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>教員アイコン
+            <span class="text-danger">*</span>
+          </label>
+          <input type="file" class="form-control" name="icon">
+        </div>
+        <div class="form-group">
+          <label>自己紹介文
+            <span class="text-danger">*</span>
+          </label>
+          <input type="text" class="form-control" name="biography" value="<%= @teacher.biography %>">
+        </div>
+      </div>
+      <input type="submit" value="変更" class="btn btn-primary font-right">
+    <% end %>
+  </div>
+</div>
