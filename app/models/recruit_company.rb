@@ -6,6 +6,6 @@ class RecruitCompany < ApplicationRecord
   validates :prefecture_id, {presence: true}
   validates :address, {presence: true}
   validates :found_date, {presence: true}
-  validates :tel_number, {presence: true, format: {with: /\A\d{10,11}\z/, message: "ハイフンなしの電話番号を入力して下さい"}}
-  validates :fax_number, {format: {with: /\A\d{10,11}|\A\z/, message: "ハイフンなしの電話番号を入力して下さい"}}
+  validates :tel_number, {presence: true, format: {with: /\A0(\d{1}[-(]?\d{4}|\d{2}[-(]?\d{3}|\d{3}[-(]?\d{2}|\d{4}[-(]?\d{1})[-)]?\d{4}\z/, message: "ハイフンなしの電話番号を入力して下さい"}}
+  validates :fax_number, {format: {with: /\A0(\d{1}[-(]?\d{4}|\d{2}[-(]?\d{3}|\d{3}[-(]?\d{2}|\d{4}[-(]?\d{1})[-)]?\d{4}|\A\z/, message: "ハイフンなしの電話番号を入力して下さい"}}
 end
