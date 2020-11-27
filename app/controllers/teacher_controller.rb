@@ -1,6 +1,15 @@
 class TeacherController < ApplicationController
   def new
-
+    @teacher = Teacher.new
+    @sub_header = {
+        title: "教員登録",
+        list: [
+            {
+                name: "教員登録",
+                url: "/teacher/new"
+            }
+        ]
+    }
   end
 
   def create
