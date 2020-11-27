@@ -8,4 +8,8 @@ class RecruitCompany < ApplicationRecord
   validates :found_date, {presence: true}
   validates :tel_number, {presence: true, format: {with: /\A0(\d{1}[-(]?\d{4}|\d{2}[-(]?\d{3}|\d{3}[-(]?\d{2}|\d{4}[-(]?\d{1})[-)]?\d{4}\z/, message: "ハイフンなしの電話番号を入力して下さい"}}
   validates :fax_number, {format: {with: /\A0(\d{1}[-(]?\d{4}|\d{2}[-(]?\d{3}|\d{3}[-(]?\d{2}|\d{4}[-(]?\d{1})[-)]?\d{4}|\A\z/, message: "ハイフンなしの電話番号を入力して下さい"}}
+
+  def prefecture
+    return Prefecture.find_by(id: self.prefecture_id)
+  end
 end
