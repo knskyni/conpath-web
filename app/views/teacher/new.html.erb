@@ -5,80 +5,87 @@
 </head>
 <body>
 <div class="card card-custom">
-  <div class="card-body p-0">
-    <div class="wizard wizard-3" id="kt_wizard_v3" data-wizard-state="first" data-wizard-clickable="true">
-      <div class="d-flex flex-column-fluid px-8 py-8 px-lg-15 py-lg-3">
-        <%=form_tag('/teacher/create') do %>
-          <% if @teacher.errors.full_messages.any? %>
-            <h4 class="alert-heading">エラー</h4>
-            <% @teacher.errors.full_messages.each do |message| %>
-              <div class="form-error">
-                <%= message %>
-              </div>
-            <% end %>
-          <% end %>
-          <div class="container">
-            <div class="row">
-              <div class="col-xl-4">
-                <div class="form-group fv-plugins-icon-container">
-                  <label>苗字<span class="text-danger">*</span></label>
-                  <input type="text" name="last_name" class="form-control" placeholder="Last Name" value="<%= @teacher.last_name %>">
-                </div>
-              </div>
-              <div class="col-xl-4">
-                <div class="form-group fv-plugins-icon-container">
-                  <label>名前<span class="text-danger">*</span></label>
-                  <input type="text" name="first_name" class="form-control" placeholder="First Name" value="<%= @teacher.first_name %>">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xl-4">
-                <div class="form-group fv-plugins-icon-container">
-                  <label>みょうじ<span class="text-danger">*</span></label>
-                  <input type="text" name="last_name_furigana" class="form-control" placeholder="Last Name Furigana" value="<%= @teacher.last_name_furigana %>">
-                </div>
-              </div>
-              <div class="col-xl-4">
-                <div class="form-group fv-plugins-icon-container">
-                  <label>なまえ<span class="text-danger">*</span></label>
-                  <input type="text" name="first_name_furigana" class="form-control" placeholder="First Name Furigana" value="<%= @teacher.first_name_furigana %>">
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>メールアドレス
-                <span class="text-danger">*</span></label>
-                <input type="email" name="email" class="form-control" placeholder="Email" value="<%= @teacher.email %>">
-            </div>
-            <div class="form-group">
-              <label>パスワード
-                <span class="text-danger">*</span></label>
-                <input type="password" name="password" class="form-control" placeholder="Password">
-            </div>
-            <div class="form-group">
-              <label for="exampleSelect1">性別
-                <span class="text-danger">*</span></label>
-                <select class="form-control"  name="gender" id="exampleSelect1">
-                  <option value=1>女性</option>
-                  <option value=2>男性</option>
-                </select>
-            </div>
-            <div class="form-group">
-              <label>教員アイコン
-                <span class="text-danger">*</span></label>
-              <input type="file" name="icon" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>自己紹介文
-                <span class="text-danger">*</span></label>
-                <input type="text" name="biography" class="form-control" placeholder="biography" value="<%= @teacher.biography %>">
-            </div>
+  <div class="card-body">
+    <% if @teacher.errors.full_messages.any? %>
+      <h4 class="alert-heading">エラー</h4>
+      <% @teacher.errors.full_messages.each do |message| %>
+        <div class="form-error">
+          <li><%= message %></li>
+        </div>
+      <% end %>
+    <% end %>
+    <%=form_tag('/teacher/create') do %>
+      <div class="container">
+        <div class="form-row">
+          <div class="form-group col-xl-6">
+            <label>性
+              <span class="text-danger">*</span>
+            </label>
+            <input type="String" class="form-control" name="last_name" value="<%= @teacher.last_name %>">
           </div>
-          <button type="button" class="btn btn-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-next">登録</button>
-        <% end %>
+          <div class="form-group col-xl-6">
+            <label>名
+              <span class="text-danger">*</span>
+            </label>
+            <input type="String" class="form-control" name="first_name" value="<%= @teacher.first_name %>">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-xl-6">
+            <label>せい
+              <span class="text-danger">*</span>
+            </label>
+            <input type="String"  class="form-control" name="last_name_furigana" value="<%= @teacher.last_name_furigana %>">
+          </div>
+          <div class="form-group col-xl-6">
+            <label>めい
+              <span class="text-danger">*</span>
+            </label>
+            <input type="String" name="first_name_furigana" class="form-control" value="<%= @teacher.first_name_furigana %>">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>メールアドレス
+            <span class="text-danger">*</span>
+          </label>
+          <input type="email" class="form-control" name="email" value="<%= @teacher.email %>">
+        </div>
+        <div class="form-group">
+          <label>パスワード
+            <span class="text-danger">*</span>
+          </label>
+          <input type="password" class="form-control" name="password">
+        </div>
+        <div class="form-group">
+          <label>パスワード確認
+            <span class="text-danger">*</span>
+          </label><input type="password" class="form-control" name="password_confirm">
+        </div>
+        <div class="form-group">
+          <label>性別
+            <span class="text-danger">*</span>
+          </label>
+          <select class="form-control"  name="gender" id="exampleSelects">
+            <option value=0>男性</option>
+            <option value=1>女性</option>
+            <option value=2>非公開</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>教員アイコン
+            <span class="text-danger">*</span>
+          </label>
+          <input type="file" class="form-control" name="icon">
+        </div>
+        <div class="form-group">
+          <label>自己紹介文
+            <span class="text-danger">*</span>
+          </label>
+          <input type="text" class="form-control" name="biography" value="<%= @teacher.biography %>">
+        </div>
       </div>
-    </div>
+      <input type="submit" value="登録" class="btn btn-primary font-right">
+    <% end %>
   </div>
 </div>
 </body>
