@@ -43,14 +43,8 @@
         </div>
         <div class="card-toolbar">
           <ul class="nav nav-tabs nav-bold nav-tabs-line">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">年度選択</a>
-                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" style="">
-                  <a class="dropdown-item" data-toggle="tab" href="#kt_tab_pane_1_2">2021年度</a>
-                  <a class="dropdown-item" data-toggle="tab" href="#kt_tab_pane_2_2">2020年度</a>
-                  <a class="dropdown-item" data-toggle="tab" href="#kt_tab_pane_3_2">2019年度</a>
-                </div>
-            </li>
+            <li class="nav-item">
+              <%= link_to("修正","/company/#{@recruit_company.id}/edit", {class: %w(btn btn-success ml-3)}) %>
           </ul>
         </div>
       </div>
@@ -147,9 +141,6 @@
             <div class="col-8">
               <span class="form-control-plaintext font-weight-bolder"><%= link_to(@recruit_company.recruit_url, @recruit_company.recruit_url) %></span>
             </div>
-          </div>
-          <div class="text-center">
-            <%= link_to("修正","/company/#{@recruit_company.id}/edit", {class: %w(btn btn-success ml-3)}) %>
           </div>
         </div>
       </div>
