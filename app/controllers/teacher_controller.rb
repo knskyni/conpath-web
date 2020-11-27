@@ -13,16 +13,28 @@ class TeacherController < ApplicationController
   end
 
   def create
-    @teacher = Teacher.new(last_name: params[:last_name])
-    @teacher = Teacher.new(first_name: params[:first_name])
-    @teacher = Teacher.new(last_name_furigana: params[:last_name_furigana])
-    @teacher = Teacher.new(first_name_furigana: params[:first_name_furigana])
-    @teacher = Teacher.new(email: params[:email])
-    @teacher = Teacher.new(password: params[:password])
-    @teacher = Teacher.new(gender: params[:gender])
-    @teacher = Teacher.new(biography: params[:biography])
-    @teacher.save
-    redirect_to("/")
+    @teacher = Teacher.new(
+        lastName: params[:last_name],
+        firstName: params[:first_name],
+        lastNameFurigana: params[:last_name_furigana],
+        firstNameFurigana: params[:first_name_furigana],
+        email: params[:email],
+        password: params[:password],
+        gender: params[:gender],
+        biography: params[:biography]
+    )
+    if @teacher.save
+      flash[:notice] = "教員登録を完了いたしました"
+      redirect_to("/teacher/new")
+    else
+      @teacher.last_name = params[:last_name]
+      @teacher.first_name = params[:first_name]
+      @teacher.last_name_furigana = params[:last_name_furigana]
+      @teacher.first_name_furigana = params[:first_name_furigana]
+      @teacher.email = params[:email]
+      @teacher.biography = params[:biography]
+      render("/teacher/new")
+    end
   end
 
   def show
