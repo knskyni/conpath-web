@@ -1,13 +1,8 @@
 class TeacherController < ApplicationController
   def new
-<<<<<<< HEAD
     @sub_header = {
         title: "教員プロフィール",
-=======
-    @teacher = Teacher.new
-    @sub_header = {
-        title: "教員登録",
->>>>>>> teacher_create
+
         list: [
             {
                 name: "教員登録",
@@ -15,15 +10,13 @@ class TeacherController < ApplicationController
             }
         ]
     }
-<<<<<<< HEAD
+
     @teacher = Teacher.new
-=======
->>>>>>> teacher_create
   end
 
   def create
     @teacher = Teacher.new(
-<<<<<<< HEAD
+
         last_name: params[:last_name],
         first_name: params[:first_name],
         last_name_furigana: params[:last_name_furigana],
@@ -42,20 +35,6 @@ class TeacherController < ApplicationController
     if @teacher.save
       flash[:notice] = "教員登録を完了いたしました"
       redirect_to("/")
-=======
-        lastName: params[:last_name],
-        firstName: params[:first_name],
-        lastNameFurigana: params[:last_name_furigana],
-        firstNameFurigana: params[:first_name_furigana],
-        email: params[:email],
-        password: params[:password],
-        gender: params[:gender],
-        biography: params[:biography]
-    )
-    if @teacher.save
-      flash[:notice] = "教員登録を完了いたしました"
-      redirect_to("/teacher/new")
->>>>>>> teacher_create
     else
       @teacher.last_name = params[:last_name]
       @teacher.first_name = params[:first_name]
