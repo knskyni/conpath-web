@@ -4,85 +4,75 @@
   <title>教員情報登録 | 教員</title>
 </head>
 <body>
-  <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
-    <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-      <div class="d-flex align-items-center flex-wrap mr-1">
-        <div class="d-flex align-items-baseline flex-wrap mr-5">
-          <h5 class="text-dark font-weight-bold my-1 mr-5">教員情報登録</h5>
-            <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
-              <li class="breadcrumb-item">
-                <%= link_to("就サポ", "/") %>>
-              </li>
-              <li class="breadcrumb-item">
-                <%= link_to("教員情報登録", "/teacher/new") %>>
-              </li>
-            </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
 <div class="card card-custom">
   <div class="card-body p-0">
     <div class="wizard wizard-3" id="kt_wizard_v3" data-wizard-state="first" data-wizard-clickable="true">
       <div class="d-flex flex-column-fluid px-8 py-8 px-lg-15 py-lg-3">
         <%=form_tag('/teacher/create') do %>
+          <% if @teacher.errors.full_messages.any? %>
+            <h4 class="alert-heading">エラー</h4>
+            <% @teacher.errors.full_messages.each do |message| %>
+              <div class="form-error">
+                <%= message %>
+              </div>
+            <% end %>
+          <% end %>
           <div class="container">
             <div class="row">
-              <div class="col-xl-4" name="last_name">
+              <div class="col-xl-4">
                 <div class="form-group fv-plugins-icon-container">
                   <label>苗字<span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" name="width" placeholder="Last Name">
+                  <input type="text" name="last_name" class="form-control" placeholder="Last Name" value="<%= @teacher.last_name %>">
                 </div>
               </div>
-              <div class="col-xl-4" name="first_name">
+              <div class="col-xl-4">
                 <div class="form-group fv-plugins-icon-container">
                   <label>名前<span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" name="height" placeholder="First Name">
+                  <input type="text" name="first_name" class="form-control" placeholder="First Name" value="<%= @teacher.first_name %>">
                 </div>
               </div>
             </div>
             <div class="row">
-              <div class="col-xl-4" name="last_name_furigana">
+              <div class="col-xl-4">
                 <div class="form-group fv-plugins-icon-container">
                   <label>みょうじ<span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" name="width" placeholder="Last Name Furigana">
+                  <input type="text" name="last_name_furigana" class="form-control" placeholder="Last Name Furigana" value="<%= @teacher.last_name_furigana %>">
                 </div>
               </div>
-              <div class="col-xl-4" name="first_name_furigana">
+              <div class="col-xl-4">
                 <div class="form-group fv-plugins-icon-container">
                   <label>なまえ<span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" name="height" placeholder="First Name Furigana">
+                  <input type="text" name="first_name_furigana" class="form-control" placeholder="First Name Furigana" value="<%= @teacher.first_name_furigana %>">
                 </div>
               </div>
             </div>
-            <div class="form-group" name="email">
+            <div class="form-group">
               <label>メールアドレス
                 <span class="text-danger">*</span></label>
-                <input type="email" class="form-control" placeholder="Email">
+                <input type="email" name="email" class="form-control" placeholder="Email" value="<%= @teacher.email %>">
             </div>
-            <div class="form-group" name="password">
+            <div class="form-group">
               <label>パスワード
                 <span class="text-danger">*</span></label>
-                <input type="password" class="form-control" placeholder="Password">
+                <input type="password" name="password" class="form-control" placeholder="Password">
             </div>
-            <div class="form-group" name="gender">
+            <div class="form-group">
               <label for="exampleSelect1">性別
                 <span class="text-danger">*</span></label>
-                <select class="form-control" id="exampleSelect1">
+                <select class="form-control"  name="gender" id="exampleSelect1">
                   <option value=1>女性</option>
                   <option value=2>男性</option>
                 </select>
             </div>
-            <div class="form-group" name="icon">
+            <div class="form-group">
               <label>教員アイコン
                 <span class="text-danger">*</span></label>
-              <input type="file" class="form-control">
+              <input type="file" name="icon" class="form-control">
             </div>
-            <div class="form-group" name="biography">
+            <div class="form-group">
               <label>自己紹介文
                 <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" placeholder="biography">
+                <input type="text" name="biography" class="form-control" placeholder="biography" value="<%= @teacher.biography %>">
             </div>
           </div>
           <button type="button" class="btn btn-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-next">登録</button>
