@@ -113,21 +113,9 @@
             </div>
           </div>
           <div class="form-group row my-2">
-            <label class="col-4 col-form-label">男性従業員数:</label>
-            <div class="col-8">
-              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.	number_of_employee_male %></span>
-            </div>
-          </div>
-          <div class="form-group row my-2">
-            <label class="col-4 col-form-label">女性従業員数:</label>
-            <div class="col-8">
-              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.number_of_employee_female %></span>
-            </div>
-          </div>
-          <div class="form-group row my-2">
             <label class="col-4 col-form-label">従業員数:</label>
             <div class="col-8">
-              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.number_of_employee %></span>
+              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.number_of_employee.to_s(:delimited) %>名 (内: 男性<%= @recruit_company.number_of_employee_male.to_s(:delimited) %>名、女性<%= @recruit_company.number_of_employee_female.to_s(:delimited) %>名)</span>
             </div>
           </div>
           <div class="form-group row my-2">

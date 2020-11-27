@@ -28,9 +28,9 @@ class CompanyController < ApplicationController
         tel_number: params[:recruit_company][:tel_number],
         fax_number: params[:recruit_company][:fax_number],
         stock_list: params[:recruit_company][:stock_list],
+        number_of_employee: params[:recruit_company][:number_of_employee],
         number_of_employee_male: params[:recruit_company][:number_of_employee_male],
         number_of_employee_female: params[:recruit_company][:number_of_employee_female],
-        number_of_employee: params[:recruit_company][:number_of_employee],
         capital: params[:recruit_company][:capital],
         proceed: params[:recruit_company][:proceed],
         business_details: params[:recruit_company][:business_details],
@@ -107,9 +107,9 @@ class CompanyController < ApplicationController
     @recruit_company.tel_number = params[:recruit_company][:tel_number]
     @recruit_company.fax_number = params[:recruit_company][:fax_number]
     @recruit_company.stock_list = params[:recruit_company][:stock_list]
+    @recruit_company.number_of_employee = params[:recruit_company][:number_of_employee]
     @recruit_company.number_of_employee_male = params[:recruit_company][:number_of_employee_male]
     @recruit_company.number_of_employee_female = params[:recruit_company][:number_of_employee_female]
-    @recruit_company.number_of_employee = params[:recruit_company][:number_of_employee]
     @recruit_company.capital = params[:recruit_company][:capital]
     @recruit_company.proceed = params[:recruit_company][:proceed]
     @recruit_company.business_details = params[:recruit_company][:business_details]
