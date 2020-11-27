@@ -27,9 +27,9 @@ class TeacherController < ApplicationController
     if params[:password] != params[:password_confirm]
       @error_message = "パスワードが一致しません"
     end
-    if @teacher.save and @error_message.nil?
+    if @teacher.save
       flash[:notice] = "教員登録を完了いたしました"
-      redirect_to("/teacher/new")
+      redirect_to("/")
     else
       @teacher.last_name = params[:last_name]
       @teacher.first_name = params[:first_name]
