@@ -154,16 +154,16 @@ class StudentController < ApplicationController
   end
 
   def favorite_edit
-    @recruit_student_company_favorite = RecruitStudentCompanyFavorite.find_by(student_id: @current_user.id,company_id: params[:id])
-    if @recruit_student_company_favorite
-      @recruit_student_company_favorite.destroy
+    @favorite = RecruitStudentCompanyFavorite.find_by(student_id: @current_user.id,company_id: params[:id])
+    if @favorite
+      @favorite.destroy
       render json: { action: 'destroy' } ,layout: false
     else
-      @recruit_student_company_favorite = RecruitStudentCompanyFavorite.new(
+      @favorite = RecruitStudentCompanyFavorite.new(
           student_id: @current_user.id,
           company_id: params[:id]
       )
-      if @recruit_student_company_favorite.save
+      if @favorite.save
         render json: { action: 'add' },layout: false
       else
         render status: 400,layout: false
@@ -171,8 +171,7 @@ class StudentController < ApplicationController
     end
   end
 
-  def fovorite_list
-    @recruit_student_company_favorites = RecruitStudentCompanyFavorite.where(student_id: session[:id])
+  def favorite_list
+    @favorites = RecruitStudentCompanyFavorite.where(student_id: @current_user.id)
   end
-
 end
