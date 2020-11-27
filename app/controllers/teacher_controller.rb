@@ -16,4 +16,7 @@ class TeacherController < ApplicationController
     redirect_to("/")
   end
 
+  def show
+    @teacher = Teacher.find_by(id: params[:id])
+  end
 end
