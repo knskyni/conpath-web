@@ -38,7 +38,24 @@ class CompanyController < ApplicationController
         recruit_url: params[:recruit_url],
         teacher_comment: params[:teacher_comment]
     )
+    @tag_name = params[:recruit_company_tags]
     if @recruit_company.save
+      tag_array = params[:recruit_company_tags]
+      tags = tag_array.to_s.split(nil)
+      tags.each do |tag|
+        @recruit_company_tag = RecruitCompanyTag.find_by(name: params[tag])
+        unless @recruit_company_tag
+          @recruit_company_tag = RecruitCompanyTag.new(
+              name: tag
+          )
+          @recruit_company_tag.save
+        end
+        @recruit_company_tag_assign = RecruitCompanyTagAssign.new(
+            company_id: @recruit_company.id,
+            tag_id: @recruit_company_tag.id
+        )
+        @recruit_company_tag_assign.save
+      end
       flash[:notice] = "企業情報の登録が完了しました"
       redirect_to("/company/#{@recruit_company.id}")
     else
@@ -55,10 +72,11 @@ class CompanyController < ApplicationController
               }
           ]
       }
-
       render("company/new")
     end
   end
+
+
 
   def show
     @recruit_company = RecruitCompany.find_by(id:params[:id])
@@ -138,3 +156,5 @@ class CompanyController < ApplicationController
     end
   end
 end
+
+

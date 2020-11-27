@@ -135,6 +135,10 @@
         <label>採用ページ</label>
         <input type="text" name="recruit_url" class="form-control" placeholder="https://asojuku.ac.jp/abcc/info/" value="<%= @recruit_company.recruit_url %>">
       </div>
+      <div class="form-group">
+        <label>タグ</label>
+        <input type="text" name="recruit_company_tag" class="form-control" placeholder="スペースを入力することで複数のタグを付けることができます。" value="<%= @tag_name %>">
+      </div>
       <div class="text-center">
         <button type="submit" class="btn btn-success ml-3">登録</button>
       </div>
