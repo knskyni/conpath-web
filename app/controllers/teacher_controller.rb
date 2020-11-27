@@ -1,7 +1,7 @@
 class TeacherController < ApplicationController
   def new
     @sub_header = {
-        title: "教員登録",
+        title: "教員プロフィール",
         list: [
             {
                 name: "教員登録",
@@ -14,19 +14,21 @@ class TeacherController < ApplicationController
 
   def create
     @teacher = Teacher.new(
-        lastName: params[:last_name],
-        firstName: params[:first_name],
-        lastNameFurigana: params[:last_name_furigana],
-        firstNameFurigana: params[:first_name_furigana],
+        last_name: params[:last_name],
+        first_name: params[:first_name],
+        last_name_furigana: params[:last_name_furigana],
+        first_name_furigana: params[:first_name_furigana],
         email: params[:email],
         password: params[:password],
         gender: params[:gender],
         icon: "assets/image",
         biography: params[:biography]
     )
+
     if params[:password] != params[:password_confirm]
       @error_message = "パスワードが一致しません"
     end
+
     if @teacher.save
       flash[:notice] = "教員登録を完了いたしました"
       redirect_to("/")
