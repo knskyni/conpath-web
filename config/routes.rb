@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   post 'student/activate/:auth_key', to: 'student#create'
   get 'student/edit/:id', to: 'student#edit'
   post 'student/update/:id', to: 'student#update'
-  get 'student/favorite_edit/:id', to: 'student#favorite_edit'
-  get 'student/favorite_list', to: 'student#favorite_list'
+  get 'student/favorite/edit/:id', to: 'student#favorite_edit'
+  get 'student/favorite/list', to: 'student#favorite_list'
 
   root to: 'home#index'
 
