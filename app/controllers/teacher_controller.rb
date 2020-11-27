@@ -75,4 +75,40 @@ class TeacherController < ApplicationController
       render("teacher/edit")
     end
   end
+
+  def password_edit
+    @sub_header = {
+        title: "教員プロフィール",
+
+        list: [
+            {
+                name: "教員情報パスワードの変更",
+                url: "/teacher/password_edit"
+            }
+        ]
+    }
+    @teacher = Teacher.find_by(id: params[:id])
+  end
+
+  def password_update
+    @teacher = Teacher.find_by(id: params[:id])
+    @error_messages = []
+    unless @teacher.authenticate(params[:password])
+      @error_messages.push("現在のパスワードが違います")
+    end
+
+    if params[:new_password] != params[:password_confirm]
+      @error_messages.push("パスワードが一致しません")
+    end
+
+    @teacher.password = params[:new_password]
+
+    if @teacher.save and not @error_messages.any?
+      flash[:notice] = "パスワードを変更しました"
+      redirect_to("/")
+    else
+      render("teacher/password_edit")
+    end
+  end
+
 end
