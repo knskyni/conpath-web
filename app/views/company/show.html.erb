@@ -121,13 +121,13 @@
           <div class="form-group row my-2">
             <label class="col-4 col-form-label">資本金:</label>
             <div class="col-8">
-              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.capital %></span>
+              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.capital.to_s(:delimited) %>円</span>
             </div>
           </div>
           <div class="form-group row my-2">
             <label class="col-4 col-form-label">売上高:</label>
             <div class="col-8">
-              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.proceed %></span>
+              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.proceed.to_s(:delimited) %>円</span>
             </div>
           </div>
           <div class="form-group row my-2">
@@ -139,17 +139,17 @@
           <div class="form-group row my-2">
             <label class="col-4 col-form-label">ホームページ:</label>
             <div class="col-8">
-              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.url %></span>
+              <span class="form-control-plaintext font-weight-bolder"><%= link_to(@recruit_company.url, @recruit_company.url) %></span>
             </div>
           </div>
           <div class="form-group row my-2">
             <label class="col-4 col-form-label">採用ページ:</label>
             <div class="col-8">
-              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.recruit_url %></span>
+              <span class="form-control-plaintext font-weight-bolder"><%= link_to(@recruit_company.recruit_url, @recruit_company.recruit_url) %></span>
             </div>
           </div>
           <div class="text-center">
-            <button type="submit" class="btn btn-success ml-3"><%= link_to("修正","/company/#{@recruit_company.id}/edit") %></button>
+            <%= link_to("修正","/company/#{@recruit_company.id}/edit", {class: %w(btn btn-success ml-3)}) %>
           </div>
         </div>
       </div>
