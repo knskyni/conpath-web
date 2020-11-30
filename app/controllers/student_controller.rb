@@ -153,6 +153,28 @@ class StudentController < ApplicationController
     end
   end
 
+  def favorite_edit
+    @favorite = RecruitStudentCompanyFavorite.find_by(student_id: @current_user.id,company_id: params[:id])
+    if @favorite
+      @favorite.destroy
+      render json: { action: 'destroy' } ,layout: false
+    else
+      @favorite = RecruitStudentCompanyFavorite.new(
+          student_id: @current_user.id,
+          company_id: params[:id]
+      )
+      if @favorite.save
+        render json: { action: 'add' },layout: false
+      else
+        render status: 400,layout: false
+      end
+    end
+  end
+
+  def favorite_list
+    @favorites = RecruitStudentCompanyFavorite.where(student_id: @current_user.id)
+  end
+
   def password_edit
     @sub_header = {
         title: "パスワード変更ページ",
@@ -190,5 +212,4 @@ class StudentController < ApplicationController
     end
 
   end
-
 end
