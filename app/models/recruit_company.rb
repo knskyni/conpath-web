@@ -12,4 +12,8 @@ class RecruitCompany < ApplicationRecord
   def prefecture
     return Prefecture.find_by(id: self.prefecture_id)
   end
+
+  def tag_assigns
+    return RecruitCompanyTagAssign.where(company_id: self.id)
+  end
 end
