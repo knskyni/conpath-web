@@ -103,7 +103,7 @@ class StudentController < ApplicationController
         first_name_furigana: params[:first_name_furigana],
         class_id: student_temp.class_id,
         gender: params[:gender],
-        icon: "default_user.jpg",
+        icon: "/assets/media/users/blank.png",
     )
     if params[:password] != params[:password_confirm]
       @error_message = "パスワードが一致しません"
@@ -173,5 +173,43 @@ class StudentController < ApplicationController
 
   def favorite_list
     @favorites = RecruitStudentCompanyFavorite.where(student_id: @current_user.id)
+  end
+
+  def password_edit
+    @sub_header = {
+        title: "パスワード変更ページ",
+        list: [
+            {
+                name: "学生",
+                url: "/student"
+            }
+        ]
+    }
+    @student = Student.find_by(id: params[:id])
+  end
+
+  def password_update
+
+    @student = Student.find_by(id: params[:id])
+
+    @error_messages = []
+
+    unless @student.authenticate(params[:password])
+      @error_messages.push("現在のパスワードが違います")
+    end
+
+    if params[:new_password] != params[:password_confirm]
+      @error_messages.push("パスワードが一致しません")
+    end
+
+    @student.password = params[:new_password]
+
+    if @student.save and not @error_messages.any?
+      flash[:notice] = "パスワードを変更しました"
+      redirect_to("/student/new")
+    else
+      render("student/password_edit")
+    end
+
   end
 end
