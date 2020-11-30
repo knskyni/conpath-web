@@ -30,11 +30,15 @@ class Student < ApplicationRecord
       end
     end
 
-    result_companies = ActiveRecord::Base.connection.select_all("SELECT `recruit_company_tag_assigns`.`company_id` FROM `recruit_company_tag_assigns` WHERE `recruit_company_tag_assigns`.`tag_id` IN (#{tags.map(&:inspect).join(', ')}) GROUP BY `recruit_company_tag_assigns`.`company_id`")
-    companies = []
-    result_companies.rows.each do |result_company|
-      companies.push(result_company[0])
+    if tags.any?
+      result_companies = ActiveRecord::Base.connection.select_all("SELECT `recruit_company_tag_assigns`.`company_id` FROM `recruit_company_tag_assigns` WHERE `recruit_company_tag_assigns`.`tag_id` IN (#{tags.map(&:inspect).join(', ')}) GROUP BY `recruit_company_tag_assigns`.`company_id`")
+      companies = []
+      result_companies.rows.each do |result_company|
+        companies.push(result_company[0])
+      end
+      return RecruitCompany.where(id: companies)
+    else
+      return []
     end
-    return RecruitCompany.where(id: companies)
   end
 end
