@@ -7,6 +7,6 @@ class RecruitCompanyTagAssign < ApplicationRecord
   end
 
   def tag
-    return RecruitTag.find_by(id: self.tag_id)
+    return RecruitCompanyTag.find_by(id: self.tag_id)
   end
 end
