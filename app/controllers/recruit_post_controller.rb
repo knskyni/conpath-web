@@ -56,4 +56,8 @@ class RecruitPostController < ApplicationController
     end
   end
 
+  def edit
+
+  end
+
 end
