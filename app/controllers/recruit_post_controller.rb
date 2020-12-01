@@ -50,7 +50,7 @@ class RecruitPostController < ApplicationController
 
     if @recruit_posts.save
       flash[:notice] = "求人情報の登録が完了いたしました"
-      redirect_to("/recruit_post/#{@recruit_posts.id}")
+      redirect_to("/")
     else
       render("/recruit_post/new")
     end
