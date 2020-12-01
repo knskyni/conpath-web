@@ -7,7 +7,7 @@
         <% end %>
       </ul>
     <% end %>
-    <%= form_tag("/student/update/#{@student.id}", {multipart: true}) do %>
+    <%= form_tag("/student/my/update", {multipart: true}) do %>
       <div class="form-group">
         <label>画像
           <span class="text-danger">*</span>
