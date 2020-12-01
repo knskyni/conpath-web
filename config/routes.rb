@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root to: 'home#index'
 
+  # 学生
   get 'student/login', to: 'student#login'
   post 'student/login', to: 'student#auth'
   post 'student/logout', to: 'student#logout'
@@ -12,10 +13,10 @@ Rails.application.routes.draw do
   post 'student/update/:id', to: 'student#update'
   get 'student/favorite/edit/:id', to: 'student#favorite_edit'
   get 'student/favorite/list', to: 'student#favorite_list'
-
   get 'student/password_edit/:id', to: 'student#password_edit'
   post 'student/password_update/:id', to: 'student#password_update'
 
+  # 学校
   get 'school', to: 'school#index'
   get 'school/new', to: 'school#new'
   post 'school/create', to: 'school#create'
@@ -23,18 +24,21 @@ Rails.application.routes.draw do
   get 'school/:id/edit', to: 'school#edit'
   patch 'school/:id/update', to: 'school#update'
 
+  # 学科
   get 'course/new/:school_id', to: 'course#new'
   post 'course/new/:school_id', to: 'course#create'
   get 'course/:id', to: 'course#show'
   get 'course/:id/edit', to: 'course#edit'
   patch 'course/:id/update', to: 'course#update'
 
+  # クラス
   get 'class/new/:course_id', to: 'school_class#new'
   post 'class/new/:course_id', to:'school_class#create'
   get 'class/:id', to: 'school_class#show'
   get 'class/:id/edit', to: 'school_class#edit'
   patch 'class/:id/update', to: 'school_class#update'
 
+  # 企業
   get 'company/new', to: 'company#new'
   post 'company/create', to: 'company#create'
   get 'company/:id', to: 'company#show'
