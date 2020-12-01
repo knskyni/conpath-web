@@ -1,20 +1,21 @@
 <div class="card card-custom">
   <div class="card-body">
     <% if @recruit_posts.errors.full_messages.any? %>
-      <h4 class="alert-heading">エラー</h4>
-      <ul class="m-0">
-        <% @recruit_posts.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+      <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">エラー</h4>
+        <ul class="m-0">
+          <% @recruit_posts.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
       </div>
     <% end %>
-    <%=form_for('@recruit_posts/create') do %>
+    <%= form_for(@recruit_posts, url: {controller: 'recruit_post', action: 'create'}) do |f| %>
       <div class="form-group">
         <label>企業コード
           <span class="text-danger">*</span>
         </label>
-        <input type="String" class="form-control" name="recruit_code">
+        <input type="text" class="form-control" name="recruit_code">
       </div>
       <div class="form-group">
         <label>企業名
@@ -32,13 +33,13 @@
         <label>職種
           <span class="text-danger">*</span>
         </label>
-        <input type="String" class="form-control" name="job_category_id">
+        <input type=text class="form-control" name="job_category_id">
       </div>
       <div class="form-group">
         <label>仕事内容
         <span class="text-danger">*</span>
         </label>
-        <input type="String" class="form-control" name="job_description">
+        <input type="text" class="form-control" name="job_description">
       </div>
       <div class="form-group">
         <label>採用人数
@@ -75,7 +76,7 @@
         <label>雇用形態(その他)
           <span class="text-danger">*</span>
         </label>
-        <input type="String" class="form-control" name="employment_status_other">
+        <input type="text" class="form-control" name="employment_status_other">
       </div>
       <div class="form-group">
         <label>初任給
@@ -89,19 +90,21 @@
         <label>提出方法
           <span class="text-danger">*</span>
         </label>
-        <input type="string" class="form-control" name="apply_method">
+        <input type="text" class="form-control" name="apply_method">
       </div>
       <div class="form-group">
         <label>提出書類
           <span class="text-danger">*</span>
         </label>
-        <input type="string" class="form-control" name="submit_document">
+        <input type="text" class="form-control" name="submit_document">
       </div>
       <div class="form-group">
         <label>特記事項
           <span class="text-danger">*</span>
         </label>
-        <input type="string" class="form-control" name="other_description">
+        <input type="text" class="form-control" name="other_description">
       </div>
-  <% end %>
+      <input type="submit" value="登録" class="btn btn-primary float-right">
+    <% end %>
+  </div>
 </div>
