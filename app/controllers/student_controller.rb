@@ -92,16 +92,16 @@ class StudentController < ApplicationController
   end
 
   def create
-    student_temp = StudentTemp.find_by(auth_key: params[:auth_key])
+    @student_temp = StudentTemp.find_by(auth_key: params[:auth_key])
     @student = Student.new(
-        id: student_temp.student_id,
-        email: student_temp.student_id + "@s.asojuku.ac.jp",
+        id: @student_temp.student_id,
+        email: @student_temp.student_id + "@s.asojuku.ac.jp",
         password: params[:password],
         last_name: params[:last_name],
         first_name: params[:first_name],
         last_name_furigana: params[:last_name_furigana],
         first_name_furigana: params[:first_name_furigana],
-        class_id: student_temp.class_id,
+        class_id: @student_temp.class_id,
         gender: params[:gender],
         icon: "/assets/media/users/blank.png",
     )
@@ -113,7 +113,7 @@ class StudentController < ApplicationController
       flash[:notice] = "ユーザー登録が完了しました"
       redirect_to("/student/new")
     else
-      render("student/new")
+      render("student/activate")
     end
   end
 
