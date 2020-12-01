@@ -3,9 +3,9 @@ Rails.application.routes.draw do
 
   get 'teacher/new', to: 'teacher#new'
   post 'teacher/create', to: 'teacher#create'
-  get 'teacher/edit/:id', to: 'teacher#edit'
-  post 'teacher/update/:id', to: 'teacher#update'
-  get 'teacher/password_edit/:id', to: 'teacher#password_edit'
-  post 'teacher/password_update/:id', to: 'teacher#password_update'
+  get 'teacher/:id/edit', to: 'teacher#edit'
+  post 'teacher/:id/update', to: 'teacher#update'
+  get 'teacher/:id/password_change', to: 'teacher#password_edit'
+  post 'teacher/:id/password_change', to: 'teacher#password_update'
 
 end
