@@ -10,7 +10,7 @@
         </ul>
       </div>
     <% end %>
-    <%= form_for(@recruit_posts, url: {controller: 'recruit_post', action: 'create'}) do |f| %>
+    <%=form_tag("/recruit_post/create/#{@recruit_company.id}", {multipart: true}) do %>
       <div class="form-group">
         <label>企業コード
           <span class="text-danger">*</span>
