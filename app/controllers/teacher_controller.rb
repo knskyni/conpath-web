@@ -1,17 +1,9 @@
 class TeacherController < ApplicationController
   def new
-    @sub_header = {
-        title: "入力",
-        list: [
-            {
-                name: "教員",
-                url: "/teacher"
-            },{
-            name: "新規登録",
-            url: "/teacher/new"
-        }
-        ]
-    }
+    # サブヘッダー
+    set_sub_header_title("新規教員登録")
+    add_sub_header_path("教員", "/teacher")
+
     @teacher = Teacher.new
   end
 
@@ -36,21 +28,22 @@ class TeacherController < ApplicationController
       flash[:notice] = "教員情報の登録を完了いたしました"
       redirect_to("/")
     else
+      # サブヘッダー
+      set_sub_header_title("新規教員登録")
+      add_sub_header_path("教員", "/teacher")
+
       render("/teacher/new")
     end
   end
 
   def edit
-    @sub_header = {
-        title: "教員プロフィール",
-        list: [
-            {
-                name: "教員情報修正",
-                url: "/teacher/edit"
-            }
-        ]
-    }
     @teacher = Teacher.find_by(id: params[:id])
+
+    # サブヘッダー
+    set_sub_header_title("教員情報編集")
+    add_sub_header_path("教員", "/teacher")
+    add_sub_header_path("プロフィール", "/teacher/#{@teacher.id}")
+    add_sub_header_path("編集", nil)
   end
 
   def update
@@ -67,21 +60,24 @@ class TeacherController < ApplicationController
       flash[:notice] = "教員情報の変更を完了いたしました"
       redirect_to("/")
     else
+      # サブヘッダー
+      set_sub_header_title("教員情報編集")
+      add_sub_header_path("教員", "/teacher")
+      add_sub_header_path("プロフィール", "/teacher/#{@teacher.id}")
+      add_sub_header_path("編集", nil)
+
       render("teacher/edit")
     end
   end
 
   def password_edit
-    @sub_header = {
-        title: "教員プロフィール",
-        list: [
-            {
-                name: "教員情報パスワードの変更",
-                url: "/teacher/password_edit"
-            }
-        ]
-    }
     @teacher = Teacher.find_by(id: params[:id])
+
+    # サブヘッダー
+    set_sub_header_title("教員情報編集")
+    add_sub_header_path("教員", "/teacher")
+    add_sub_header_path("プロフィール", "/teacher/#{@teacher.id}")
+    add_sub_header_path("パスワード変更", nil)
   end
 
   def password_update
@@ -101,8 +97,13 @@ class TeacherController < ApplicationController
       flash[:notice] = "パスワードを変更しました"
       redirect_to("/")
     else
+      # サブヘッダー
+      set_sub_header_title("教員情報編集")
+      add_sub_header_path("教員", "/teacher")
+      add_sub_header_path("プロフィール", "/teacher/#{@teacher.id}")
+      add_sub_header_path("パスワード変更", nil)
+
       render("teacher/password_edit")
     end
   end
-
 end
