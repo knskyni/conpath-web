@@ -24,7 +24,7 @@ class TeacherController < ApplicationController
         email: params[:email],
         password: params[:password],
         gender: params[:gender],
-        icon: "assets/image",
+        icon: "/assets/media/users/blank.png",
         biography: params[:biography]
     )
 
