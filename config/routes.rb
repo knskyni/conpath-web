@@ -15,6 +15,14 @@ Rails.application.routes.draw do
   get 'student/favorite/list', to: 'student#favorite_list'
   get 'student/password_change', to: 'student#password_edit'
   post 'student/password_change', to: 'student#password_update'
+  
+  # 教員
+  get 'teacher/new', to: 'teacher#new'
+  post 'teacher/create', to: 'teacher#create'
+  get 'teacher/:id/edit', to: 'teacher#edit'
+  post 'teacher/:id/update', to: 'teacher#update'
+  get 'teacher/:id/password_change', to: 'teacher#password_edit'
+  post 'teacher/:id/password_change', to: 'teacher#password_update'
 
   # 学校
   get 'school', to: 'school#index'
