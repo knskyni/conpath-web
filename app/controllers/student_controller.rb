@@ -128,11 +128,11 @@ class StudentController < ApplicationController
         ]
     }
 
-    @student = Student.find_by(id: params[:id])
+    @student = Student.find_by(id: @current_user.id)
   end
 
   def update
-    @student = Student.find_by(id: params[:id])
+    @student = Student.find_by(id: @current_user.id)
     @student.email = params[:email]
     @student.last_name = params[:last_name]
     @student.first_name = params[:first_name]
@@ -147,7 +147,7 @@ class StudentController < ApplicationController
     end
     if @student.save
       flash[:notice] = "ユーザー情報変更完了しました"
-      redirect_to("/student/edit/#{@student.id}")
+      redirect_to("/student/my/edit")
     else
       render("student/edit")
     end
