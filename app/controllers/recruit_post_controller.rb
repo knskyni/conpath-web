@@ -56,6 +56,10 @@ class RecruitPostController < ApplicationController
     end
   end
 
+  def show
+    
+  end
+
   def edit
     @sub_header = {
         title: "求人情報",
