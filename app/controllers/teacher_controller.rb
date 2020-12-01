@@ -36,12 +36,6 @@ class TeacherController < ApplicationController
       flash[:notice] = "教員情報の登録を完了いたしました"
       redirect_to("/")
     else
-      @teacher.last_name = params[:last_name]
-      @teacher.first_name = params[:first_name]
-      @teacher.last_name_furigana = params[:last_name_furigana]
-      @teacher.first_name_furigana = params[:first_name_furigana]
-      @teacher.email = params[:email]
-      @teacher.biography = params[:biography]
       render("/teacher/new")
     end
   end
