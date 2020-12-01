@@ -185,12 +185,11 @@ class StudentController < ApplicationController
             }
         ]
     }
-    @student = Student.find_by(id: params[:id])
+    @student = Student.find_by(id: @current_user.id)
   end
 
   def password_update
-
-    @student = Student.find_by(id: params[:id])
+    @student = Student.find_by(id: @current_user.id)
 
     @error_messages = []
 
