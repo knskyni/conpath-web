@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   get 'student/favorite/edit/:id', to: 'student#favorite_edit'
   get 'student/favorite/list', to: 'student#favorite_list'
 
-  root to: 'home#index'
   get 'student/password_edit/:id', to: 'student#password_edit'
   post 'student/password_update/:id', to: 'student#password_update'
 
