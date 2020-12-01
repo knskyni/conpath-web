@@ -1,13 +1,15 @@
 class TeacherController < ApplicationController
   def new
     @sub_header = {
-        title: "教員プロフィール",
-
+        title: "入力",
         list: [
             {
-                name: "教員情報登録",
-                url: "/teacher/new"
-            }
+                name: "教員",
+                url: "/teacher"
+            },{
+            name: "新規登録",
+            url: "/teacher/new"
+        }
         ]
     }
     @teacher = Teacher.new
@@ -47,7 +49,6 @@ class TeacherController < ApplicationController
   def edit
     @sub_header = {
         title: "教員プロフィール",
-
         list: [
             {
                 name: "教員情報修正",
@@ -79,7 +80,6 @@ class TeacherController < ApplicationController
   def password_edit
     @sub_header = {
         title: "教員プロフィール",
-
         list: [
             {
                 name: "教員情報パスワードの変更",
