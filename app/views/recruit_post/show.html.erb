@@ -1,0 +1,95 @@
+<div class="card card-custom">
+  <div class="card-body">
+    
+    <%=form_tag("/recruit_post/update/#{@recruit_posts.id}", {multipart: true}) do %>
+      <div class="form-group">
+        <label>企業コード
+          <span class="text-danger">*</span>
+        </label>
+        <input type="text" class="form-control" name="recruit_code" value="<%= @recruit_posts.recruit_code %>">
+      </div>
+      <div class="form-group">
+        <label>採用年度
+          <span class="text-danger">*</span>
+        </label>
+        <input type="number" class="form-control" name="year" value="<%= @recruit_posts.year %>">
+      </div>
+      <div class="form-group">
+        <label>職種
+          <span class="text-danger">*</span>
+        </label>
+        <input type=text class="form-control" name="job_category_id" value="<%= @recruit_posts.job_category_id %>">
+      </div>
+      <div class="form-group">
+        <label>仕事内容
+          <span class="text-danger">*</span>
+        </label>
+        <input type="text" class="form-control" name="job_description" value="<%= @recruit_posts.job_description %>">
+      </div>
+      <div class="form-group">
+        <label>採用人数
+          <span class="text-danger">*</span>
+        </label>
+        <input type="number" class="form-control" name="recruitment_numbers" value="<%= @recruit_posts.recruitment_numbers %>">
+      </div>
+      <div class="form-group">
+        <label>勤務地
+          <span class="text-danger">*</span>
+        </label>
+        <input type="text" class="form-control" name="working_office" value="<%= @recruit_posts.working_office %>">
+      </div>
+      <div class="form-group">
+        <label>求人公開状況
+          <span class="text-danger">*</span>
+        </label>
+        <select class="form-control" name="status">
+          <option value=0>公開</option>
+          <option value=1>非公開</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exampleSelect1">雇用形態
+          <span class="text-danger">*</span>
+        </label>
+        <select class="form-control" name="employment_status">
+          <option value=0>正規</option>
+          <option value=1>非正規</option>
+          <option value=2>その他</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>雇用形態(その他)
+          <span class="text-danger">*</span>
+        </label>
+        <input type="text" class="form-control" name="employment_status_other" value="<%= @recruit_posts.employment_status_other %>">
+      </div>
+      <div class="form-group">
+        <label>初任給
+          <span class="text-danger">*</span>
+        </label>
+        <input type="number" class="form-control" name="salary_2year" value="<%= @recruit_posts.salary_2year %>">
+        <input type="number" class="form-control" name="salary_3year" value="<%= @recruit_posts.salary_3year %>">
+        <input type="number" class="form-control" name="salary_4year" value="<%= @recruit_posts.salary_4year %>">
+      </div>
+      <div class="form-group">
+        <label>提出方法
+          <span class="text-danger">*</span>
+        </label>
+        <input type="text" class="form-control" name="apply_method" value="<%= @recruit_posts.apply_method %>">
+      </div>
+      <div class="form-group">
+        <label>提出書類
+          <span class="text-danger">*</span>
+        </label>
+        <input type="text" class="form-control" name="submit_document" value=<%= @recruit_posts.submit_document %>>
+      </div>
+      <div class="form-group">
+        <label>特記事項
+          <span class="text-danger">*</span>
+        </label>
+        <input type="text" class="form-control" name="other_description" value="<%= @recruit_posts.other_description %>">
+      </div>
+      <input type="submit" value="変更" class="btn btn-primary float-right">
+    <% end %>
+  </div>
+</div>
