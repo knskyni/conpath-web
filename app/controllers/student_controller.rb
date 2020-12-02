@@ -142,9 +142,10 @@ class StudentController < ApplicationController
     @student.gender = params[:gender]
     @student.biography = params[:biography]
     if params[:icon]
-      @student.icon = "/assets/media/users/student/#{@student.id}.jpg"
-      image = params[:icon]
-      File.binwrite("public#{@student.icon}", image.read)
+      image_name = "/assets/media/users/student/#{@student.id}.jpg"
+      image_bin = params[:icon]
+      @student.icon = "#{image_name}?v=#{Time.now.to_i}"
+      File.binwrite("public#{image_name}", image_bin.read)
     end
     if @student.save
       flash[:notice] = "ユーザー情報変更完了しました"
