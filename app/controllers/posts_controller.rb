@@ -1,12 +1,19 @@
 class PostsController < ApplicationController
 
   def search
+    set_sub_header_title("求人票検索")
+    add_sub_header_path("求人票", nil)
+    add_sub_header_path("検索", "/posts/search")
     @recruit_job_category = RecruitJobCategory.all.order(created_at: :desc)
     @recruit_company_category = RecruitCompanyCategory.all.order(id: :asc)
     @recruit_post = RecruitPost.new
   end
 
   def search_result
+    set_sub_header_title("求人票検索結果")
+    add_sub_header_path("求人票", nil)
+    add_sub_header_path("検索", "/posts/search")
+    add_sub_header_path("結果", "/posts/search/result")
     @recruit_job_category = RecruitJobCategory.all.order(created_at: :desc)
     @recruit_company_category = RecruitCompanyCategory.all.order(id: :asc)
     @keyword = params[:keyword]
