@@ -128,6 +128,7 @@ class StudentController < ApplicationController
         ]
     }
 
+    add_custom_js("/assets/js/pages/crud/file-upload/image-input.js")
     @student = Student.find_by(id: @current_user.id)
   end
 
@@ -141,9 +142,9 @@ class StudentController < ApplicationController
     @student.gender = params[:gender]
     @student.biography = params[:biography]
     if params[:icon]
-      @student.icon = "#{@student.id}.jpg"
+      @student.icon = "/assets/media/users/student/#{@student.id}.jpg"
       image = params[:icon]
-      File.binwrite("public/student_icons/#{@student.icon}", image.read)
+      File.binwrite("public#{@student.icon}", image.read)
     end
     if @student.save
       flash[:notice] = "ユーザー情報変更完了しました"
