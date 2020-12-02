@@ -1,0 +1,70 @@
+<div class="card card-custom card-collapse" data-card="true">
+  <div class="card-body">
+    <%= form_tag("/posts/search_result", {method: "get", enforce_utf8: false}) do %>
+      <div class="form-group row">
+        <label for="example-week-input" class="col-2 col-form-label">年度</label>
+        <div class="col-2">
+          <select name="year" class="form-control">
+            <option value="">-------</option>
+            <% RecruitPost.group(:year).select(:year).order(year: :asc).each do |obj| %>
+              <option value="<%= obj.year %>"><%= obj.year %></option>
+            <% end %>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="example-search-input" class="col-2 col-form-label">キーワード</label>
+        <div class="col-10">
+          <input class="form-control" type="text" name="keyword" value="" id="example-search-input" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="example-week-input" class="col-2 col-form-label">業種</label>
+        <div class="col-4">
+          <select class="form-control" name="company_category_id">
+            <option value="">-------</option>
+            <% @recruit_company_category.each do |company_category| %>
+              <option value="<%= company_category.id %>"><%= company_category.name %></option>
+            <% end %>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="example-week-input" class="col-2 col-form-label">職種</label>
+        <div class="col-4">
+          <select class="form-control" name="job_category_id">
+            <option value="">-------</option>
+            <% @recruit_job_category.each do |job_category| %>
+              <option value="<%= job_category.id %>"><%= job_category.name %></option>
+            <% end %>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="example-date-input" class="col-2 col-form-label">何年制</label>
+        <div class="col-2">
+          <select class="form-control" name="grade">
+            <option value="">-------</option>
+            <option value="2">2年生</option>
+            <option value="3">3年生</option>
+            <option value="4">4年生</option>
+          </select>
+        </div>
+        <label for="example-date-input" class="col-form-label">給与</label>
+        <div class="col-2">
+          <input type="text" class="form-control" name="salary" value="">
+        </div>
+        <span class="col-form-label">円 以上</span>
+      </div>
+      <div class="form-group row">
+        <label for="example-week-input" class="col-2 col-form-label">勤務地</label>
+        <div class="col-10">
+          <input type="text" class="form-control" name="working_office" value="<%= @recruit_post.working_office %>">
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-success ml-3">検索</button>
+      </div>
+    <% end %>
+  </div>
+</div>

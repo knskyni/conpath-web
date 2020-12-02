@@ -37,5 +37,8 @@ Rails.application.routes.draw do
   get 'company/:id', to: 'company#show'
   get 'company/:id/edit', to: 'company#edit'
   patch "company/:id/update", to: 'company#update'
+
+  get 'posts/search', to: 'posts#search'
+  get 'posts/search_result', to: 'posts#search_result'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

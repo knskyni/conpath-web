@@ -14,4 +14,8 @@ class RecruitPost < ApplicationRecord
   def category
     return RecruitCompanyCategory.find_by(id: self.company_category_id)
   end
+
+  def jobCategory
+    return RecruitJobCategory.find_by(id: self.job_category_id)
+  end
 end
