@@ -1,95 +1,187 @@
 <div class="card card-custom">
-  <div class="card-body">
-    
-    <%=form_tag("/recruit_post/update/#{@recruit_posts.id}", {multipart: true}) do %>
-      <div class="form-group">
-        <label>企業コード
-          <span class="text-danger">*</span>
-        </label>
-        <input type="text" class="form-control" name="recruit_code" value="<%= @recruit_posts.recruit_code %>">
+  <div class="row">
+
+    <div class="d-flex">
+      <div class="flex-shrink-0 mr-7">
+        <div class="symbol symbol-50 symbol-lg-120">
+          <img alt="Pic" src="assets/media/users/blank.png">
+        </div>
       </div>
-      <div class="form-group">
-        <label>採用年度
-          <span class="text-danger">*</span>
-        </label>
-        <input type="number" class="form-control" name="year" value="<%= @recruit_posts.year %>">
+      <div class="flex-grow-1">
+        <div class="d-flex align-items-center justify-content-between flex-wrap">
+          <div class="mr-3">
+            <div class="d-flex align-items-center mr-3">
+              <span class="d-flex align-items-center text-dark font-size-h5 font-weight-bold mr-3"><%= @recruit_company.name %></span>
+            </div>
+            <div class="d-flex flex-wrap my-2">
+              <span class="text-muted font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
+                <i class="fas fa-map-marked-alt mr-2"></i><%= @recruit_company.prefecture_id %>
+              </span>
+              <span class="text-muted font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
+                <i class="fas fa-tag mr-2"></i><%= @recruit_company.business_details %>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex align-items-center flex-wrap justify-content-between">
+          <div class="flex-grow-1 font-weight-bold text-dark-50 py-2 py-lg-2 mr-5">
+            <%= @recruit_company.teacher_comment %>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label>職種
-          <span class="text-danger">*</span>
-        </label>
-        <input type=text class="form-control" name="job_category_id" value="<%= @recruit_posts.job_category_id %>">
+    </div>
+
+    <div class="col-xl-12">
+      <div class="card card-custom gutter-b">
+        <div class="card-header card-header-tabs-line">
+          <div class="card-title">
+            <h3 class="card-label">
+              企業情報
+              <span class="d-block text-muted pt-2 font-size-sm">Company Information</span>
+            </h3>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="tab-content">
+            <div class="tab-pane fade active show" id="kt_tab_pane_1_2" role="tabpanel">
+              <div class="form-group row my-2">
+                <label class="col-4 col-form-label">企業名:</label>
+                <div class="col-8">
+                  <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.name %></span>
+                </div>
+              </div>
+              <div class="form-group row my-2">
+                <label class="col-4 col-form-label">本拠地:</label>
+                <div class="col-8">
+                  <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.postal_code + @recruit_company.address %></span>
+                </div>
+              </div>
+              <div class="form-group row my-2">
+                <label class="col-4 col-form-label">設立日:</label>
+                <div class="col-8">
+                  <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.found_date.strftime('%Y年%m月%d日') %></span>
+                </div>
+                </div>
+            </div>
+            <div class="form-group row my-2">
+              <label class="col-4 col-form-label">従業員数:</label>
+              <div class="col-8">
+                <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.number_of_employee_male + @recruit_company.number_of_employee_female %>名</span>
+              </div>
+            </div>
+            <div class="form-group row my-2">
+              <label class="col-4 col-form-label">資本金:</label>
+              <div class="col-8">
+                <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.capital %></span>
+              </div>
+            </div>
+            <div class="form-group row my-2">
+              <label class="col-4 col-form-label">電話番号:</label>
+              <div class="col-8">
+                <a href="tel:<%= @recruit_company.tel_number %>">
+                  <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.tel_number %></span>
+                </a>
+              </div>
+            </div>
+            <div class="form-group row my-2">
+              <label class="col-4 col-form-label">webサイト:</label>
+              <div class="col-8">
+                <span class="form-control-plaintext font-weight-bolder"><%= link_to(@recruit_company.url, @recruit_company.url) %></span>
+              </div>
+            </div>
+            <div class="form-group row my-2">
+              <label class="col-4 col-form-label">採用ページ:</label>
+              <div class="col-8">
+                <span class="form-control-plaintext font-weight-bolder"><%= link_to(@recruit_company.recruit_url, @recruit_company.recruit_url) %></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-header card-header-tabs-line">
+          <div class="card-title">
+            <h3 class="card-label">
+              求人票
+              <span class="d-block text-muted pt-2 font-size-sm">Job Posting</span>
+            </h3>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="tab-content">
+            <div class="tab-pane fade active show" id="kt_tab_pane_1_2" role="tabpanel">
+              <div class="form-group row my-2">
+                <label class="col-4 col-form-label">求人コード:</label>
+                <div class="col-8">
+                  <span class="form-control-plaintext font-weight-bolder"><%= @recruit_post.recruit_code %></span>
+                </div>
+              </div>
+              <div class="form-group row my-2">
+                <label class="col-4 col-form-label">募集年度:</label>
+                <div class="col-8">
+                  <span class="form-control-plaintext font-weight-bolder"><%= @recruit_post.year %>年度</span>
+                </div>
+              </div>
+              <div class="form-group row my-2">
+                <label class="col-4 col-form-label">職種:</label>
+                <div class="col-8">
+                  <span class="form-control-plaintext font-weight-bolder"><%= @recruit_post.job_category_id %></span>
+                </div>
+              </div>
+              <div class="form-group row my-2">
+                <label class="col-4 col-form-label">仕事内容:</label>
+                <div class="col-8">
+                  <span class="form-control-plaintext font-weight-bolder"><%= @recruit_post.job_description %></span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row my-2">
+              <label class="col-4 col-form-label">採用人数:</label>
+              <div class="col-8">
+                <span class="form-control-plaintext font-weight-bolder"><%= @recruit_post.recruitment_numbers %>名</span>
+              </div>
+            </div>
+            <div class="form-group row my-2">
+              <label class="col-4 col-form-label">雇用形態:</label>
+              <div class="col-8">
+                <span class="form-control-plaintext font-weight-bolder"><%= @recruit_post.capital %></span>
+              </div>
+            </div>
+            <div class="form-group row my-2">
+              <label class="col-4 col-form-label">雇用形態（その他）:</label>
+              <div class="col-8">
+                <span class="form-control-plaintext font-weight-bolder"><%= @recruit_post.employment_status %></span>
+              </div>
+            </div>
+            <div class="form-group row my-2">
+              <label class="col-4 col-form-label">初任給:</label>
+              <div class="col-8">
+                <span class="form-control-plaintext font-weight-bolder"><%= @recruit_post.salary_2year %>万円</span>
+                <span class="form-control-plaintext font-weight-bolder"><%= @recruit_post.salary_3year %>万円</span>
+                <span class="form-control-plaintext font-weight-bolder"><%= @recruit_post.salary_4year %>万円</span>
+              </div>
+            </div>
+            <div class="form-group row my-2">
+              <label class="col-4 col-form-label">提出方法:</label>
+              <div class="col-8">
+                <span class="form-control-plaintext font-weight-bolder"><%= @recruit_post.apply_method %></span>
+              </div>
+            </div>
+            <div class="form-group row my-2">
+              <label class="col-4 col-form-label">提出書類:</label>
+              <div class="col-8">
+                <span class="form-control-plaintext font-weight-bolder"><%= @recruit_post.submit_document %></span>
+              </div>
+            </div>
+            <div class="form-group row my-2">
+              <label class="col-4 col-form-label">特記事項:</label>
+              <div class="col-8">
+                <span class="form-control-plaintext font-weight-bolder"><%= @recruit_post.other_description %></span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label>仕事内容
-          <span class="text-danger">*</span>
-        </label>
-        <input type="text" class="form-control" name="job_description" value="<%= @recruit_posts.job_description %>">
-      </div>
-      <div class="form-group">
-        <label>採用人数
-          <span class="text-danger">*</span>
-        </label>
-        <input type="number" class="form-control" name="recruitment_numbers" value="<%= @recruit_posts.recruitment_numbers %>">
-      </div>
-      <div class="form-group">
-        <label>勤務地
-          <span class="text-danger">*</span>
-        </label>
-        <input type="text" class="form-control" name="working_office" value="<%= @recruit_posts.working_office %>">
-      </div>
-      <div class="form-group">
-        <label>求人公開状況
-          <span class="text-danger">*</span>
-        </label>
-        <select class="form-control" name="status">
-          <option value=0>公開</option>
-          <option value=1>非公開</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="exampleSelect1">雇用形態
-          <span class="text-danger">*</span>
-        </label>
-        <select class="form-control" name="employment_status">
-          <option value=0>正規</option>
-          <option value=1>非正規</option>
-          <option value=2>その他</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>雇用形態(その他)
-          <span class="text-danger">*</span>
-        </label>
-        <input type="text" class="form-control" name="employment_status_other" value="<%= @recruit_posts.employment_status_other %>">
-      </div>
-      <div class="form-group">
-        <label>初任給
-          <span class="text-danger">*</span>
-        </label>
-        <input type="number" class="form-control" name="salary_2year" value="<%= @recruit_posts.salary_2year %>">
-        <input type="number" class="form-control" name="salary_3year" value="<%= @recruit_posts.salary_3year %>">
-        <input type="number" class="form-control" name="salary_4year" value="<%= @recruit_posts.salary_4year %>">
-      </div>
-      <div class="form-group">
-        <label>提出方法
-          <span class="text-danger">*</span>
-        </label>
-        <input type="text" class="form-control" name="apply_method" value="<%= @recruit_posts.apply_method %>">
-      </div>
-      <div class="form-group">
-        <label>提出書類
-          <span class="text-danger">*</span>
-        </label>
-        <input type="text" class="form-control" name="submit_document" value=<%= @recruit_posts.submit_document %>>
-      </div>
-      <div class="form-group">
-        <label>特記事項
-          <span class="text-danger">*</span>
-        </label>
-        <input type="text" class="form-control" name="other_description" value="<%= @recruit_posts.other_description %>">
-      </div>
-      <input type="submit" value="変更" class="btn btn-primary float-right">
-    <% end %>
+
+    </div>
   </div>
 </div>
