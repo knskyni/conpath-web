@@ -211,4 +211,13 @@ class StudentController < ApplicationController
     end
 
   end
+
+  def edit_favorite_industries
+    @student = Student.find_by(id: @current_user.id)
+
+    # サブヘッダー
+    set_sub_header_title("志望業種選択")
+    add_sub_header_path("プロフィール", "/student/#{@student.id}")
+    add_sub_header_path("志望業種選択", nil)
+  end
 end
