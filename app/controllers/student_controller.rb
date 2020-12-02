@@ -92,16 +92,16 @@ class StudentController < ApplicationController
   end
 
   def create
-    student_temp = StudentTemp.find_by(auth_key: params[:auth_key])
+    @student_temp = StudentTemp.find_by(auth_key: params[:auth_key])
     @student = Student.new(
-        id: student_temp.student_id,
-        email: student_temp.student_id + "@s.asojuku.ac.jp",
+        id: @student_temp.student_id,
+        email: @student_temp.student_id + "@s.asojuku.ac.jp",
         password: params[:password],
         last_name: params[:last_name],
         first_name: params[:first_name],
         last_name_furigana: params[:last_name_furigana],
         first_name_furigana: params[:first_name_furigana],
-        class_id: student_temp.class_id,
+        class_id: @student_temp.class_id,
         gender: params[:gender],
         icon: "/assets/media/users/blank.png",
     )
@@ -113,7 +113,7 @@ class StudentController < ApplicationController
       flash[:notice] = "ユーザー登録が完了しました"
       redirect_to("/student/new")
     else
-      render("student/new")
+      render("student/activate")
     end
   end
 
@@ -128,11 +128,12 @@ class StudentController < ApplicationController
         ]
     }
 
-    @student = Student.find_by(id: params[:id])
+    add_custom_js("/assets/js/pages/crud/file-upload/image-input.js")
+    @student = Student.find_by(id: @current_user.id)
   end
 
   def update
-    @student = Student.find_by(id: params[:id])
+    @student = Student.find_by(id: @current_user.id)
     @student.email = params[:email]
     @student.last_name = params[:last_name]
     @student.first_name = params[:first_name]
@@ -141,16 +142,39 @@ class StudentController < ApplicationController
     @student.gender = params[:gender]
     @student.biography = params[:biography]
     if params[:icon]
-      @student.icon = "#{@student.id}.jpg"
-      image = params[:icon]
-      File.binwrite("public/student_icons/#{@student.icon}", image.read)
+      image_name = "/assets/media/users/student/#{@student.id}.jpg"
+      image_bin = params[:icon]
+      @student.icon = "#{image_name}?v=#{Time.now.to_i}"
+      File.binwrite("public#{image_name}", image_bin.read)
     end
     if @student.save
       flash[:notice] = "ユーザー情報変更完了しました"
-      redirect_to("/student/edit/#{@student.id}")
+      redirect_to("/student/my/edit")
     else
       render("student/edit")
     end
+  end
+
+  def favorite_edit
+    @favorite = RecruitStudentCompanyFavorite.find_by(student_id: @current_user.id,company_id: params[:id])
+    if @favorite
+      @favorite.destroy
+      render json: { action: 'destroy' } ,layout: false
+    else
+      @favorite = RecruitStudentCompanyFavorite.new(
+          student_id: @current_user.id,
+          company_id: params[:id]
+      )
+      if @favorite.save
+        render json: { action: 'add' },layout: false
+      else
+        render status: 400,layout: false
+      end
+    end
+  end
+
+  def favorite_list
+    @favorites = RecruitStudentCompanyFavorite.where(student_id: @current_user.id)
   end
 
   def password_edit
@@ -163,12 +187,11 @@ class StudentController < ApplicationController
             }
         ]
     }
-    @student = Student.find_by(id: params[:id])
+    @student = Student.find_by(id: @current_user.id)
   end
 
   def password_update
-
-    @student = Student.find_by(id: params[:id])
+    @student = Student.find_by(id: @current_user.id)
 
     @error_messages = []
 
@@ -190,5 +213,4 @@ class StudentController < ApplicationController
     end
 
   end
-
 end
