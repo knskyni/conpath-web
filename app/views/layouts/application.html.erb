@@ -323,7 +323,7 @@
                   <div class="topbar-item">
                     <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
                       <span class="text-muted font-weight-bold font-size-base mr-1">ようこそ、</span>
-                      <span class="text-dark-50 font-weight-bolder font-size-base mr-1"><%= @current_user.last_name + " " + @current_user.first_name %></span>
+                      <span class="text-dark-50 font-weight-bolder font-size-base mr-1"><%= @current_user.full_name %></span>
                       <span class="text-muted font-weight-bold font-size-base mr-3">さん</span>
                       <span class="symbol symbol-lg-35 symbol-25">
                       <div class="symbol-label" style="background-image:url('/assets/media/users/blank.png')"></div>
@@ -388,7 +388,7 @@
             <div class="symbol-label" style="background-image:url('/assets/media/users/blank.png')"></div>
           </div>
           <div class="d-flex flex-column">
-            <a class="font-weight-bold font-size-h5 text-dark-75">山田 太郎</a>
+            <a class="font-weight-bold font-size-h5 text-dark-75"><%= @current_user.full_name %></a>
             <div class="text-muted mt-1">ｘｘｘｘｘｘ学校<br>ｘｘｘｘｘｘｘｘｘｘｘｘ科</div>
             <div class="navi mt-2">
               <%= link_to("ログアウト", "/student/logout", {method: "post", class: %w(btn btn-sm btn-light-danger font-weight-bolder py-2 px-5)}) %>
