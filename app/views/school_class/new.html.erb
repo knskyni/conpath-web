@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-12">
+    <%= form_for(@school_class, url: {controller: 'school_class', action: 'create'}) do |f| %>
+      <div class="card card-custom gutter-b">
+        <div class="card-header h-auto py-4">
+          <div class="card-title">
+            <h3 class="card-label">
+              クラス情報を入力してください。
+            </h3>
+          </div>
+        </div>
+        <div class="card-body py-4">
+          <% if @school_class.errors.any? %>
+            <div class="alert alert-danger" role="alert">
+              <h4 class="alert-heading">エラー</h4>
+              <ul class="m-0">
+                <% @school_class.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <div class="form-group row my-2">
+            <label class="col-2 col-form-label text-right">学科名:</label>
+            <div class="col-10">
+              <input type="text" value="<%= "#{@school_class.course.name} (#{@school_class.course.school.name})" %>" class="form-control" disabled>
+            </div>
+          </div>
+          <div class="form-group row my-2">
+            <label class="col-2 col-form-label text-right">入学年度:</label>
+            <div class="col-10">
+              <%= f.number_field(:begin_year, {value: (@school_class.begin_year.nil?) ? Time.now.year : @school_class.begin_year, class: ["form-control"]}) %>
+            </div>
+          </div>
+          <div class="form-group row my-2">
+            <label class="col-2 col-form-label text-right">クラス名:</label>
+            <div class="col-10">
+              <%= f.text_field(:school_class, {class: ["form-control"], placeholder: "A"}) %>
+            </div>
+          </div>
+          <div class="form-group row my-2">
+            <label class="col-2 col-form-label text-right">在学状況:</label>
+            <div class="col-10">
+              <%= f.select(:graduated, {'在学中': false, '卒業済み': true}, {}, {class: ["form-control"]}) %>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <%= f.submit("送信", {class: %w(btn btn-primary)}) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

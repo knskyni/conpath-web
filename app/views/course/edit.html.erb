@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-12">
+    <%= form_for(@course, url: {controller: 'course', action: 'update'}) do |f| %>
+      <div class="card card-custom gutter-b">
+        <div class="card-header h-auto py-4">
+          <div class="card-title">
+            <h3 class="card-label">
+              学科情報を入力してください。
+            </h3>
+          </div>
+        </div>
+        <div class="card-body py-4">
+          <% if @course.errors.any? %>
+            <div class="alert alert-danger" role="alert">
+              <h4 class="alert-heading">エラー</h4>
+              <ul class="m-0">
+                <% @course.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <div class="form-group row my-2">
+            <label class="col-2 col-form-label text-right">学校名:</label>
+            <div class="col-10">
+              <input type="text" value="<%= @course.school.name %>" class="form-control" disabled>
+            </div>
+          </div>
+          <div class="form-group row my-2">
+            <label class="col-2 col-form-label text-right">学科名:</label>
+            <div class="col-10">
+              <%= f.text_field(:name, {class: ["form-control"]}) %>
+            </div>
+          </div>
+          <div class="form-group row my-2">
+            <label class="col-2 col-form-label text-right">年次:</label>
+            <div class="col-10">
+              <%= f.select(:number_of_enrolled_year, {'2年次': 2, '3年次': 3, '4年次': 4}, {}, {class: ["form-control"]}) %>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <%= f.submit("送信", {class: %w(btn btn-primary)}) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
