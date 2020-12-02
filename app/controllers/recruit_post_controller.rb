@@ -1,14 +1,10 @@
 class RecruitPostController < ApplicationController
   def new
-    @sub_header = {
-        title: "求人情報",
-        list: [
-            {
-                name: "登録",
-                url: 'recruit_post/new'
-            }
-        ]
-    }
+    # サブヘッダー
+    set_sub_header_title("求人情報登録")
+    add_sub_header_path("求人票一覧", "/recruit_post/show/#{@recruit_posts.id}")
+    add_sub_header_path("登録", "/recruit_post/new/#{@recruit_company.id}")
+    add_sub_header_path("編集", nil)
 
     @recruit_company = RecruitCompany.find_by(id: params[:company_id])
     if @recruit_company.nil?
@@ -57,20 +53,24 @@ class RecruitPostController < ApplicationController
   end
 
   def show
-    
+
+    # サブヘッダー
+    set_sub_header_title("求人票一覧")
+    add_sub_header_path("求人情報", "/recruit_post/show/#{@recruit_posts.id}")
+    add_sub_header_path("登録", "/recruit_post/new/#{@recruit_company.id}")
+    add_sub_header_path("編集", nil)
+
+    @recruit_posts = RecruitPost.find_by(id: params[:id])
+    @recruit_company = RecruitCompany.find_by(id: params[:company_id])
+
   end
 
   def edit
-    @sub_header = {
-        title: "求人情報",
 
-        list: [
-            {
-                name: "変更",
-                url: "/teacher/edit"
-            }
-        ]
-    }
+    set_sub_header_title("求人情報編集")
+    add_sub_header_path("求人票一覧", "/recruit_post/show/#{@recruit_posts.id}")
+    add_sub_header_path("登録", "/recruit_post/new/#{@recruit_company.id}")
+    add_sub_header_path("編集", nil)
 
     @recruit_posts = RecruitPost.find_by(id: params[:id])
   end
