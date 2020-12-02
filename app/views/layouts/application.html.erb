@@ -326,7 +326,7 @@
                       <span class="text-dark-50 font-weight-bolder font-size-base mr-1"><%= @current_user.full_name %></span>
                       <span class="text-muted font-weight-bold font-size-base mr-3">さん</span>
                       <span class="symbol symbol-lg-35 symbol-25">
-                      <div class="symbol-label" style="background-image:url('/assets/media/users/blank.png')"></div>
+                      <div class="symbol-label" style="background-image:url('<%= @current_user.icon %>')"></div>
                       </span>
                     </div>
                   </div>
@@ -385,7 +385,7 @@
       <div class="offcanvas-content pr-5 mr-n5">
         <div class="d-flex align-items-center mt-5">
           <div class="symbol symbol-100 mr-5">
-            <div class="symbol-label" style="background-image:url('/assets/media/users/blank.png')"></div>
+            <div class="symbol-label" style="background-image:url('<%= @current_user.icon %>')"></div>
           </div>
           <div class="d-flex flex-column">
             <a class="font-weight-bold font-size-h5 text-dark-75"><%= @current_user.full_name %></a>
