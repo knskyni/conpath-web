@@ -7,6 +7,9 @@ class ApplicationController < ActionController::Base
         list: []
     }
 
+    @custom_css = []
+    @custom_js = []
+
     super
   end
 
@@ -26,5 +29,13 @@ class ApplicationController < ActionController::Base
 
   def add_sub_header_path(name, url)
     @sub_header[:list].push({name: name, url: url})
+  end
+
+  def add_custom_css(path)
+    @custom_css.push(path)
+  end
+
+  def add_custom_js(path)
+    @custom_js.push(path)
   end
 end
