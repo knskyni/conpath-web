@@ -99,7 +99,7 @@ class CompanyController < ApplicationController
   def edit
     @recruit_company = RecruitCompany.find_by(id: params[:id])
 
-    @recruit_company_tag_assigns = RecruitCompanyTagAssign.where(company_id: @recruit_company.id)
+    @recruit_company_tag_assign = RecruitCompanyTagAssign.where(company_id: @recruit_company.id)
     @sub_header = {
         title: "企業情報修正",
         list: [
@@ -136,9 +136,39 @@ class CompanyController < ApplicationController
     @recruit_company.url = params[:url]
     @recruit_company.recruit_url = params[:recruit_url]
 
-    @recruit_company_tag.name = params[:name]
-
     if @recruit_company.save
+      tag_array = params[:recruit_company_tags]
+      tags = tag_array.to_s.split(nil)
+      tags.each do |tag|
+        @recruit_company_tag = RecruitCompanyTag.find_by(name: tag)
+        if @recruit_company_tag.nil?
+          @recruit_company_tag = RecruitCompanyTag.new(
+              name: tag
+          )
+          @recruit_company_tag.save
+        end
+        @recruit_company_tag_assign = RecruitCompanyTagAssign.find_by(company_id: @recruit_company.id, tag_id: @recruit_company_tag.id)
+        if @recruit_company_tag_assign.nil?
+          @recruit_company_tag_assign = RecruitCompanyTagAssign.new(
+              company_id: @recruit_company.id,
+              tag_id: @recruit_company_tag.id
+          )
+          @recruit_company_tag_assign.save
+        end
+      end
+      @recruit_company_tag_assign = RecruitCompanyTagAssign.where(company_id: @recruit_company.id)
+      @recruit_company_tag_assign.each do |tag_assign|
+        @recruit_company_tag = RecruitCompanyTag.find_by(id: tag_assign.tag_id)
+        exist = false
+        tags.each do |tag|
+          if @recruit_company_tag.name == tag
+            exist = true
+          end
+        end
+        if exist
+          tag_assign.destroy
+        end
+      end
       flash[:notice] = "企業情報の修正が完了しました"
       redirect_to("/company/#{@recruit_company.id}")
     else
