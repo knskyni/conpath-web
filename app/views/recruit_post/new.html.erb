@@ -1,18 +1,18 @@
 <div class="card card-custom">
   <div class="card-body">
-    <% if @recruit_posts.errors.full_messages.any? %>
-      <div class="alert alert-danger" role="alert">
-        <h4 class="alert-heading">エラー</h4>
-        <ul class="m-0">
-          <% @recruit_posts.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
     <%=form_tag("/recruit_post/create/#{@recruit_company.id}", {multipart: true}) do %>
+      <% if @recruit_post.errors.full_messages.any? %>
+        <div class="alert alert-danger" role="alert">
+          <h4 class="alert-heading">エラー</h4>
+          <ul class="m-0">
+            <% @recruit_post.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
       <div class="form-group">
-        <label>企業コード
+        <label>求人コード
           <span class="text-danger">*</span>
         </label>
         <input type="text" class="form-control" name="recruit_code">
