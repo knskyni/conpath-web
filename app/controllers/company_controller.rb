@@ -137,36 +137,34 @@ class CompanyController < ApplicationController
     @recruit_company.recruit_url = params[:recruit_company][:recruit_url]
 
     if @recruit_company.save
+      # 企業とタグの紐付けを全削除
+      RecruitCompanyTagAssign.where(company_id: @recruit_company.id).destroy_all
+
       tag_array = params[:recruit_company_tags]
       tags = tag_array.to_s.split(nil)
       tags.each do |tag|
+        # タグ検索
         @recruit_company_tag = RecruitCompanyTag.find_by(name: tag)
+
+        # タグ存在
         if @recruit_company_tag.nil?
-          @recruit_company_tag = RecruitCompanyTag.new(
-              name: tag
-          )
+          # タグを保存
+          @recruit_company_tag = RecruitCompanyTag.new(name: tag)
           @recruit_company_tag.save
-        end
-        @recruit_company_tag_assign = RecruitCompanyTagAssign.find_by(company_id: @recruit_company.id, tag_id: @recruit_company_tag.id)
-        if @recruit_company_tag_assign.nil?
-          @recruit_company_tag_assign = RecruitCompanyTagAssign.new(
-              company_id: @recruit_company.id,
-              tag_id: @recruit_company_tag.id
-          )
+
+          # 企業とタグの紐付け
+          @recruit_company_tag_assign = RecruitCompanyTagAssign.new(company_id: @recruit_company.id, tag_id: @recruit_company_tag.id)
           @recruit_company_tag_assign.save
-        end
-      end
-      @recruit_company_tag_assign = RecruitCompanyTagAssign.where(company_id: @recruit_company.id)
-      @recruit_company_tag_assign.each do |tag_assign|
-        @recruit_company_tag = RecruitCompanyTag.find_by(id: tag_assign.tag_id)
-        exist = false
-        tags.each do |tag|
-          if @recruit_company_tag.name == tag
-            exist = true
+        else
+          # 企業とタグの紐付けを検索
+          @recruit_company_tag_assign = RecruitCompanyTagAssign.find_by(company_id: @recruit_company.id, tag_id: @recruit_company_tag.id)
+
+          # 企業とタグの存在がないなら
+          if @recruit_company_tag_assign.nil?
+            # 企業とタグを紐付ける
+            @recruit_company_tag_assign = RecruitCompanyTagAssign.new(company_id: @recruit_company.id, tag_id: @recruit_company_tag.id)
+            @recruit_company_tag_assign.save
           end
-        end
-        if exist
-          tag_assign.destroy
         end
       end
       flash[:notice] = "企業情報の修正が完了しました"
