@@ -111,7 +111,7 @@ class StudentController < ApplicationController
 
     if @student.save and @error_message.nil?
       flash[:notice] = "ユーザー登録が完了しました"
-      redirect_to("/student/new")
+      redirect_to("/student/login")
     else
       render("student/activate")
     end
