@@ -38,7 +38,24 @@ class CompanyController < ApplicationController
         recruit_url: params[:recruit_company][:recruit_url],
         teacher_comment: params[:recruit_company][:teacher_comment]
     )
+    @tag_name = params[:recruit_company_tags]
     if @recruit_company.save
+      tag_array = params[:recruit_company_tags]
+      tags = tag_array.to_s.split(nil)
+      tags.each do |tag|
+        @recruit_company_tag = RecruitCompanyTag.find_by(name: tag)
+        if @recruit_company_tag.nil?
+          @recruit_company_tag = RecruitCompanyTag.new(
+              name: tag
+          )
+          @recruit_company_tag.save
+        end
+        @recruit_company_tag_assign = RecruitCompanyTagAssign.new(
+            company_id: @recruit_company.id,
+            tag_id: @recruit_company_tag.id
+        )
+        @recruit_company_tag_assign.save
+      end
       flash[:notice] = "企業情報の登録が完了しました"
       redirect_to("/company/#{@recruit_company.id}")
     else
@@ -55,10 +72,11 @@ class CompanyController < ApplicationController
               }
           ]
       }
-
       render("company/new")
     end
   end
+
+
 
   def show
     @recruit_company = RecruitCompany.find_by(id:params[:id])
@@ -80,6 +98,8 @@ class CompanyController < ApplicationController
 
   def edit
     @recruit_company = RecruitCompany.find_by(id: params[:id])
+
+    @recruit_company_tag_assign = RecruitCompanyTagAssign.where(company_id: @recruit_company.id)
     @sub_header = {
         title: "企業情報修正",
         list: [
@@ -117,6 +137,36 @@ class CompanyController < ApplicationController
     @recruit_company.recruit_url = params[:recruit_company][:recruit_url]
 
     if @recruit_company.save
+      # 企業とタグの紐付けを全削除
+      RecruitCompanyTagAssign.where(company_id: @recruit_company.id).destroy_all
+
+      tag_array = params[:recruit_company_tags]
+      tags = tag_array.to_s.split(nil)
+      tags.each do |tag|
+        # タグ検索
+        @recruit_company_tag = RecruitCompanyTag.find_by(name: tag)
+
+        # タグ存在
+        if @recruit_company_tag.nil?
+          # タグを保存
+          @recruit_company_tag = RecruitCompanyTag.new(name: tag)
+          @recruit_company_tag.save
+
+          # 企業とタグの紐付け
+          @recruit_company_tag_assign = RecruitCompanyTagAssign.new(company_id: @recruit_company.id, tag_id: @recruit_company_tag.id)
+          @recruit_company_tag_assign.save
+        else
+          # 企業とタグの紐付けを検索
+          @recruit_company_tag_assign = RecruitCompanyTagAssign.find_by(company_id: @recruit_company.id, tag_id: @recruit_company_tag.id)
+
+          # 企業とタグの存在がないなら
+          if @recruit_company_tag_assign.nil?
+            # 企業とタグを紐付ける
+            @recruit_company_tag_assign = RecruitCompanyTagAssign.new(company_id: @recruit_company.id, tag_id: @recruit_company_tag.id)
+            @recruit_company_tag_assign.save
+          end
+        end
+      end
       flash[:notice] = "企業情報の修正が完了しました"
       redirect_to("/company/#{@recruit_company.id}")
     else
@@ -138,3 +188,6 @@ class CompanyController < ApplicationController
     end
   end
 end
+
+
+
