@@ -1,11 +1,25 @@
 class CourseController < ApplicationController
   def new
-    @course = Course.new(school_id: params[:school_id])
+    # 学校取得
+    school = School.find_by(id: params[:school_id])
+    if school.nil?
+      render_404
+      return
+    end
+
+    @course = Course.new(school_id: school.id)
   end
 
   def create
+    # 学校取得
+    school = School.find_by(id: params[:school_id])
+    if school.nil?
+      render_404
+      return
+    end
+
     @course = Course.new(
-        school_id: params[:school_id],
+        school_id: school.id,
         name: params[:course][:name],
         number_of_enrolled_year: params[:course][:number_of_enrolled_year]
     )
