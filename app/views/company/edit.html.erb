@@ -87,6 +87,10 @@
         <label>採用ページ</label>
         <%= f.text_field(:recruit_url, {class: ["form-control"], placeholder: "https://recruit.asojuku.ac.jp/"}) %>
       </div>
+      <div class="form-group">
+        <label>タグ</label>
+        <input type ="text" name="recruit_company_tags" class="form-control" placeholder="web rails" value="<% @recruit_company_tag_assign.each do |tag_assign| %><%= tag_assign.tag.name %> <% end %>">
+      </div>
       <div class="text-center">
         <%= f.submit("送信", {class: %w(btn btn-primary ml-3)}) %>
       </div>
