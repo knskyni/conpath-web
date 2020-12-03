@@ -394,7 +394,11 @@
                 <div class="text-muted mt-1"><%= @current_user.school_class.course.school.name %><br><%= @current_user.school_class.course.name %></div>
               <% end %>
               <div class="navi mt-2">
-                <%= link_to("ログアウト", "/student/logout", {method: "post", class: %w(btn btn-sm btn-light-danger font-weight-bolder py-2 px-5)}) %>
+                <% if session[:user_type] == "student" %>
+                  <%= link_to("ログアウト", "/student/logout", {method: "post", class: %w(btn btn-sm btn-light-danger font-weight-bolder py-2 px-5)}) %>
+                <% elsif session[:user_type] == "teacher" %>
+                  <%= link_to("ログアウト", "/teacher/logout", {method: "post", class: %w(btn btn-sm btn-light-danger font-weight-bolder py-2 px-5)}) %>
+                <% end %>
               </div>
             </div>
           </div>
