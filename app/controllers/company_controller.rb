@@ -1,19 +1,11 @@
 class CompanyController < ApplicationController
   def new
     @company = RecruitCompany.new
-    @sub_header = {
-        title: "企業情報追加",
-        list: [
-            {
-                name: "General",
-                url: "/"
-            },
-            {
-                name: "Empty Page",
-                url: "/test"
-            }
-        ]
-    }
+
+    # サブヘッダー
+    set_sub_header_title("企業新規登録")
+    add_sub_header_path("企業", nil)
+    add_sub_header_path("登録", nil)
   end
 
   def create
@@ -59,19 +51,11 @@ class CompanyController < ApplicationController
       flash[:notice] = "企業情報の登録が完了しました"
       redirect_to("/company/#{@company.id}")
     else
-      @sub_header = {
-          title: "企業情報追加",
-          list: [
-              {
-                  name: "General",
-                  url: "/"
-              },
-              {
-                  name: "Empty Page",
-                  url: "/test"
-              }
-          ]
-      }
+      # サブヘッダー
+      set_sub_header_title("企業新規登録")
+      add_sub_header_path("企業", nil)
+      add_sub_header_path("登録", nil)
+
       render("company/new")
     end
   end
@@ -81,38 +65,20 @@ class CompanyController < ApplicationController
   def show
     @company = RecruitCompany.find_by(id:params[:id])
 
-    @sub_header = {
-        title: "企業情報",
-        list: [
-            {
-                name: "General",
-                url: "/"
-            },
-            {
-                name: "Empty Page",
-                url: "/test"
-            }
-        ]
-    }
+    # サブヘッダー
+    set_sub_header_title(@company.name)
+    add_sub_header_path("企業", nil)
+    add_sub_header_path(@company.name, "/company/#{@company.id}")
   end
 
   def edit
     @company = RecruitCompany.find_by(id: params[:id])
-
     @assign = RecruitCompanyTagAssign.where(company_id: @company.id)
-    @sub_header = {
-        title: "企業情報修正",
-        list: [
-            {
-                name: "General",
-                url: "/"
-            },
-            {
-                name: "Empty Page",
-                url: "/test"
-            }
-        ]
-    }
+
+    # サブヘッダー
+    set_sub_header_title("企業情報編集")
+    add_sub_header_path(@company.name, "/company/#{@company.id}")
+    add_sub_header_path("編集", nil)
   end
 
   def update
@@ -170,19 +136,10 @@ class CompanyController < ApplicationController
       flash[:notice] = "企業情報の修正が完了しました"
       redirect_to("/company/#{@company.id}")
     else
-      @sub_header = {
-          title: "企業情報修正",
-          list: [
-              {
-                  name: "General",
-                  url: "/"
-              },
-              {
-                  name: "Empty Page",
-                  url: "/test"
-              }
-          ]
-      }
+      # サブヘッダー
+      set_sub_header_title("企業情報編集")
+      add_sub_header_path(@company.name, "/company/#{@company.id}")
+      add_sub_header_path("編集", nil)
 
       render("company/edit")
     end
