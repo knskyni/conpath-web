@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   post 'student/my/update', to: 'student#update'
   get 'student/favorite/edit/:id', to: 'student#favorite_edit'
   get 'student/favorite/list', to: 'student#favorite_list'
-  get 'student/password_change', to: 'student#password_edit'
-  post 'student/password_change', to: 'student#password_update'
+  get 'student/my/password_change', to: 'student#password_edit'
+  post 'student/my/password_change', to: 'student#password_update'
   
   # 教員
   get 'teacher/login', to: 'teacher#login'
