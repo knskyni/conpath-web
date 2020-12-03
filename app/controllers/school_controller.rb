@@ -69,7 +69,7 @@ class SchoolController < ApplicationController
       render_404
       return
     end
-    
+
     @school.name = params[:school][:name]
     if @school.save
       flash[:notice] = "学校情報の更新に成功しました。"
