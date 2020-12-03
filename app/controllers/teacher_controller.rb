@@ -1,4 +1,29 @@
 class TeacherController < ApplicationController
+  def login
+    render(layout: false)
+  end
+
+  def auth
+    @teacher = Teacher.find_by(email: params[:email])
+
+    if @teacher && @teacher.authenticate(params[:password])
+      session[:user_type] = "teacher"
+      session[:user_id] = @teacher.id
+      flash[:notice] = "ログインしました。"
+      redirect_to("/")
+    else
+      @error_message = "メールアドレスまたはパスワードが間違っています。"
+      @email = params[:email]
+      render("teacher/login", layout: false)
+    end
+  end
+
+  def logout
+    session[:user_type] = nil
+    session[:user_id] = nil
+    redirect_to("/")
+  end
+
   def new
     # サブヘッダー
     set_sub_header_title("新規教員登録")

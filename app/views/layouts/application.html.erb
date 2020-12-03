@@ -390,7 +390,9 @@
             </div>
             <div class="d-flex flex-column">
               <a class="font-weight-bold font-size-h5 text-dark-75"><%= @current_user.full_name %></a>
-              <div class="text-muted mt-1"><%= @current_user.school_class.course.school.name %><br><%= @current_user.school_class.course.name %></div>
+              <% if session[:user_type] == "student" %>
+                <div class="text-muted mt-1"><%= @current_user.school_class.course.school.name %><br><%= @current_user.school_class.course.name %></div>
+              <% end %>
               <div class="navi mt-2">
                 <%= link_to("ログアウト", "/student/logout", {method: "post", class: %w(btn btn-sm btn-light-danger font-weight-bolder py-2 px-5)}) %>
               </div>
@@ -398,35 +400,68 @@
           </div>
           <div class="separator separator-dashed mt-8 mb-5"></div>
           <div class="navi navi-spacer-x-0 p-0">
-            <%= link_to("/student/password_change", {class: %w(navi-item)}) do %>
-              <div class="navi-link">
-                <div class="symbol symbol-40 bg-light mr-3">
-                  <div class="symbol-label">
+            <% if session[:user_type] == "student" %>
+              <%= link_to("/student/password_change", {class: %w(navi-item)}) do %>
+                <div class="navi-link">
+                  <div class="symbol symbol-40 bg-light mr-3">
+                    <div class="symbol-label">
                     <span class="svg-icon svg-icon-md svg-icon-muted">
                       <img src="/assets/media/svg/icons/Home/Key.svg"/>
                     </span>
+                    </div>
+                  </div>
+                  <div class="navi-text">
+                    <div class="font-weight-bold">パスワード変更</div>
+                    <div class="text-muted">現在のパスワードを変更するならこちら</div>
                   </div>
                 </div>
-                <div class="navi-text">
-                  <div class="font-weight-bold">パスワード変更</div>
-                  <div class="text-muted">現在のパスワードを変更するならこちら</div>
-                </div>
-              </div>
-            <% end %>
-            <%= link_to("/student/my/edit", {class: %w(navi-item)}) do %>
-              <div class="navi-link">
-                <div class="symbol symbol-40 bg-light mr-3">
-                  <div class="symbol-label">
+              <% end %>
+              <%= link_to("/student/my/edit", {class: %w(navi-item)}) do %>
+                <div class="navi-link">
+                  <div class="symbol symbol-40 bg-light mr-3">
+                    <div class="symbol-label">
                     <span class="svg-icon svg-icon-md svg-icon-muted">
                       <img src="/assets/media/svg/icons/General/Settings-2.svg"/>
                     </span>
+                    </div>
+                  </div>
+                  <div class="navi-text">
+                    <div class="font-weight-bold">設定</div>
+                    <div class="text-muted">アカウント設定をする場合はこちら</div>
                   </div>
                 </div>
-                <div class="navi-text">
-                  <div class="font-weight-bold">設定</div>
-                  <div class="text-muted">アカウント設定をする場合はこちら</div>
+              <% end %>
+            <% elsif session[:user_type] == "teacher" %>
+              <%= link_to("/teacher/my/password_change", {class: %w(navi-item)}) do %>
+                <div class="navi-link">
+                  <div class="symbol symbol-40 bg-light mr-3">
+                    <div class="symbol-label">
+                    <span class="svg-icon svg-icon-md svg-icon-muted">
+                      <img src="/assets/media/svg/icons/Home/Key.svg"/>
+                    </span>
+                    </div>
+                  </div>
+                  <div class="navi-text">
+                    <div class="font-weight-bold">パスワード変更</div>
+                    <div class="text-muted">現在のパスワードを変更するならこちら</div>
+                  </div>
                 </div>
-              </div>
+              <% end %>
+              <%= link_to("/teacher/my/edit", {class: %w(navi-item)}) do %>
+                <div class="navi-link">
+                  <div class="symbol symbol-40 bg-light mr-3">
+                    <div class="symbol-label">
+                    <span class="svg-icon svg-icon-md svg-icon-muted">
+                      <img src="/assets/media/svg/icons/General/Settings-2.svg"/>
+                    </span>
+                    </div>
+                  </div>
+                  <div class="navi-text">
+                    <div class="font-weight-bold">設定</div>
+                    <div class="text-muted">アカウント設定をする場合はこちら</div>
+                  </div>
+                </div>
+              <% end %>
             <% end %>
           </div>
         </div>
