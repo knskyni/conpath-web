@@ -1,5 +1,5 @@
 class TeacherController < ApplicationController
-  before_action :check_login
+  before_action :check_login, {only: [:new, :create, :edit, :update, :password_edit, :password_update]}
   before_action :check_teacher, {only: [:logout, :new, :create, :edit, :update, :password_edit, :password_update]}
 
   def login
