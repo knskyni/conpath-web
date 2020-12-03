@@ -42,6 +42,10 @@ class CourseController < ApplicationController
 
   def show
     @course = Course.find_by(id: params[:id])
+    if @course.nil?
+      render_404
+      return
+    end
 
     set_sub_header_title(@course.name)
     add_sub_header_path(@course.school.name, "/school/#{@course.school.id}")
@@ -50,6 +54,10 @@ class CourseController < ApplicationController
 
   def edit
     @course = Course.find_by(id: params[:id])
+    if @course.nil?
+      render_404
+      return
+    end
 
     set_sub_header_title("学科情報編集")
     add_sub_header_path(@course.school.name, "/school/#{@course.school.id}")
@@ -59,6 +67,12 @@ class CourseController < ApplicationController
 
   def update
     @course = Course.find_by(id: params[:id])
+
+    if @course.nil?
+      render_404
+      return
+    end
+    
     @course.name = params[:course][:name]
     @course.number_of_enrolled_year = params[:course][:number_of_enrolled_year]
 
@@ -70,7 +84,7 @@ class CourseController < ApplicationController
       add_sub_header_path(@course.school.name, "/school/#{@course.school.id}")
       add_sub_header_path(@course.name, "/course/#{@course.id}")
       add_sub_header_path("編集", nil)
-      
+
       render("course/edit")
     end
   end
