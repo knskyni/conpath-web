@@ -8,6 +8,10 @@ class CourseController < ApplicationController
     end
 
     @course = Course.new(school_id: school.id)
+
+    set_sub_header_title("学科登録")
+    add_sub_header_path(school.name, "/school/#{school.id}")
+    add_sub_header_path("学科登録", nil)
   end
 
   def create
@@ -28,16 +32,29 @@ class CourseController < ApplicationController
       flash[:notice] = "学科の登録に成功しました。"
       redirect_to("/course/#{@course.id}")
     else
+      set_sub_header_title("学科登録")
+      add_sub_header_path(school.name, "/school/#{school.id}")
+      add_sub_header_path("学科登録", nil)
+
       render("course/new")
     end
   end
 
   def show
     @course = Course.find_by(id: params[:id])
+
+    set_sub_header_title(@course.name)
+    add_sub_header_path(@course.school.name, "/school/#{@course.school.id}")
+    add_sub_header_path(@course.name, nil)
   end
 
   def edit
     @course = Course.find_by(id: params[:id])
+
+    set_sub_header_title("学科情報編集")
+    add_sub_header_path(@course.school.name, "/school/#{@course.school.id}")
+    add_sub_header_path(@course.name, "/course/#{@course.id}")
+    add_sub_header_path("編集", nil)
   end
 
   def update
@@ -49,6 +66,11 @@ class CourseController < ApplicationController
       flash[:notice] = "学科情報の更新に成功しました。"
       redirect_to("/course/#{@course.id}")
     else
+      set_sub_header_title("学科情報編集")
+      add_sub_header_path(@course.school.name, "/school/#{@course.school.id}")
+      add_sub_header_path(@course.name, "/course/#{@course.id}")
+      add_sub_header_path("編集", nil)
+      
       render("course/edit")
     end
   end
