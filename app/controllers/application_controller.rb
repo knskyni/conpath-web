@@ -38,4 +38,8 @@ class ApplicationController < ActionController::Base
   def add_custom_js(path)
     @custom_js.push(path)
   end
+
+  def render_404
+    render(file: "#{Rails.root}/public/404", layout: false, status: :not_found)
+  end
 end
