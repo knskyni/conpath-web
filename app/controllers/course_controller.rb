@@ -72,7 +72,7 @@ class CourseController < ApplicationController
       render_404
       return
     end
-    
+
     @course.name = params[:course][:name]
     @course.number_of_enrolled_year = params[:course][:number_of_enrolled_year]
 
