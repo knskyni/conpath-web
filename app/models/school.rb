@@ -1,7 +1,7 @@
 class School < ApplicationRecord
   has_many :courses, foreign_key: :school_id
 
-  validates :name, {presence: true, length: {maximum: 255}}
+  validates :name, {presence: true, uniqueness: true, length: {maximum: 255}}
 
   def courses
     return Course.where(school_id: self.id)
