@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   post 'student/password_change', to: 'student#password_update'
   
   # 教員
+  get 'teacher/login', to: 'teacher#login'
+  post 'teacher/login', to: 'teacher#auth'
+  post 'teacher/logout', to: 'teacher#logout'
   get 'teacher/new', to: 'teacher#new'
   post 'teacher/create', to: 'teacher#create'
   get 'teacher/:id/edit', to: 'teacher#edit'
