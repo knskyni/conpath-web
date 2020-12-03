@@ -1,6 +1,6 @@
 class CompanyController < ApplicationController
   def new
-    @recruit_company = RecruitCompany.new
+    @company = RecruitCompany.new
     @sub_header = {
         title: "企業情報追加",
         list: [
@@ -17,7 +17,7 @@ class CompanyController < ApplicationController
   end
 
   def create
-    @recruit_company = RecruitCompany.new(
+    @company = RecruitCompany.new(
         company_code: params[:recruit_company][:company_code],
         name: params[:recruit_company][:name],
         name_furigana: params[:recruit_company][:name_furigana],
@@ -39,25 +39,25 @@ class CompanyController < ApplicationController
         teacher_comment: params[:recruit_company][:teacher_comment]
     )
     @tag_name = params[:recruit_company_tags]
-    if @recruit_company.save
+    if @company.save
       tag_array = params[:recruit_company_tags]
       tags = tag_array.to_s.split(nil)
       tags.each do |tag|
-        @recruit_company_tag = RecruitCompanyTag.find_by(name: tag)
-        if @recruit_company_tag.nil?
-          @recruit_company_tag = RecruitCompanyTag.new(
+        @tag = RecruitCompanyTag.find_by(name: tag)
+        if @tag.nil?
+          @tag = RecruitCompanyTag.new(
               name: tag
           )
-          @recruit_company_tag.save
+          @tag.save
         end
-        @recruit_company_tag_assign = RecruitCompanyTagAssign.new(
-            company_id: @recruit_company.id,
-            tag_id: @recruit_company_tag.id
+        @tag_assign = RecruitCompanyTagAssign.new(
+            company_id: @company.id,
+            tag_id: @tag.id
         )
-        @recruit_company_tag_assign.save
+        @tag_assign.save
       end
       flash[:notice] = "企業情報の登録が完了しました"
-      redirect_to("/company/#{@recruit_company.id}")
+      redirect_to("/company/#{@company.id}")
     else
       @sub_header = {
           title: "企業情報追加",
@@ -79,7 +79,7 @@ class CompanyController < ApplicationController
 
 
   def show
-    @recruit_company = RecruitCompany.find_by(id:params[:id])
+    @company = RecruitCompany.find_by(id:params[:id])
 
     @sub_header = {
         title: "企業情報",
@@ -97,9 +97,9 @@ class CompanyController < ApplicationController
   end
 
   def edit
-    @recruit_company = RecruitCompany.find_by(id: params[:id])
+    @company = RecruitCompany.find_by(id: params[:id])
 
-    @recruit_company_tag_assign = RecruitCompanyTagAssign.where(company_id: @recruit_company.id)
+    @assign = RecruitCompanyTagAssign.where(company_id: @company.id)
     @sub_header = {
         title: "企業情報修正",
         list: [
@@ -116,59 +116,59 @@ class CompanyController < ApplicationController
   end
 
   def update
-    @recruit_company = RecruitCompany.find_by(id: params[:id])
-    @recruit_company.company_code = params[:recruit_company][:company_code]
-    @recruit_company.name = params[:recruit_company][:name]
-    @recruit_company.name_furigana = params[:recruit_company][:name_furigana]
-    @recruit_company.postal_code = params[:recruit_company][:postal_code]
-    @recruit_company.prefecture_id = params[:recruit_company][:prefecture_id]
-    @recruit_company.address = params[:recruit_company][:address]
-    @recruit_company.found_date = params[:found_date]
-    @recruit_company.tel_number = params[:recruit_company][:tel_number]
-    @recruit_company.fax_number = params[:recruit_company][:fax_number]
-    @recruit_company.stock_list = params[:recruit_company][:stock_list]
-    @recruit_company.number_of_employee = params[:recruit_company][:number_of_employee]
-    @recruit_company.number_of_employee_male = params[:recruit_company][:number_of_employee_male]
-    @recruit_company.number_of_employee_female = params[:recruit_company][:number_of_employee_female]
-    @recruit_company.capital = params[:recruit_company][:capital]
-    @recruit_company.proceed = params[:recruit_company][:proceed]
-    @recruit_company.business_details = params[:recruit_company][:business_details]
-    @recruit_company.url = params[:recruit_company][:url]
-    @recruit_company.recruit_url = params[:recruit_company][:recruit_url]
+    @company = RecruitCompany.find_by(id: params[:id])
+    @company.company_code = params[:recruit_company][:company_code]
+    @company.name = params[:recruit_company][:name]
+    @company.name_furigana = params[:recruit_company][:name_furigana]
+    @company.postal_code = params[:recruit_company][:postal_code]
+    @company.prefecture_id = params[:recruit_company][:prefecture_id]
+    @company.address = params[:recruit_company][:address]
+    @company.found_date = params[:found_date]
+    @company.tel_number = params[:recruit_company][:tel_number]
+    @company.fax_number = params[:recruit_company][:fax_number]
+    @company.stock_list = params[:recruit_company][:stock_list]
+    @company.number_of_employee = params[:recruit_company][:number_of_employee]
+    @company.number_of_employee_male = params[:recruit_company][:number_of_employee_male]
+    @company.number_of_employee_female = params[:recruit_company][:number_of_employee_female]
+    @company.capital = params[:recruit_company][:capital]
+    @company.proceed = params[:recruit_company][:proceed]
+    @company.business_details = params[:recruit_company][:business_details]
+    @company.url = params[:recruit_company][:url]
+    @company.recruit_url = params[:recruit_company][:recruit_url]
 
-    if @recruit_company.save
+    if @company.save
       # 企業とタグの紐付けを全削除
-      RecruitCompanyTagAssign.where(company_id: @recruit_company.id).destroy_all
+      RecruitCompanyTagAssign.where(company_id: @company.id).destroy_all
 
       tag_array = params[:recruit_company_tags]
       tags = tag_array.to_s.split(nil)
       tags.each do |tag|
         # タグ検索
-        @recruit_company_tag = RecruitCompanyTag.find_by(name: tag)
+        @tag = RecruitCompanyTag.find_by(name: tag)
 
         # タグ存在
-        if @recruit_company_tag.nil?
+        if @tag.nil?
           # タグを保存
-          @recruit_company_tag = RecruitCompanyTag.new(name: tag)
-          @recruit_company_tag.save
+          @tag = RecruitCompanyTag.new(name: tag)
+          @tag.save
 
           # 企業とタグの紐付け
-          @recruit_company_tag_assign = RecruitCompanyTagAssign.new(company_id: @recruit_company.id, tag_id: @recruit_company_tag.id)
-          @recruit_company_tag_assign.save
+          @assign = RecruitCompanyTagAssign.new(company_id: @company.id, tag_id: @tag.id)
+          @assign.save
         else
           # 企業とタグの紐付けを検索
-          @recruit_company_tag_assign = RecruitCompanyTagAssign.find_by(company_id: @recruit_company.id, tag_id: @recruit_company_tag.id)
+          @assign = RecruitCompanyTagAssign.find_by(company_id: @company.id, tag_id: @tag.id)
 
           # 企業とタグの存在がないなら
-          if @recruit_company_tag_assign.nil?
+          if @assign.nil?
             # 企業とタグを紐付ける
-            @recruit_company_tag_assign = RecruitCompanyTagAssign.new(company_id: @recruit_company.id, tag_id: @recruit_company_tag.id)
-            @recruit_company_tag_assign.save
+            @assign = RecruitCompanyTagAssign.new(company_id: @company.id, tag_id: @tag.id)
+            @assign.save
           end
         end
       end
       flash[:notice] = "企業情報の修正が完了しました"
-      redirect_to("/company/#{@recruit_company.id}")
+      redirect_to("/company/#{@company.id}")
     else
       @sub_header = {
           title: "企業情報修正",

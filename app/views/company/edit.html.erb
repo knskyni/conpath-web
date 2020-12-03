@@ -1,11 +1,11 @@
 <div class="card card-custom">
-  <%=form_for(@recruit_company, url: {controller: 'company', action: 'update'}) do |f| %>
+  <%=form_for(@company, url: {controller: 'company', action: 'update'}) do |f| %>
     <div class="card-body">
-      <% if @recruit_company.errors.full_messages.any? %>
+      <% if @company.errors.full_messages.any? %>
         <div class="alert alert-danger" role="alert">
           <h4 class="alert-heading">エラー</h4>
           <ul class="m-0">
-            <% @recruit_company.errors.full_messages.each do |message| %>
+            <% @company.errors.full_messages.each do |message| %>
               <li><%= message %></li>
             <% end %>
           </ul>
@@ -37,7 +37,7 @@
       </div>
       <div class="form-group">
         <label>設立日<span class="text-danger">*</span></label>
-        <input type="date" name="found_date" class="form-control" value="<%= @recruit_company.found_date %>">
+        <input type="date" name="found_date" class="form-control" value="<%= @company.found_date %>">
       </div>
       <div class="form-group">
         <label>電話番号<span class="text-danger">*</span></label>
@@ -89,7 +89,7 @@
       </div>
       <div class="form-group">
         <label>タグ</label>
-        <input type ="text" name="recruit_company_tags" class="form-control" placeholder="web rails" value="<% @recruit_company_tag_assign.each do |tag_assign| %><%= tag_assign.tag.name %> <% end %>">
+        <input type ="text" name="recruit_company_tags" class="form-control" placeholder="web rails" value="<% @assign.each do |tag_assign| %><%= tag_assign.tag.name %> <% end %>">
       </div>
       <div class="text-center">
         <%= f.submit("送信", {class: %w(btn btn-primary ml-3)}) %>
