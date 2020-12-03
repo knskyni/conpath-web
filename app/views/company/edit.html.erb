@@ -1,5 +1,5 @@
 <div class="card card-custom">
-  <%=form_tag("/company/#{@recruit_company.id}/update") do %>
+  <%=form_for(@recruit_company, url: {controller: 'company', action: 'update'}) do |f| %>
     <div class="card-body">
       <% if @recruit_company.errors.full_messages.any? %>
         <div class="alert alert-danger" role="alert">
@@ -13,75 +13,27 @@
       <% end %>
       <div class="form-group">
         <label>企業コード<span class="text-danger">*</span></label>
-        <input type="text" name="company_code" class="form-control" placeholder="12345678" value="<%= @recruit_company.company_code %>">
+        <%= f.text_field(:company_code, {class: ["form-control"], placeholder: "123456789"}) %>
       </div>
       <div class="form-group">
         <label>企業名<span class="text-danger">*</span></label>
-        <input type="text" name="name"class="form-control" placeholder="麻生株式会社" value="<%= @recruit_company.name %>">
+        <%= f.text_field(:name, {class: ["form-control"], placeholder: "学校法人 麻生塾"}) %>
       </div>
       <div class="form-group">
         <label>企業名（ふりがな）<span class="text-danger">*</span></label>
-        <input type="text" name="name_furigana" class="form-control" placeholder="あそうかぶしきがいしゃ" value="<%= @recruit_company.name_furigana %>">
+        <%= f.text_field(:name_furigana, {class: ["form-control"], placeholder: "がっこうほうじんあそうじゅく"}) %>
       </div>
       <div class="form-group">
         <label>郵便番号<span class="text-danger">*</span></label>
-        <input type="text" name="postal_code" class="form-control" placeholder="123-4567" value="<%= @recruit_company.postal_code %>">
+        <%= f.text_field(:postal_code, {class: ["form-control"], placeholder: "812-0011"}) %>
       </div>
       <div class="form-group">
         <label>都道府県<span class="text-danger">*</span></label>
-        <select name="prefecture_id" class="form-control">
-          <option value="1">北海道</option>
-          <option value="2">青森県</option>
-          <option value="3">岩手県</option>
-          <option value="4">宮城県</option>
-          <option value="5">秋田県</option>
-          <option value="6">山形県</option>
-          <option value="7">福島県</option>
-          <option value="8">茨城県</option>
-          <option value="9">栃木県</option>
-          <option value="10">群馬県</option>
-          <option value="11">埼玉県</option>
-          <option value="12">千葉県</option>
-          <option value="13">東京都</option>
-          <option value="14">神奈川県</option>
-          <option value="15">新潟県</option>
-          <option value="16">富山県</option>
-          <option value="17">石川県</option>
-          <option value="18">福井県</option>
-          <option value="19">山梨県</option>
-          <option value="20">長野県</option>
-          <option value="21">岐阜県</option>
-          <option value="22">静岡県</option>
-          <option value="23">愛知県</option>
-          <option value="24">三重県</option>
-          <option value="25">滋賀県</option>
-          <option value="26">京都府</option>
-          <option value="27">大阪府</option>
-          <option value="28">兵庫県</option>
-          <option value="29">奈良県</option>
-          <option value="30">和歌山県</option>
-          <option value="31">鳥取県</option>
-          <option value="32">島根県</option>
-          <option value="33">岡山県</option>
-          <option value="34">広島県</option>
-          <option value="35">山口県</option>
-          <option value="36">徳島県</option>
-          <option value="37">香川県</option>
-          <option value="38">愛媛県</option>
-          <option value="39">高知県</option>
-          <option value="40">福岡県</option>
-          <option value="41">佐賀県</option>
-          <option value="42">長崎県</option>
-          <option value="43">熊本県</option>
-          <option value="44">大分県</option>
-          <option value="45">宮崎県</option>
-          <option value="46">鹿児島県</option>
-          <option value="47">沖縄県</option>
-        </select>
+        <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name, {}, {class: %w(form-control)} %>
       </div>
       <div class="form-group">
         <label>住所<span class="text-danger">*</span></label>
-        <input type="text" name="address" class="form-control" placeholder="福岡市博多区博多駅南2-12-32" value="<%= @recruit_company.address %>">
+        <%= f.text_field(:address, {class: ["form-control"], placeholder: "福岡市博多区博多駅南2-12-32"}) %>
       </div>
       <div class="form-group">
         <label>設立日<span class="text-danger">*</span></label>
@@ -89,58 +41,58 @@
       </div>
       <div class="form-group">
         <label>電話番号<span class="text-danger">*</span></label>
-        <input type="text" name="tel_number" class="form-control" placeholder="0921234567" value="<%= @recruit_company.tel_number %>">
+        <%= f.text_field(:tel_number, {class: ["form-control"], placeholder: "092-123-4567"}) %>
       </div>
       <div class="form-group">
         <label>FAX番号</label>
-        <input type="text" name="fax_number" class="form-control" placeholder="0921234567" value="<%= @recruit_company.fax_number %>">
+        <%= f.text_field(:fax_number, {class: ["form-control"], placeholder: "092-123-4567"}) %>
       </div>
       <div class="form-group">
         <label>株式上場</label>
-        <input type="text" name="stock_list" class="form-control" placeholder="東証1部" value="<%= @recruit_company.stock_list %>">
+        <%= f.text_field(:stock_list, {class: ["form-control"], placeholder: "東証1部"}) %>
       </div>
       <div class="form-group">
         <div class="form-row">
           <div class="col-md-4">
             <label>従業員数<span class="text-danger">*</span></label>
-            <input type="number" name="number_of_employee" class="form-control" placeholder="100" value="<%= @recruit_company.number_of_employee %>">
+            <%= f.number_field(:number_of_employee, {class: ["form-control"], placeholder: "100"}) %>
           </div>
           <div class="col-md-4">
             <label>内、男性従業員数</label>
-            <input type="number" name="number_of_employee_male" class="form-control" placeholder="50" value="<%= @recruit_company.number_of_employee_male %>">
+            <%= f.number_field(:number_of_employee_male, {class: ["form-control"], placeholder: "50"}) %>
           </div>
           <div class="col-md-4">
             <label>内、女性従業員数</label>
-            <input type="number" name="number_of_employee_female" class="form-control" placeholder="50" value="<%= @recruit_company.number_of_employee_female %>">
+            <%= f.number_field(:number_of_employee_female, {class: ["form-control"], placeholder: "50"}) %>
           </div>
         </div>
       </div>
       <div class="form-group">
         <label>資本金<span class="text-danger">*</span></label>
-        <input type="number" name="capital" class="form-control" placeholder="10000000" value="<%= @recruit_company.capital %>">
+        <%= f.number_field(:capital, {class: ["form-control"], placeholder: "10000000"}) %>
       </div>
       <div class="form-group">
         <label>売上高<span class="text-danger">*</span></label>
-        <input type="number" name="proceed" class="form-control" placeholder="100000000" value="<%= @recruit_company.proceed %>">
+        <%= f.number_field(:proceed, {class: ["form-control"], placeholder: "100000000"}) %>
       </div>
       <div class="form-group">
         <label>事業内容<span class="text-danger">*</span></label>
-        <input type="text" name="business_details" class="form-control" placeholder="Webサイト・スマホアプリ開発" value="<%= @recruit_company.business_details %>">
+        <%= f.text_field(:business_details, {class: ["form-control"], placeholder: "Webサイト・スマホアプリ開発"}) %>
       </div>
       <div class="form-group">
         <label>ホームページ</label>
-        <input type="text" name="url" class="form-control" placeholder="https://asojuku.ac.jp/abcc/" value="<%= @recruit_company.url %>">
+        <%= f.text_field(:url, {class: ["form-control"], placeholder: "https://asojuku.ac.jp/"}) %>
       </div>
       <div class="form-group">
         <label>採用ページ</label>
-        <input type="text" name="recruit_url" class="form-control" placeholder="https://asojuku.ac.jp/abcc/info/" value="<%= @recruit_company.recruit_url %>">
+        <%= f.text_field(:recruit_url, {class: ["form-control"], placeholder: "https://recruit.asojuku.ac.jp/"}) %>
       </div>
       <div class="form-group">
         <label>タグ</label>
         <input type ="text" name="recruit_company_tags" class="form-control" placeholder="web rails" value="<% @recruit_company_tag_assign.each do |tag_assign| %><%= tag_assign.tag.name %> <% end %>">
       </div>
       <div class="text-center">
-        <button type="submit" class="btn btn-success ml-3">登録</button>
+        <%= f.submit("送信", {class: %w(btn btn-primary ml-3)}) %>
       </div>
     </div>
   <% end %>

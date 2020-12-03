@@ -1,7 +1,10 @@
 class SchoolClassController < ApplicationController
   def new
     @course = Course.find_by(id: params[:course_id])
-    render(file: "#{Rails.root}/public/404", layout: false, status: :not_found) if @course.nil?
+    if @course.nil?
+      render_404
+      return
+    end
 
     @school_class = SchoolClass.new(
         course_id: @course.id
@@ -10,7 +13,10 @@ class SchoolClassController < ApplicationController
 
   def create
     @course = Course.find_by(id: params[:course_id])
-    render(file: "#{Rails.root}/public/404", layout: false, status: :not_found) if @course.nil?
+    if @course.nil?
+      render_404
+      return
+    end
 
     @school_class = SchoolClass.new(
         begin_year: params[:school_class][:begin_year],
@@ -30,17 +36,26 @@ class SchoolClassController < ApplicationController
 
   def show
     @school_class = SchoolClass.find_by(id: params[:id])
-    render(file: "#{Rails.root}/public/404", layout: false, status: :not_found) if @school_class.nil?
+    if @school_class.nil?
+      render_404
+      return
+    end
   end
 
   def edit
     @school_class = SchoolClass.find_by(id: params[:id])
-    render(file: "#{Rails.root}/public/404", layout: false, status: :not_found) if @school_class.nil?
+    if @school_class.nil?
+      render_404
+      return
+    end
   end
 
   def update
     @school_class = SchoolClass.find_by(id: params[:id])
-    render(file: "#{Rails.root}/public/404", layout: false, status: :not_found) if @school_class.nil?
+    if @school_class.nil?
+      render_404
+      return
+    end
 
     @school_class.begin_year = params[:school_class][:begin_year]
     @school_class.school_class = params[:school_class][:school_class]

@@ -9,13 +9,16 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 
-    <!-- Page Vendors Styles(used by this page) -->
-    <link href="/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
-
     <!-- Global Theme Styles(used by all pages) -->
     <link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
     <link href="/assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
     <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+
+    <!-- Page Vendors Styles(used by this page) -->
+    <link href="/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+    <% @custom_css.each do |path| %>
+      <link href="<%= path %>" rel="stylesheet" type="text/css" />
+    <% end %>
 
     <!-- Layout Themes(used by all pages) -->
     <link href="/assets/css/themes/layout/header/base/light.css" rel="stylesheet" type="text/css" />
@@ -320,10 +323,10 @@
                   <div class="topbar-item">
                     <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
                       <span class="text-muted font-weight-bold font-size-base mr-1">ようこそ、</span>
-                      <span class="text-dark-50 font-weight-bolder font-size-base mr-1"><%= @current_user.last_name + " " + @current_user.first_name %></span>
+                      <span class="text-dark-50 font-weight-bolder font-size-base mr-1"><%= @current_user.full_name %></span>
                       <span class="text-muted font-weight-bold font-size-base mr-3">さん</span>
                       <span class="symbol symbol-lg-35 symbol-25">
-                      <div class="symbol-label" style="background-image:url('/assets/media/users/blank.png')"></div>
+                      <div class="symbol-label" style="background-image:url('<%= @current_user.icon %>')"></div>
                       </span>
                     </div>
                   </div>
@@ -372,72 +375,63 @@
         </div>
       </div>
     </div>
-    <div id="kt_quick_user" class="offcanvas offcanvas-right p-10">
-      <div class="offcanvas-header d-flex align-items-center justify-content-between pb-5">
-        <h3 class="font-weight-bold m-0">アカウント</h3>
-        <a class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_user_close">
-          <i class="ki ki-close icon-xs text-muted"></i>
-        </a>
-      </div>
-      <div class="offcanvas-content pr-5 mr-n5">
-        <div class="d-flex align-items-center mt-5">
-          <div class="symbol symbol-100 mr-5">
-            <div class="symbol-label" style="background-image:url('/assets/media/users/blank.png')"></div>
-          </div>
-          <div class="d-flex flex-column">
-            <a class="font-weight-bold font-size-h5 text-dark-75">山田 太郎</a>
-            <div class="text-muted mt-1">ｘｘｘｘｘｘ学校<br>ｘｘｘｘｘｘｘｘｘｘｘｘ科</div>
-            <div class="navi mt-2">
-              <%= link_to("ログアウト", "/student/logout", {method: "post", class: %w(btn btn-sm btn-light-danger font-weight-bolder py-2 px-5)}) %>
-            </div>
-          </div>
-        </div>
-        <div class="separator separator-dashed mt-8 mb-5"></div>
-        <div class="navi navi-spacer-x-0 p-0">
-          <a href="student/show.html" class="navi-item">
-            <div class="navi-link">
-              <div class="symbol symbol-40 bg-light mr-3">
-                <div class="symbol-label">
-                  <span class="svg-icon svg-icon-md svg-icon-primary">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <polygon points="0 0 24 0 24 24 0 24"/>
-                        <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
-                        <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero"/>
-                      </g>
-                    </svg>
-                  </span>
-                </div>
-              </div>
-              <div class="navi-text">
-                <div class="font-weight-bold">プロフィール</div>
-                <div class="text-muted">自分のプロフィールページを開きます</div>
-              </div>
-            </div>
-          </a>
-          <a href="student/settings.html" class="navi-item">
-            <div class="navi-link">
-              <div class="symbol symbol-40 bg-light mr-3">
-                <div class="symbol-label">
-                  <span class="svg-icon svg-icon-md svg-icon-muted">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <rect x="0" y="0" width="24" height="24"/>
-                        <path d="M5,8.6862915 L5,5 L8.6862915,5 L11.5857864,2.10050506 L14.4852814,5 L19,5 L19,9.51471863 L21.4852814,12 L19,14.4852814 L19,19 L14.4852814,19 L11.5857864,21.8994949 L8.6862915,19 L5,19 L5,15.3137085 L1.6862915,12 L5,8.6862915 Z M12,15 C13.6568542,15 15,13.6568542 15,12 C15,10.3431458 13.6568542,9 12,9 C10.3431458,9 9,10.3431458 9,12 C9,13.6568542 10.3431458,15 12,15 Z" fill="#000000"/>
-                      </g>
-                    </svg>
-                  </span>
-                </div>
-              </div>
-              <div class="navi-text">
-                <div class="font-weight-bold">設定</div>
-                <div class="text-muted">アカウント設定をする場合はこちら</div>
-              </div>
-            </div>
+    <% if @current_user %>
+      <div id="kt_quick_user" class="offcanvas offcanvas-right p-10">
+        <div class="offcanvas-header d-flex align-items-center justify-content-between pb-5">
+          <h3 class="font-weight-bold m-0">アカウント</h3>
+          <a class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_user_close">
+            <i class="ki ki-close icon-xs text-muted"></i>
           </a>
         </div>
+        <div class="offcanvas-content pr-5 mr-n5">
+          <div class="d-flex align-items-center mt-5">
+            <div class="symbol symbol-100 mr-5">
+              <div class="symbol-label" style="background-image:url('<%= @current_user.icon %>')"></div>
+            </div>
+            <div class="d-flex flex-column">
+              <a class="font-weight-bold font-size-h5 text-dark-75"><%= @current_user.full_name %></a>
+              <div class="text-muted mt-1"><%= @current_user.school_class.course.school.name %><br><%= @current_user.school_class.course.name %></div>
+              <div class="navi mt-2">
+                <%= link_to("ログアウト", "/student/logout", {method: "post", class: %w(btn btn-sm btn-light-danger font-weight-bolder py-2 px-5)}) %>
+              </div>
+            </div>
+          </div>
+          <div class="separator separator-dashed mt-8 mb-5"></div>
+          <div class="navi navi-spacer-x-0 p-0">
+            <%= link_to("/student/password_change", {class: %w(navi-item)}) do %>
+              <div class="navi-link">
+                <div class="symbol symbol-40 bg-light mr-3">
+                  <div class="symbol-label">
+                    <span class="svg-icon svg-icon-md svg-icon-muted">
+                      <img src="/assets/media/svg/icons/Home/Key.svg"/>
+                    </span>
+                  </div>
+                </div>
+                <div class="navi-text">
+                  <div class="font-weight-bold">パスワード変更</div>
+                  <div class="text-muted">現在のパスワードを変更するならこちら</div>
+                </div>
+              </div>
+            <% end %>
+            <%= link_to("/student/my/edit", {class: %w(navi-item)}) do %>
+              <div class="navi-link">
+                <div class="symbol symbol-40 bg-light mr-3">
+                  <div class="symbol-label">
+                    <span class="svg-icon svg-icon-md svg-icon-muted">
+                      <img src="/assets/media/svg/icons/General/Settings-2.svg"/>
+                    </span>
+                  </div>
+                </div>
+                <div class="navi-text">
+                  <div class="font-weight-bold">設定</div>
+                  <div class="text-muted">アカウント設定をする場合はこちら</div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
-    </div>
+    <% end %>
 
     <div id="kt_scrolltop" class="scrolltop">
       <span class="svg-icon">
@@ -474,6 +468,9 @@
     <!-- Page Scripts(used by this page) -->
     <script src="/assets/js/pages/widgets.js"></script>
     <script src="/assets/js/pages/crud/forms/widgets/clipboard.js?v=7.1.6"></script>
+    <% @custom_js.each do |path| %>
+      <script src="<%= path %>"></script>
+    <% end %>
     <% if !flash[:notice].nil? %>
       <script>
         $.notify({

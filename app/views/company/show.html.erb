@@ -3,7 +3,7 @@
     <div class="d-flex">
       <div class="flex-shrink-0 mr-7">
         <div class="symbol symbol-50 symbol-lg-120">
-          <img alt="Pic" src="assets/media/users/blank.png">
+          <img alt="Pic" src="/assets/media/users/blank.png">
         </div>
       </div>
       <div class="flex-grow-1">
@@ -14,11 +14,16 @@
             </div>
             <div class="d-flex flex-wrap my-2">
               <span class="text-muted font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
-                <i class="fas fa-map-marked-alt mr-2"></i><%= @recruit_company.prefecture_id %>
+                <i class="fas fa-map-marked-alt mr-2"></i><%= @recruit_company.prefecture.name %>
               </span>
-              <span class="text-muted font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
-                <i class="fas fa-tag mr-2"></i><%= @recruit_company.business_details %>
-              </span>
+              <% if @recruit_company.tag_assigns.any? %>
+                <span class="text-muted font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
+                  <i class="fas fa-tag mr-2"></i>
+                  <% @recruit_company.tag_assigns.each_with_index do |tag_assign, index| %>
+                    <a><%= tag_assign.tag.name %></a><%= "," if index < @recruit_company.tag_assigns.size - 1 %>
+                  <% end %>
+                </span>
+              <% end %>
             </div>
           </div>
         </div>
@@ -43,14 +48,8 @@
         </div>
         <div class="card-toolbar">
           <ul class="nav nav-tabs nav-bold nav-tabs-line">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">年度選択</a>
-                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" style="">
-                  <a class="dropdown-item" data-toggle="tab" href="#kt_tab_pane_1_2">2021年度</a>
-                  <a class="dropdown-item" data-toggle="tab" href="#kt_tab_pane_2_2">2020年度</a>
-                  <a class="dropdown-item" data-toggle="tab" href="#kt_tab_pane_3_2">2019年度</a>
-                </div>
-            </li>
+            <li class="nav-item">
+              <%= link_to("修正","/company/#{@recruit_company.id}/edit", {class: %w(btn btn-success ml-3)}) %>
           </ul>
         </div>
       </div>
@@ -75,29 +74,20 @@
                 <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.name_furigana %></span>
               </div>
             </div>
-            <div class="form-group row my-2">
-              <label class="col-4 col-form-label">郵便番号:</label>
-              <div class="col-8">
-                <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.postal_code %></span>
-              </div>
-            </div>
-          </div>
-          <div class="form-group row my-2">
-            <label class="col-4 col-form-label">都道府県ID:</label>
-            <div class="col-8">
-              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.prefecture_id %></span>
-            </div>
           </div>
           <div class="form-group row my-2">
             <label class="col-4 col-form-label">住所:</label>
             <div class="col-8">
-              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.address %></span>
+              <span class="form-control-plaintext font-weight-bolder">
+                〒<%= @recruit_company.postal_code %><br>
+                <%= @recruit_company.prefecture.name + @recruit_company.address %>
+              </span>
             </div>
           </div>
           <div class="form-group row my-2">
             <label class="col-4 col-form-label">設立日:</label>
             <div class="col-8">
-              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.found_date %></span>
+              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.found_date.strftime('%Y年%m月%d日') %></span>
             </div>
           </div>
           <div class="form-group row my-2">
@@ -119,33 +109,27 @@
             </div>
           </div>
           <div class="form-group row my-2">
-            <label class="col-4 col-form-label">男性従業員数:</label>
-            <div class="col-8">
-              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.	number_of_employee_male %></span>
-            </div>
-          </div>
-          <div class="form-group row my-2">
-            <label class="col-4 col-form-label">女性従業員数:</label>
-            <div class="col-8">
-              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.number_of_employee_female %></span>
-            </div>
-          </div>
-          <div class="form-group row my-2">
             <label class="col-4 col-form-label">従業員数:</label>
             <div class="col-8">
-              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.number_of_employee %></span>
+              <span class="form-control-plaintext font-weight-bolder">
+                <% if @recruit_company.number_of_employee.nil? %>
+                  非公開
+                <% else %>
+                  <%= @recruit_company.number_of_employee.to_s(:delimited) %>名 (内: 男性<%= @recruit_company.number_of_employee_male.nil? ? "人員非公開" : @recruit_company.number_of_employee_male.to_s(:delimited) + "名" %>、女性<%= @recruit_company.number_of_employee_female.nil? ? "人員非公開" : @recruit_company.number_of_employee_female.to_s(:delimited) + "名" %>)
+                <% end %>
+              </span>
             </div>
           </div>
           <div class="form-group row my-2">
             <label class="col-4 col-form-label">資本金:</label>
             <div class="col-8">
-              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.capital %></span>
+              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.capital.to_s(:delimited) %>円</span>
             </div>
           </div>
           <div class="form-group row my-2">
             <label class="col-4 col-form-label">売上高:</label>
             <div class="col-8">
-              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.proceed %></span>
+              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.proceed.to_s(:delimited) %>円</span>
             </div>
           </div>
           <div class="form-group row my-2">
@@ -157,17 +141,14 @@
           <div class="form-group row my-2">
             <label class="col-4 col-form-label">ホームページ:</label>
             <div class="col-8">
-              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.url %></span>
+              <span class="form-control-plaintext font-weight-bolder"><%= link_to(@recruit_company.url, @recruit_company.url) %></span>
             </div>
           </div>
           <div class="form-group row my-2">
             <label class="col-4 col-form-label">採用ページ:</label>
             <div class="col-8">
-              <span class="form-control-plaintext font-weight-bolder"><%= @recruit_company.recruit_url %></span>
+              <span class="form-control-plaintext font-weight-bolder"><%= link_to(@recruit_company.recruit_url, @recruit_company.recruit_url) %></span>
             </div>
-          </div>
-          <div class="text-center">
-            <button type="submit" class="btn btn-success ml-3"><%= link_to("修正","/company/#{@recruit_company.id}/edit") %></button>
           </div>
         </div>
       </div>
