@@ -1,4 +1,7 @@
 class SchoolController < ApplicationController
+  before_action :check_login
+  before_action :check_teacher, {only: [:new, :create, :edit, :update]}
+
   def index
     # 学校一覧取得
     @schools = School.all

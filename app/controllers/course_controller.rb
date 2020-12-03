@@ -1,4 +1,7 @@
 class CourseController < ApplicationController
+  before_action :check_login
+  before_action :check_teacher, {only: [:new, :create, :edit, :update]}
+
   def new
     # 学校取得
     school = School.find_by(id: params[:school_id])

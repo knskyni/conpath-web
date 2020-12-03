@@ -1,4 +1,7 @@
 class StudentController < ApplicationController
+  before_action :check_login
+  before_action :check_student, {only: [:logout, :edit, :update, :favorite_edit, :favorite_list, :password_edit, :password_update]}
+
   def login
     render(layout: false)
   end

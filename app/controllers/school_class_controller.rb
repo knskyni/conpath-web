@@ -1,4 +1,7 @@
 class SchoolClassController < ApplicationController
+  before_action :check_login
+  before_action :check_teacher, {only: [:new, :create, :edit, :update]}
+
   def new
     @course = Course.find_by(id: params[:course_id])
     if @course.nil?

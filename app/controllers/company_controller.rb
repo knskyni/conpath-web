@@ -1,4 +1,7 @@
 class CompanyController < ApplicationController
+  before_action :check_login
+  before_action :check_teacher, {only: [:new, :create, :edit, :update]}
+
   def new
     @company = RecruitCompany.new
 
