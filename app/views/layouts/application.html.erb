@@ -401,7 +401,7 @@
           <div class="separator separator-dashed mt-8 mb-5"></div>
           <div class="navi navi-spacer-x-0 p-0">
             <% if session[:user_type] == "student" %>
-              <%= link_to("/student/password_change", {class: %w(navi-item)}) do %>
+              <%= link_to("/student/my/password_change", {class: %w(navi-item)}) do %>
                 <div class="navi-link">
                   <div class="symbol symbol-40 bg-light mr-3">
                     <div class="symbol-label">
