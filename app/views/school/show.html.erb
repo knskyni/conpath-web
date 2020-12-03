@@ -80,6 +80,15 @@
     </div>
   </div>
   <div class="col-xl-9">
+    <div class="row">
+      <div class="col">
+        <div class="card card-custom gutter-b card-stretch">
+          <div class="card-body py-4">
+            <%= link_to("学科を新しく登録する", "/course/new/#{@school.id}", {class: %w(btn btn-primary font-weight-bolder font-size-sm float-right py-3 px-14)}) %>
+          </div>
+        </div>
+      </div>
+    </div>
     <% @courses.each_slice(3) do |courses_sliced| %>
       <div class="row">
         <% courses_sliced.each do |course| %>
