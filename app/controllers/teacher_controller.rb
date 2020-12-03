@@ -62,7 +62,7 @@ class TeacherController < ApplicationController
   end
 
   def edit
-    @teacher = Teacher.find_by(id: params[:id])
+    @teacher = Teacher.find_by(id: @current_user.id)
 
     # サブヘッダー
     set_sub_header_title("教員情報編集")
@@ -72,7 +72,7 @@ class TeacherController < ApplicationController
   end
 
   def update
-    @teacher = Teacher.find_by(id: params[:id])
+    @teacher = Teacher.find_by(id: @current_user.id)
     @teacher.last_name = params[:last_name]
     @teacher.first_name = params[:first_name]
     @teacher.last_name_furigana = params[:last_name_furigana]
@@ -96,7 +96,7 @@ class TeacherController < ApplicationController
   end
 
   def password_edit
-    @teacher = Teacher.find_by(id: params[:id])
+    @teacher = Teacher.find_by(id: @current_user.id)
 
     # サブヘッダー
     set_sub_header_title("教員情報編集")
@@ -106,7 +106,7 @@ class TeacherController < ApplicationController
   end
 
   def password_update
-    @teacher = Teacher.find_by(id: params[:id])
+    @teacher = Teacher.find_by(id: @current_user.id)
     @error_messages = []
     unless @teacher.authenticate(params[:password])
       @error_messages.push("現在のパスワードが違います")

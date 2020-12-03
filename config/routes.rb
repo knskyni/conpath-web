@@ -22,10 +22,10 @@ Rails.application.routes.draw do
   post 'teacher/logout', to: 'teacher#logout'
   get 'teacher/new', to: 'teacher#new'
   post 'teacher/create', to: 'teacher#create'
-  get 'teacher/:id/edit', to: 'teacher#edit'
-  post 'teacher/:id/update', to: 'teacher#update'
-  get 'teacher/:id/password_change', to: 'teacher#password_edit'
-  post 'teacher/:id/password_change', to: 'teacher#password_update'
+  get 'teacher/my/edit', to: 'teacher#edit'
+  post 'teacher/my/update', to: 'teacher#update'
+  get 'teacher/my/password_change', to: 'teacher#password_edit'
+  post 'teacher/my/password_change', to: 'teacher#password_update'
 
   # 学校
   get 'school', to: 'school#index'
