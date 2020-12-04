@@ -1,23 +1,18 @@
 class CompanyController < ApplicationController
+  before_action :check_login
+  before_action :check_teacher, {only: [:new, :create, :edit, :update]}
+
   def new
-    @recruit_company = RecruitCompany.new
-    @sub_header = {
-        title: "企業情報追加",
-        list: [
-            {
-                name: "General",
-                url: "/"
-            },
-            {
-                name: "Empty Page",
-                url: "/test"
-            }
-        ]
-    }
+    @company = RecruitCompany.new
+
+    # サブヘッダー
+    set_sub_header_title("企業新規登録")
+    add_sub_header_path("企業", nil)
+    add_sub_header_path("登録", nil)
   end
 
   def create
-    @recruit_company = RecruitCompany.new(
+    @company = RecruitCompany.new(
         company_code: params[:recruit_company][:company_code],
         name: params[:recruit_company][:name],
         name_furigana: params[:recruit_company][:name_furigana],
@@ -38,103 +33,121 @@ class CompanyController < ApplicationController
         recruit_url: params[:recruit_company][:recruit_url],
         teacher_comment: params[:recruit_company][:teacher_comment]
     )
-    if @recruit_company.save
+    @tag_name = params[:recruit_company_tags]
+    if @company.save
+      tag_array = params[:recruit_company_tags]
+      tags = tag_array.to_s.split(nil)
+      tags.each do |tag|
+        @tag = RecruitCompanyTag.find_by(name: tag)
+        if @tag.nil?
+          @tag = RecruitCompanyTag.new(
+              name: tag
+          )
+          @tag.save
+        end
+        @tag_assign = RecruitCompanyTagAssign.new(
+            company_id: @company.id,
+            tag_id: @tag.id
+        )
+        @tag_assign.save
+      end
       flash[:notice] = "企業情報の登録が完了しました"
-      redirect_to("/company/#{@recruit_company.id}")
+      redirect_to("/company/#{@company.id}")
     else
-      @sub_header = {
-          title: "企業情報追加",
-          list: [
-              {
-                  name: "General",
-                  url: "/"
-              },
-              {
-                  name: "Empty Page",
-                  url: "/test"
-              }
-          ]
-      }
+      # サブヘッダー
+      set_sub_header_title("企業新規登録")
+      add_sub_header_path("企業", nil)
+      add_sub_header_path("登録", nil)
 
       render("company/new")
     end
   end
 
-  def show
-    @recruit_company = RecruitCompany.find_by(id:params[:id])
 
-    @sub_header = {
-        title: "企業情報",
-        list: [
-            {
-                name: "General",
-                url: "/"
-            },
-            {
-                name: "Empty Page",
-                url: "/test"
-            }
-        ]
-    }
+
+  def show
+    @company = RecruitCompany.find_by(id:params[:id])
+
+    # サブヘッダー
+    set_sub_header_title(@company.name)
+    add_sub_header_path("企業", nil)
+    add_sub_header_path(@company.name, "/company/#{@company.id}")
   end
 
   def edit
-    @recruit_company = RecruitCompany.find_by(id: params[:id])
-    @sub_header = {
-        title: "企業情報修正",
-        list: [
-            {
-                name: "General",
-                url: "/"
-            },
-            {
-                name: "Empty Page",
-                url: "/test"
-            }
-        ]
-    }
+    @company = RecruitCompany.find_by(id: params[:id])
+    @assign = RecruitCompanyTagAssign.where(company_id: @company.id)
+
+    # サブヘッダー
+    set_sub_header_title("企業情報編集")
+    add_sub_header_path(@company.name, "/company/#{@company.id}")
+    add_sub_header_path("編集", nil)
   end
 
   def update
-    @recruit_company = RecruitCompany.find_by(id: params[:id])
-    @recruit_company.company_code = params[:recruit_company][:company_code]
-    @recruit_company.name = params[:recruit_company][:name]
-    @recruit_company.name_furigana = params[:recruit_company][:name_furigana]
-    @recruit_company.postal_code = params[:recruit_company][:postal_code]
-    @recruit_company.prefecture_id = params[:recruit_company][:prefecture_id]
-    @recruit_company.address = params[:recruit_company][:address]
-    @recruit_company.found_date = params[:found_date]
-    @recruit_company.tel_number = params[:recruit_company][:tel_number]
-    @recruit_company.fax_number = params[:recruit_company][:fax_number]
-    @recruit_company.stock_list = params[:recruit_company][:stock_list]
-    @recruit_company.number_of_employee = params[:recruit_company][:number_of_employee]
-    @recruit_company.number_of_employee_male = params[:recruit_company][:number_of_employee_male]
-    @recruit_company.number_of_employee_female = params[:recruit_company][:number_of_employee_female]
-    @recruit_company.capital = params[:recruit_company][:capital]
-    @recruit_company.proceed = params[:recruit_company][:proceed]
-    @recruit_company.business_details = params[:recruit_company][:business_details]
-    @recruit_company.url = params[:recruit_company][:url]
-    @recruit_company.recruit_url = params[:recruit_company][:recruit_url]
+    @company = RecruitCompany.find_by(id: params[:id])
+    @company.company_code = params[:recruit_company][:company_code]
+    @company.name = params[:recruit_company][:name]
+    @company.name_furigana = params[:recruit_company][:name_furigana]
+    @company.postal_code = params[:recruit_company][:postal_code]
+    @company.prefecture_id = params[:recruit_company][:prefecture_id]
+    @company.address = params[:recruit_company][:address]
+    @company.found_date = params[:found_date]
+    @company.tel_number = params[:recruit_company][:tel_number]
+    @company.fax_number = params[:recruit_company][:fax_number]
+    @company.stock_list = params[:recruit_company][:stock_list]
+    @company.number_of_employee = params[:recruit_company][:number_of_employee]
+    @company.number_of_employee_male = params[:recruit_company][:number_of_employee_male]
+    @company.number_of_employee_female = params[:recruit_company][:number_of_employee_female]
+    @company.capital = params[:recruit_company][:capital]
+    @company.proceed = params[:recruit_company][:proceed]
+    @company.business_details = params[:recruit_company][:business_details]
+    @company.url = params[:recruit_company][:url]
+    @company.recruit_url = params[:recruit_company][:recruit_url]
 
-    if @recruit_company.save
+    if @company.save
+      # 企業とタグの紐付けを全削除
+      RecruitCompanyTagAssign.where(company_id: @company.id).destroy_all
+
+      tag_array = params[:recruit_company_tags]
+      tags = tag_array.to_s.split(nil)
+      tags.each do |tag|
+        # タグ検索
+        @tag = RecruitCompanyTag.find_by(name: tag)
+
+        # タグ存在
+        if @tag.nil?
+          # タグを保存
+          @tag = RecruitCompanyTag.new(name: tag)
+          @tag.save
+
+          # 企業とタグの紐付け
+          @assign = RecruitCompanyTagAssign.new(company_id: @company.id, tag_id: @tag.id)
+          @assign.save
+        else
+          # 企業とタグの紐付けを検索
+          @assign = RecruitCompanyTagAssign.find_by(company_id: @company.id, tag_id: @tag.id)
+
+          # 企業とタグの存在がないなら
+          if @assign.nil?
+            # 企業とタグを紐付ける
+            @assign = RecruitCompanyTagAssign.new(company_id: @company.id, tag_id: @tag.id)
+            @assign.save
+          end
+        end
+      end
       flash[:notice] = "企業情報の修正が完了しました"
-      redirect_to("/company/#{@recruit_company.id}")
+      redirect_to("/company/#{@company.id}")
     else
-      @sub_header = {
-          title: "企業情報修正",
-          list: [
-              {
-                  name: "General",
-                  url: "/"
-              },
-              {
-                  name: "Empty Page",
-                  url: "/test"
-              }
-          ]
-      }
+      # サブヘッダー
+      set_sub_header_title("企業情報編集")
+      add_sub_header_path(@company.name, "/company/#{@company.id}")
+      add_sub_header_path("編集", nil)
 
       render("company/edit")
     end
   end
 end
+
+
+
