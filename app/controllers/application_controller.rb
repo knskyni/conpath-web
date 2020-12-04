@@ -45,6 +45,7 @@ class ApplicationController < ActionController::Base
 
   def check_login
     if @current_user.nil?
+      flash[:notice] = "ログインしてください。"
       redirect_to("/student/login")
     end
   end
