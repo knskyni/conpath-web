@@ -1,4 +1,33 @@
 class TeacherController < ApplicationController
+  before_action :check_login, {only: [:new, :create, :edit, :update, :password_edit, :password_update]}
+  before_action :check_teacher, {only: [:logout, :new, :create, :edit, :update, :password_edit, :password_update]}
+
+  def login
+    render(layout: false)
+  end
+
+  def auth
+    @teacher = Teacher.find_by(email: params[:email])
+
+    if @teacher && @teacher.authenticate(params[:password])
+      session[:user_type] = "teacher"
+      session[:user_id] = @teacher.id
+      flash[:notice] = "ログインしました。"
+      redirect_to("/")
+    else
+      @error_message = "メールアドレスまたはパスワードが間違っています。"
+      @email = params[:email]
+      render("teacher/login", layout: false)
+    end
+  end
+
+  def logout
+    session[:user_type] = nil
+    session[:user_id] = nil
+    flash[:notice] = "ログアウトしました。"
+    redirect_to("/teacher/login")
+  end
+
   def new
     # サブヘッダー
     set_sub_header_title("新規教員登録")
@@ -37,7 +66,7 @@ class TeacherController < ApplicationController
   end
 
   def edit
-    @teacher = Teacher.find_by(id: params[:id])
+    @teacher = Teacher.find_by(id: @current_user.id)
 
     # サブヘッダー
     set_sub_header_title("教員情報編集")
@@ -47,7 +76,7 @@ class TeacherController < ApplicationController
   end
 
   def update
-    @teacher = Teacher.find_by(id: params[:id])
+    @teacher = Teacher.find_by(id: @current_user.id)
     @teacher.last_name = params[:last_name]
     @teacher.first_name = params[:first_name]
     @teacher.last_name_furigana = params[:last_name_furigana]
@@ -71,7 +100,7 @@ class TeacherController < ApplicationController
   end
 
   def password_edit
-    @teacher = Teacher.find_by(id: params[:id])
+    @teacher = Teacher.find_by(id: @current_user.id)
 
     # サブヘッダー
     set_sub_header_title("教員情報編集")
@@ -81,7 +110,7 @@ class TeacherController < ApplicationController
   end
 
   def password_update
-    @teacher = Teacher.find_by(id: params[:id])
+    @teacher = Teacher.find_by(id: @current_user.id)
     @error_messages = []
     unless @teacher.authenticate(params[:password])
       @error_messages.push("現在のパスワードが違います")
