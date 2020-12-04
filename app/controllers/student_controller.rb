@@ -52,7 +52,14 @@ class StudentController < ApplicationController
 
     @student_temp.auth_key = SecureRandom.uuid
 
-    unless @student_temp.save
+    if @student_temp.save
+      StudentMailer.verify(@student_temp).deliver_now
+
+      # サブヘッダー
+      set_sub_header_title("仮登録完了")
+      add_sub_header_path("学生", nil)
+      add_sub_header_path("登録", nil)
+    else
       @sub_header = {
           title: "登録ページ",
           list: [
