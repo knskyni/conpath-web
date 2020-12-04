@@ -24,7 +24,8 @@ class StudentController < ApplicationController
   def logout
     session[:user_type] = nil
     session[:user_id] = nil
-    redirect_to("/")
+    flash[:notice] = "ログアウトしました。"
+    redirect_to("/student/login")
   end
 
   def new
