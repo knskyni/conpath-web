@@ -225,7 +225,7 @@ class StudentController < ApplicationController
 
   end
 
-  def edit_favorite_industries
+  def recruit_profile
     @student = Student.find_by(id: @current_user.id)
 
     # サブヘッダー
