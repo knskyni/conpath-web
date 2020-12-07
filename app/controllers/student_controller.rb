@@ -229,8 +229,8 @@ class StudentController < ApplicationController
     @student = Student.find_by(id: @current_user.id)
 
     # サブヘッダー
-    set_sub_header_title("志望業種選択")
+    set_sub_header_title("志望職種選択")
     add_sub_header_path("プロフィール", "/student/#{@student.id}")
-    add_sub_header_path("志望業種選択", nil)
+    add_sub_header_path("志望職種選択", nil)
   end
 end
