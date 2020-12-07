@@ -233,3 +233,7 @@ $RECYCLE.BIN/
 
 # Docker MySQL
 /docker/mysql/data/
+
+# app's user icon folder
+public/assets/media/users/student/
+public/assets/media/users/teacher/
