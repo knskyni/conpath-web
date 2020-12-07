@@ -1,10 +1,5 @@
 class RecruitPostController < ApplicationController
   def new
-    # サブヘッダー
-    set_sub_header_title("求人情報登録")
-    add_sub_header_path("求人票一覧", "/recruit_post/show/#{@recruit_post.id}")
-    add_sub_header_path("登録", "/recruit_post/new/#{@recruit_company.id}")
-    add_sub_header_path("編集", nil)
 
     @recruit_company = RecruitCompany.find_by(id: params[:company_id])
     if @recruit_company.nil?
@@ -15,6 +10,11 @@ class RecruitPostController < ApplicationController
     @recruit_post = RecruitPost.new(
         company_id: @recruit_company.id
     )
+    # サブヘッダー
+    set_sub_header_title("求人情報登録")
+    add_sub_header_path("求人票一覧", "/recruit_post/show/#{@recruit_post.id}")
+    add_sub_header_path("登録", "/recruit_post/new/#{@recruit_company.id}")
+    add_sub_header_path("編集", nil)
 
   end
 
@@ -54,25 +54,36 @@ class RecruitPostController < ApplicationController
 
   def show
 
+    @recruit_post = RecruitPost.find_by(id: params[:id])
+
+    @recruit_company = RecruitCompany.find_by(id: params[:company_id])
+    if @recruit_company.nil?
+      render(file: "#{Rails.root}/public/404", layout: false, status: :not_found)
+      return
+    end
+
     # サブヘッダー
     set_sub_header_title("求人票一覧")
     add_sub_header_path("求人情報", "/recruit_post/show/#{@recruit_post.id}")
     add_sub_header_path("登録", "/recruit_post/new/#{@recruit_company.id}")
     add_sub_header_path("編集", nil)
 
-    @recruit_post = RecruitPost.find_by(id: params[:id])
-    @recruit_company = RecruitCompany.find_by(id: params[:company_id])
-
   end
 
   def edit
+    @recruit_post = RecruitPost.find_by(id: params[:id])
+
+    @recruit_company = RecruitCompany.find_by(id: params[:company_id])
+    if @recruit_company.nil?
+      render(file: "#{Rails.root}/public/404", layout: false, status: :not_found)
+      return
+    end
 
     set_sub_header_title("求人情報編集")
     add_sub_header_path("求人票一覧", "/recruit_post/show/#{@recruit_post.id}")
     add_sub_header_path("登録", "/recruit_post/new/#{@recruit_company.id}")
     add_sub_header_path("編集", nil)
 
-    @recruit_post = RecruitPost.find_by(id: params[:id])
   end
 
   def update
