@@ -41,4 +41,8 @@ class Student < ApplicationRecord
       return []
     end
   end
+
+  def full_name
+    return "#{self.last_name} #{self.first_name}"
+  end
 end

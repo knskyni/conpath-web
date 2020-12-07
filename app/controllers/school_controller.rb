@@ -1,4 +1,7 @@
 class SchoolController < ApplicationController
+  before_action :check_login
+  before_action :check_teacher, {only: [:new, :create, :edit, :update]}
+
   def index
     # 学校一覧取得
     @schools = School.all
@@ -11,7 +14,7 @@ class SchoolController < ApplicationController
   def show
     @school = School.find_by(id: params[:id])
     if @school.nil?
-      render :file => "#{Rails.root}/public/404", layout: false, status: :not_found
+      render_404
       return
     end
 
@@ -50,6 +53,11 @@ class SchoolController < ApplicationController
   def edit
     @school = School.find_by(id: params[:id])
 
+    if @school.nil?
+      render_404
+      return
+    end
+
     # サブヘッダー
     set_sub_header_title("学校情報更新")
     add_sub_header_path("学校", "/school")
@@ -59,6 +67,12 @@ class SchoolController < ApplicationController
 
   def update
     @school = School.find_by(id: params[:id])
+
+    if @school.nil?
+      render_404
+      return
+    end
+
     @school.name = params[:school][:name]
     if @school.save
       flash[:notice] = "学校情報の更新に成功しました。"
