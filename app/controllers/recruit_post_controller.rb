@@ -55,18 +55,15 @@ class RecruitPostController < ApplicationController
   def show
 
     @recruit_post = RecruitPost.find_by(id: params[:id])
-
-    @recruit_company = RecruitCompany.find_by(id: params[:company_id])
-    if @recruit_company.nil?
+    if @recruit_post.nil?
       render(file: "#{Rails.root}/public/404", layout: false, status: :not_found)
       return
     end
 
     # サブヘッダー
     set_sub_header_title("求人票一覧")
-    add_sub_header_path("求人情報", "/recruit_post/show/#{@recruit_post.id}")
-    add_sub_header_path("登録", "/recruit_post/new/#{@recruit_company.id}")
-    add_sub_header_path("編集", nil)
+    add_sub_header_path("求人票", "/recruit_post/show/#{@recruit_post.id}")
+    add_sub_header_path("#{@recruit_post.company.name}", nil)
 
   end
 
