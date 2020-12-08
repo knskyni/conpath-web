@@ -1,79 +1,31 @@
-<div class="card card-custom gutter-b example example-compact">
+<div class="card card-custom gutter-b">
   <div class="card-header">
-    <h3 class="card-title">就職したいと思う職種を選択してください。</h3>
+    <h3 class="card-title">就活プロファイル</h3>
   </div>
-  <form class="form">
+  <%= form_tag("/student/my/recruit_profile") do %>
     <div class="card-body">
-      <div class="form-group">
-        <label>職種:</label>
-        <select class="form-control select2 select2-hidden-accessible" id="kt_select2_3" name="param" multiple="" data-select2-id="kt_select2_3" tabindex="-1" aria-hidden="true">
-          <optgroup label="Alaskan/Hawaiian Time Zone">
-            <option value="AK" selected="selected" data-select2-id="10">Alaska</option>
-            <option value="HI">Hawaii</option>
-          </optgroup>
-          <optgroup label="Pacific Time Zone">
-            <option value="CA">California</option>
-            <option value="NV" selected="selected" data-select2-id="11">Nevada</option>
-            <option value="OR">Oregon</option>
-            <option value="WA">Washington</option>
-          </optgroup>
-          <optgroup label="Mountain Time Zone">
-            <option value="AZ">Arizona</option>
-            <option value="CO">Colorado</option>
-            <option value="ID">Idaho</option>
-            <option value="MT" selected="selected" data-select2-id="12">Montana</option>
-            <option value="NE">Nebraska</option>
-            <option value="NM">New Mexico</option>
-            <option value="ND">North Dakota</option>
-            <option value="UT" data-select2-id="13">Utah</option>
-            <option value="WY">Wyoming</option>
-          </optgroup>
-          <optgroup label="Central Time Zone">
-            <option value="AL">Alabama</option>
-            <option value="AR">Arkansas</option>
-            <option value="IL">Illinois</option>
-            <option value="IA">Iowa</option>
-            <option value="KS">Kansas</option>
-            <option value="KY">Kentucky</option>
-            <option value="LA">Louisiana</option>
-            <option value="MN">Minnesota</option>
-            <option value="MS">Mississippi</option>
-            <option value="MO">Missouri</option>
-            <option value="OK">Oklahoma</option>
-            <option value="SD">South Dakota</option>
-            <option value="TX">Texas</option>
-            <option value="TN">Tennessee</option>
-            <option value="WI">Wisconsin</option>
-          </optgroup>
-          <optgroup label="Eastern Time Zone">
-            <option value="CT">Connecticut</option>
-            <option value="DE">Delaware</option>
-            <option value="FL">Florida</option>
-            <option value="GA">Georgia</option>
-            <option value="IN">Indiana</option>
-            <option value="ME">Maine</option>
-            <option value="MD">Maryland</option>
-            <option value="MA">Massachusetts</option>
-            <option value="MI">Michigan</option>
-            <option value="NH">New Hampshire</option>
-            <option value="NJ">New Jersey</option>
-            <option value="NY">New York</option>
-            <option value="NC">North Carolina</option>
-            <option value="OH">Ohio</option>
-            <option value="PA">Pennsylvania</option>
-            <option value="RI">Rhode Island</option>
-            <option value="SC">South Carolina</option>
-            <option value="VT">Vermont</option>
-            <option value="VA">Virginia</option>
-            <option value="WV">West Virginia</option>
-          </optgroup>
-        </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="9" style="width: 220.828px;"><span class="selection"><span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1" aria-disabled="false"><ul class="select2-selection__rendered"><li class="select2-selection__choice" title="Alaska" data-select2-id="14"><span class="select2-selection__choice__remove" role="presentation">×</span>Alaska</li><li class="select2-selection__choice" title="Nevada" data-select2-id="15"><span class="select2-selection__choice__remove" role="presentation">×</span>Nevada</li><li class="select2-selection__choice" title="Montana" data-select2-id="16"><span class="select2-selection__choice__remove" role="presentation">×</span>Montana</li><li class="select2-selection__choice" title="Utah" data-select2-id="17"><span class="select2-selection__choice__remove" role="presentation">×</span>Utah</li><li class="select2-search select2-search--inline"><input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" placeholder="" style="width: 0.75em;"></li></ul></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
-        <span class="form-text text-muted">Please enter your full name</span>
+      <div class="form-group row my-2">
+        <label class="col-2 col-form-label">興味のある業種:</label>
+        <div class="col-10">
+          <select class="form-control select2" id="company_category" name="company_categories[]" multiple="multiple">
+            <%= @company_categories.each do |company_category| %>
+              <option value="<%= company_category.id %>" <%= "selected" if @student_company_categories.include?(company_category.id) %>><%= company_category.name %></option>
+            <% end %>
+          </select>
+        </div>
+      </div><div class="form-group row my-2">
+        <label class="col-2 col-form-label">希望職種:</label>
+        <div class="col-10">
+          <select class="form-control select2" id="job_category" name="job_categories[]" multiple="multiple">
+            <%= @job_categories.each do |job_category| %>
+              <option value="<%= job_category.id %>" <%= "selected" if @student_job_categories.include?(job_category.id) %>><%= job_category.name %></option>
+            <% end %>
+          </select>
+        </div>
       </div>
     </div>
-    <div class="card-footer">
-      <button type="reset" class="btn btn-primary mr-2">Submit</button>
-      <button type="reset" class="btn btn-secondary">Cancel</button>
+    <div class="card-footer text-right">
+      <button type="submit" class="btn btn-primary mr-2">送信</button>
     </div>
-  </form>
+  <% end %>
 </div>

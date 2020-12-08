@@ -227,10 +227,41 @@ class StudentController < ApplicationController
 
   def recruit_profile
     @student = Student.find_by(id: @current_user.id)
+    @company_categories = RecruitCompanyCategory.all
+    @job_categories = RecruitJobCategory.all
+    @student_company_categories = RecruitFavoriteStudentIndustry.where(student_id:@student.id).pluck(:industry_id)
+    @student_job_categories = RecruitFavoriteStudentJobCategory.where(student_id: @student.id).pluck(:job_category_id)
 
     # サブヘッダー
-    set_sub_header_title("志望職種選択")
+    set_sub_header_title("就活プロファイル")
     add_sub_header_path("プロフィール", "/student/#{@student.id}")
-    add_sub_header_path("志望職種選択", nil)
+    add_sub_header_path("就活プロファイル", nil)
+
+    add_custom_js("/assets/js/pages/student/recruit_profile.js")
+  end
+
+  def recruit_profile_update
+    # 業種
+    param_company_categories = params[:company_categories]
+    RecruitFavoriteStudentIndustry.where(student_id: @current_user.id).destroy_all
+    if param_company_categories
+      param_company_categories.each do |param_company_category|
+        company_category = RecruitCompanyCategory.find_by(id: param_company_category)
+        RecruitFavoriteStudentIndustry.new(student_id: @current_user.id, industry_id: company_category.id).save if company_category
+      end
+    end
+
+    # 職種
+    param_job_categories = params[:job_categories]
+    RecruitFavoriteStudentJobCategory.where(student_id: @current_user.id).destroy_all
+    if param_job_categories
+      param_job_categories.each do |param_job_category|
+        job_category = RecruitJobCategory.find_by(id: param_job_category)
+        RecruitFavoriteStudentJobCategory.new(student_id: @current_user.id, job_category_id: job_category.id).save if job_category
+      end
+    end
+
+    flash[:notice] = "就活プロファイルを更新しました。"
+    redirect_to("/student/my/recruit_profile")
   end
 end
