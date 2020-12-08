@@ -1,0 +1,2 @@
+class RecruitFavoriteStudentJobCategory < ApplicationRecord
+end
