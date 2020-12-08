@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   get 'student/favorite/list', to: 'student#favorite_list'
   get 'student/my/password_change', to: 'student#password_edit'
   post 'student/my/password_change', to: 'student#password_update'
-  
+  get 'student/my/recruit_profile', to: 'student#recruit_profile'
+  post 'student/my/recruit_profile', to: 'student#recruit_profile_update'
+
   # 教員
   get 'teacher/login', to: 'teacher#login'
   post 'teacher/login', to: 'teacher#auth'
