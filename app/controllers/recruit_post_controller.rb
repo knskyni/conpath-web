@@ -6,6 +6,7 @@ class RecruitPostController < ApplicationController
       render(file: "#{Rails.root}/public/404", layout: false, status: :not_found)
       return
     end
+    @job_categories = RecruitJobCategory.all
 
     @recruit_post = RecruitPost.new(
         company_id: @recruit_company.id
