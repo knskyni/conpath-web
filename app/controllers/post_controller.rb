@@ -13,10 +13,9 @@ class PostController < ApplicationController
     )
 
     # サブヘッダー
-    set_sub_header_title("求人情報登録")
-    add_sub_header_path("求人票一覧", "/recruit_post/show/#{@recruit_post.id}")
-    add_sub_header_path("登録", "/recruit_post/new/#{@recruit_company.id}")
-    add_sub_header_path("編集", nil)
+    set_sub_header_title("求人票新規登録")
+    add_sub_header_path("求人票", "/post")
+    add_sub_header_path("登録", nil)
   end
 
   def create
@@ -47,9 +46,14 @@ class PostController < ApplicationController
     )
 
     if @recruit_post.save
-      flash[:notice] = "求人情報の登録が完了いたしました"
-      redirect_to("/")
+      flash[:notice] = "求人票の登録が完了しました。"
+      redirect_to("/post/#{@recruit_post.id}")
     else
+      # サブヘッダー
+      set_sub_header_title("求人票新規登録")
+      add_sub_header_path("求人票", "/post")
+      add_sub_header_path("登録", nil)
+
       render("post/new")
     end
   end
@@ -62,9 +66,9 @@ class PostController < ApplicationController
     render_404 and return if @recruit_post.nil?
 
     # サブヘッダー
-    set_sub_header_title("求人票一覧")
-    add_sub_header_path("求人票", "/recruit_post/show/#{@recruit_post.id}")
-    add_sub_header_path("#{@recruit_post.company.name}", nil)
+    set_sub_header_title("#{@recruit_post.company.name}(#{@recruit_post.year}年)")
+    add_sub_header_path("求人票", "/post")
+    add_sub_header_path("#{@recruit_post.company.name}(#{@recruit_post.year}年)", nil)
   end
 
   def edit
@@ -75,9 +79,9 @@ class PostController < ApplicationController
     render_404 and return if @recruit_post.nil?
 
     # サブヘッダー
-    set_sub_header_title("求人情報編集")
-    add_sub_header_path("求人票一覧", "/recruit_post/show/#{@recruit_post.id}")
-    add_sub_header_path("登録", "/recruit_post/new/#{@recruit_company.id}")
+    set_sub_header_title("編集: #{@recruit_post.company.name}(#{@recruit_post.year}年)")
+    add_sub_header_path("求人票", "/post")
+    add_sub_header_path("#{@recruit_post.company.name}(#{@recruit_post.year}年)", "/post/#{@recruit_post.id}")
     add_sub_header_path("編集", nil)
   end
 
@@ -109,6 +113,12 @@ class PostController < ApplicationController
       flash[:notice] = "教員情報の変更を完了いたしました"
       redirect_to("/")
     else
+      # サブヘッダー
+      set_sub_header_title("編集: #{@recruit_post.company.name}(#{@recruit_post.year}年)")
+      add_sub_header_path("求人票", "/post")
+      add_sub_header_path("#{@recruit_post.company.name}(#{@recruit_post.year}年)", "/post/#{@recruit_post.id}")
+      add_sub_header_path("編集", nil)
+      
       render("post/edit")
     end
   end
