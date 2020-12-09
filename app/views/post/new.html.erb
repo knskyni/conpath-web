@@ -1,11 +1,11 @@
 <div class="card card-custom">
   <div class="card-body">
-    <%=form_tag("/post/create/#{@recruit_company.id}", {multipart: true}) do %>
-      <% if @recruit_post.errors.full_messages.any? %>
+    <%=form_tag("/post/create/#{@company.id}", {multipart: true}) do %>
+      <% if @post.errors.full_messages.any? %>
         <div class="alert alert-danger" role="alert">
           <h4 class="alert-heading">エラー</h4>
           <ul class="m-0">
-            <% @recruit_post.errors.full_messages.each do |message| %>
+            <% @post.errors.full_messages.each do |message| %>
               <li><%= message %></li>
             <% end %>
           </ul>
@@ -21,7 +21,7 @@
         <label>企業名
           <span class="text-danger">*</span>
         </label>
-        <input type="text" value="<%= "#{@recruit_company.name}" %>" class="form-control" disabled>
+        <input type="text" value="<%= "#{@company.name}" %>" class="form-control" disabled>
       </div>
       <div class="form-group">
         <label>採用年度
