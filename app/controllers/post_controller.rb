@@ -1,28 +1,27 @@
 class PostController < ApplicationController
   def new
-
     @recruit_company = RecruitCompany.find_by(id: params[:company_id])
     if @recruit_company.nil?
-      render(file: "#{Rails.root}/public/404", layout: false, status: :not_found)
+      render_404
       return
     end
-    @job_categories = RecruitJobCategory.all
 
+    @job_categories = RecruitJobCategory.all
     @recruit_post = RecruitPost.new(
         company_id: @recruit_company.id
     )
+
     # サブヘッダー
     set_sub_header_title("求人情報登録")
     add_sub_header_path("求人票一覧", "/recruit_post/show/#{@recruit_post.id}")
     add_sub_header_path("登録", "/recruit_post/new/#{@recruit_company.id}")
     add_sub_header_path("編集", nil)
-
   end
 
   def create
     @recruit_company = RecruitCompany.find_by(id: params[:company_id])
     if @recruit_company.nil?
-      render(file: "#{Rails.root}/public/404", layout: false, status: :not_found)
+      render_404
       return
     end
 
@@ -49,15 +48,14 @@ class PostController < ApplicationController
       flash[:notice] = "求人情報の登録が完了いたしました"
       redirect_to("/")
     else
-      render("/recruit_post/new")
+      render("post/new")
     end
   end
 
   def show
-
     @recruit_post = RecruitPost.find_by(id: params[:id])
     if @recruit_post.nil?
-      render(file: "#{Rails.root}/public/404", layout: false, status: :not_found)
+      render_404
       return
     end
 
@@ -73,7 +71,7 @@ class PostController < ApplicationController
 
     @recruit_company = RecruitCompany.find_by(id: params[:company_id])
     if @recruit_company.nil?
-      render(file: "#{Rails.root}/public/404", layout: false, status: :not_found)
+      render_404
       return
     end
 
@@ -81,13 +79,10 @@ class PostController < ApplicationController
     add_sub_header_path("求人票一覧", "/recruit_post/show/#{@recruit_post.id}")
     add_sub_header_path("登録", "/recruit_post/new/#{@recruit_company.id}")
     add_sub_header_path("編集", nil)
-
   end
 
   def update
-
     @recruit_post = RecruitPost.find_by(id: params[:id])
-
     @recruit_post.recruit_code = params[:recruit_code]
     @recruit_post.year = params[:year]
     @recruit_post.job_category_id = params[:job_category_id]
@@ -108,8 +103,7 @@ class PostController < ApplicationController
       flash[:notice] = "教員情報の変更を完了いたしました"
       redirect_to("/")
     else
-      render("recruit_post/edit")
+      render("post/edit")
     end
   end
-
 end
