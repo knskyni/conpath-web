@@ -1,9 +1,12 @@
 class PostController < ApplicationController
   def new
+    # URLの企業IDから企業情報を取得
     @recruit_company = RecruitCompany.find_by(id: params[:company_id])
 
+    # 企業情報取得できなければ404
     render_404 and return if @recruit_company.nil?
 
+    # view用
     @job_categories = RecruitJobCategory.all
     @recruit_post = RecruitPost.new(
         company_id: @recruit_company.id
@@ -17,10 +20,13 @@ class PostController < ApplicationController
   end
 
   def create
+    # URLの企業IDから企業情報を取得
     @recruit_company = RecruitCompany.find_by(id: params[:company_id])
 
+    # 企業情報取得できなければ404
     render_404 and return if @recruit_company.nil?
 
+    # view用
     @recruit_post = RecruitPost.new(
         recruit_code: params[:recruit_code],
         company_id: @recruit_company.id,
@@ -38,7 +44,7 @@ class PostController < ApplicationController
         apply_method: params[:apply_method],
         submit_document: params[:submit_document],
         other_description: params[:other_description]
-        )
+    )
 
     if @recruit_post.save
       flash[:notice] = "求人情報の登録が完了いたしました"
@@ -49,24 +55,26 @@ class PostController < ApplicationController
   end
 
   def show
+    # URLの求人票IDから求人票情報を取得
     @recruit_post = RecruitPost.find_by(id: params[:id])
 
+    # 求人票情報取得できなければ404
     render_404 and return if @recruit_post.nil?
 
     # サブヘッダー
     set_sub_header_title("求人票一覧")
     add_sub_header_path("求人票", "/recruit_post/show/#{@recruit_post.id}")
     add_sub_header_path("#{@recruit_post.company.name}", nil)
-
   end
 
   def edit
+    # URLの求人票IDから求人票情報を取得
     @recruit_post = RecruitPost.find_by(id: params[:id])
 
-    @recruit_company = RecruitCompany.find_by(id: params[:company_id])
-
+    # 求人票情報取得できなければ404
     render_404 and return if @recruit_post.nil?
 
+    # サブヘッダー
     set_sub_header_title("求人情報編集")
     add_sub_header_path("求人票一覧", "/recruit_post/show/#{@recruit_post.id}")
     add_sub_header_path("登録", "/recruit_post/new/#{@recruit_company.id}")
@@ -74,10 +82,13 @@ class PostController < ApplicationController
   end
 
   def update
+    # URLの求人票IDから求人票情報を取得
     @recruit_post = RecruitPost.find_by(id: params[:id])
 
+    # 求人票情報取得できなければ404
     render_404 and return if @recruit_post.nil?
-    
+
+    # フォームデータを挿入
     @recruit_post.recruit_code = params[:recruit_code]
     @recruit_post.year = params[:year]
     @recruit_post.job_category_id = params[:job_category_id]
