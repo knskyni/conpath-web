@@ -237,3 +237,6 @@ $RECYCLE.BIN/
 # app's user icon folder
 public/assets/media/users/student/
 public/assets/media/users/teacher/
+
+# app's company icon folder
+public/assets/media/company/
