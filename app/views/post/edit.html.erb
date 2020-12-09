@@ -12,90 +12,81 @@
         </div>
       <% end %>
       <div class="form-group">
-        <label>求人コード
-          <span class="text-danger">*</span>
-        </label>
+        <label>求人コード<span class="text-danger">*</span></label>
         <input type="text" class="form-control" name="recruit_code" value="<%= @post.recruit_code %>">
       </div>
       <div class="form-group">
-        <label>採用年度
-          <span class="text-danger">*</span>
-        </label>
+        <label>採用年度<span class="text-danger">*</span></label>
         <input type="number" class="form-control" name="year" value="<%= @post.year %>">
       </div>
       <div class="form-group">
-        <label>職種
-          <span class="text-danger">*</span>
-        </label>
-        <input type=text class="form-control" name="job_category_id" value="<%= @post.job_category_id %>">
+        <label>職種<span class="text-danger">*</span></label>
+        <select class="form-control" name="job_category_id">
+          <% @job_categories.each do |job_category| %>
+            <option value="<%= job_category.id %>" <%= "selected" if @post.job_category_id == job_category.id %>><%= job_category.name %></option>
+          <% end %>
+        </select>
       </div>
       <div class="form-group">
-        <label>仕事内容
-          <span class="text-danger">*</span>
-        </label>
+        <label>仕事内容<span class="text-danger">*</span></label>
         <input type="text" class="form-control" name="job_description" value="<%= @post.job_description %>">
       </div>
       <div class="form-group">
-        <label>採用人数
-          <span class="text-danger">*</span>
-        </label>
+        <label>採用人数<span class="text-danger">*</span></label>
         <input type="number" class="form-control" name="recruitment_numbers" value="<%= @post.recruitment_numbers %>">
       </div>
       <div class="form-group">
-        <label>勤務地
-          <span class="text-danger">*</span>
-        </label>
+        <label>勤務地<span class="text-danger">*</span></label>
         <input type="text" class="form-control" name="working_office" value="<%= @post.working_office %>">
       </div>
       <div class="form-group">
-        <label>求人公開状況
-          <span class="text-danger">*</span>
-        </label>
+        <label>募集状況</label>
         <select class="form-control" name="status">
-          <option value=0>公開</option>
-          <option value=1>非公開</option>
+          <option value="1" <%= "selected" if @post.status == 1 %>>募集中</option>
+          <option value="0" <%= "selected" if @post.status == 0 %>>募集終了</option>
         </select>
       </div>
       <div class="form-group">
-        <label for="exampleSelect1">雇用形態
-          <span class="text-danger">*</span>
-        </label>
+        <label for="exampleSelect1">雇用形態<span class="text-danger">*</span></label>
         <select class="form-control" name="employment_status">
-          <option value=0>正規</option>
-          <option value=1>非正規</option>
-          <option value=2>その他</option>
+          <option value="0" <%= "selected" if @post.employment_status == 0 %>>正規</option>
+          <option value="1" <%= "selected" if @post.employment_status == 1 %>>非正規</option>
+          <option value="2" <%= "selected" if @post.employment_status == 2 %>>その他</option>
         </select>
       </div>
       <div class="form-group">
-        <label>雇用形態(その他)
-          <span class="text-danger">*</span>
-        </label>
+        <label>雇用形態(その他)</label>
         <input type="text" class="form-control" name="employment_status_other" value="<%= @post.employment_status_other %>">
       </div>
       <div class="form-group">
-        <label>初任給
-          <span class="text-danger">*</span>
-        </label>
-        <input type="number" class="form-control" name="salary_2year" value="<%= @post.salary_2year %>">
-        <input type="number" class="form-control" name="salary_3year" value="<%= @post.salary_3year %>">
-        <input type="number" class="form-control" name="salary_4year" value="<%= @post.salary_4year %>">
+        <label>初任給<span class="text-danger">*</span></label>
+        <div class="row">
+          <label class="col-2 col-form-label">2年次:</label>
+          <div class="col-10">
+            <input type="number" class="form-control" name="salary_2year" value="<%= @post.salary_2year %>">
+          </div>
+        </div><div class="row">
+        <label class="col-2 col-form-label">3年次:</label>
+        <div class="col-10">
+          <input type="number" class="form-control" name="salary_3year" value="<%= @post.salary_3year %>">
+        </div>
+      </div><div class="row">
+        <label class="col-2 col-form-label">4年次:</label>
+        <div class="col-10">
+          <input type="number" class="form-control" name="salary_4year" value="<%= @post.salary_4year %>">
+        </div>
+      </div>
       </div>
       <div class="form-group">
-        <label>提出方法
-          <span class="text-danger">*</span>
-        </label>
+        <label>提出方法<span class="text-danger">*</span></label>
         <input type="text" class="form-control" name="apply_method" value="<%= @post.apply_method %>">
       </div>
       <div class="form-group">
-        <label>提出書類
-          <span class="text-danger">*</span>
-        </label>
-        <input type="text" class="form-control" name="submit_document" value=<%= @post.submit_document %>>
+        <label>提出書類<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" name="submit_document" value="<%= @post.submit_document %>">
       </div>
       <div class="form-group">
-        <label>特記事項
-          <span class="text-danger">*</span>
-        </label>
+        <label>特記事項</label>
         <input type="text" class="form-control" name="other_description" value="<%= @post.other_description %>">
       </div>
       <input type="submit" value="変更" class="btn btn-primary float-right">

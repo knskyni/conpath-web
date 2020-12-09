@@ -49,6 +49,9 @@ class PostController < ApplicationController
       flash[:notice] = "求人票の登録が完了しました。"
       redirect_to("/post/#{@post.id}")
     else
+      # view用
+      @job_categories = RecruitJobCategory.all
+
       # サブヘッダー
       set_sub_header_title("求人票新規登録")
       add_sub_header_path("求人票", "/post")
@@ -77,6 +80,9 @@ class PostController < ApplicationController
 
     # 求人票情報取得できなければ404
     render_404 and return if @post.nil?
+
+    # view用
+    @job_categories = RecruitJobCategory.all
 
     # サブヘッダー
     set_sub_header_title("編集: #{@post.company.name}(#{@post.year}年)")
@@ -113,6 +119,9 @@ class PostController < ApplicationController
       flash[:notice] = "教員情報の変更を完了いたしました"
       redirect_to("/")
     else
+      # view用
+      @job_categories = RecruitJobCategory.all
+
       # サブヘッダー
       set_sub_header_title("編集: #{@post.company.name}(#{@post.year}年)")
       add_sub_header_path("求人票", "/post")
