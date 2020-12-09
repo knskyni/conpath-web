@@ -1,10 +1,8 @@
 class PostController < ApplicationController
   def new
     @recruit_company = RecruitCompany.find_by(id: params[:company_id])
-    if @recruit_company.nil?
-      render_404
-      return
-    end
+
+    render_404 and return if @recruit_company.nil?
 
     @job_categories = RecruitJobCategory.all
     @recruit_post = RecruitPost.new(
@@ -20,10 +18,8 @@ class PostController < ApplicationController
 
   def create
     @recruit_company = RecruitCompany.find_by(id: params[:company_id])
-    if @recruit_company.nil?
-      render_404
-      return
-    end
+
+    render_404 and return if @recruit_company.nil?
 
     @recruit_post = RecruitPost.new(
         recruit_code: params[:recruit_code],
@@ -54,10 +50,8 @@ class PostController < ApplicationController
 
   def show
     @recruit_post = RecruitPost.find_by(id: params[:id])
-    if @recruit_post.nil?
-      render_404
-      return
-    end
+
+    render_404 and return if @recruit_post.nil?
 
     # サブヘッダー
     set_sub_header_title("求人票一覧")
@@ -70,10 +64,8 @@ class PostController < ApplicationController
     @recruit_post = RecruitPost.find_by(id: params[:id])
 
     @recruit_company = RecruitCompany.find_by(id: params[:company_id])
-    if @recruit_company.nil?
-      render_404
-      return
-    end
+
+    render_404 and return if @recruit_post.nil?
 
     set_sub_header_title("求人情報編集")
     add_sub_header_path("求人票一覧", "/recruit_post/show/#{@recruit_post.id}")
@@ -83,6 +75,9 @@ class PostController < ApplicationController
 
   def update
     @recruit_post = RecruitPost.find_by(id: params[:id])
+
+    render_404 and return if @recruit_post.nil?
+    
     @recruit_post.recruit_code = params[:recruit_code]
     @recruit_post.year = params[:year]
     @recruit_post.job_category_id = params[:job_category_id]
