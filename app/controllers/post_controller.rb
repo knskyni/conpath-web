@@ -1,4 +1,7 @@
 class PostController < ApplicationController
+  before_action :check_login
+  before_action :check_teacher, {only: [:new, :create, :edit, :update]}
+
   def new
     # URLの企業IDから企業情報を取得
     @company = RecruitCompany.find_by(id: params[:company_id])
