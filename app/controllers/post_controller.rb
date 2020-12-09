@@ -46,7 +46,7 @@ class PostController < ApplicationController
     )
 
     if @post.save
-      flash[:notice] = "求人票の登録が完了しました。"
+      flash[:notice] = "求人票を登録しました。"
       redirect_to("/post/#{@post.id}")
     else
       # view用
@@ -116,7 +116,7 @@ class PostController < ApplicationController
     @post.other_description = params[:other_description]
 
     if @post.save
-      flash[:notice] = "教員情報の変更を完了いたしました"
+      flash[:notice] = "求人票を変更しました。"
       redirect_to("/")
     else
       # view用
