@@ -69,9 +69,9 @@ class PostController < ApplicationController
     render_404 and return if @post.nil?
 
     # サブヘッダー
-    set_sub_header_title("#{@post.company.name}(#{@post.year}年)")
+    set_sub_header_title("#{@post.company.name}（#{@post.year}年）")
     add_sub_header_path("求人票", "/post")
-    add_sub_header_path("#{@post.company.name}(#{@post.year}年)", nil)
+    add_sub_header_path("#{@post.company.name}（#{@post.year}年）", nil)
   end
 
   def edit
@@ -85,9 +85,9 @@ class PostController < ApplicationController
     @job_categories = RecruitJobCategory.all
 
     # サブヘッダー
-    set_sub_header_title("編集: #{@post.company.name}(#{@post.year}年)")
+    set_sub_header_title("編集: #{@post.company.name}（#{@post.year}年）")
     add_sub_header_path("求人票", "/post")
-    add_sub_header_path("#{@post.company.name}(#{@post.year}年)", "/post/#{@post.id}")
+    add_sub_header_path("#{@post.company.name}（#{@post.year}年）", "/post/#{@post.id}")
     add_sub_header_path("編集", nil)
   end
 
@@ -123,9 +123,9 @@ class PostController < ApplicationController
       @job_categories = RecruitJobCategory.all
 
       # サブヘッダー
-      set_sub_header_title("編集: #{@post.company.name}(#{@post.year}年)")
+      set_sub_header_title("編集: #{@post.company.name}（#{@post.year}年）")
       add_sub_header_path("求人票", "/post")
-      add_sub_header_path("#{@post.company.name}(#{@post.year}年)", "/post/#{@post.id}")
+      add_sub_header_path("#{@post.company.name}（#{@post.year}年）", "/post/#{@post.id}")
       add_sub_header_path("編集", nil)
 
       render("post/edit")
