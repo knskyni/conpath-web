@@ -1,4 +1,7 @@
 class StudentController < ApplicationController
+  before_action :check_login, {only: [:logout, :edit, :update, :favorite_edit, :favorite_list, :password_edit, :password_update]}
+  before_action :check_student, {only: [:logout, :edit, :update, :favorite_edit, :favorite_list, :password_edit, :password_update]}
+
   def login
     render(layout: false)
   end
@@ -21,7 +24,8 @@ class StudentController < ApplicationController
   def logout
     session[:user_type] = nil
     session[:user_id] = nil
-    redirect_to("/")
+    flash[:notice] = "ログアウトしました。"
+    redirect_to("/student/login")
   end
 
   def new
@@ -52,7 +56,14 @@ class StudentController < ApplicationController
 
     @student_temp.auth_key = SecureRandom.uuid
 
-    unless @student_temp.save
+    if @student_temp.save
+      StudentMailer.verify(@student_temp).deliver_now
+
+      # サブヘッダー
+      set_sub_header_title("仮登録完了")
+      add_sub_header_path("学生", nil)
+      add_sub_header_path("登録", nil)
+    else
       @sub_header = {
           title: "登録ページ",
           list: [
@@ -111,7 +122,7 @@ class StudentController < ApplicationController
 
     if @student.save and @error_message.nil?
       flash[:notice] = "ユーザー登録が完了しました"
-      redirect_to("/student/new")
+      redirect_to("/student/login")
     else
       render("student/activate")
     end
@@ -142,9 +153,10 @@ class StudentController < ApplicationController
     @student.gender = params[:gender]
     @student.biography = params[:biography]
     if params[:icon]
-      @student.icon = "/assets/media/users/student/#{@student.id}.jpg"
-      image = params[:icon]
-      File.binwrite("public#{@student.icon}", image.read)
+      image_name = "/assets/media/users/student/#{@student.id}.jpg"
+      image_bin = params[:icon]
+      @student.icon = "#{image_name}?v=#{Time.now.to_i}"
+      File.binwrite("public#{image_name}", image_bin.read)
     end
     if @student.save
       flash[:notice] = "ユーザー情報変更完了しました"
@@ -211,5 +223,45 @@ class StudentController < ApplicationController
       render("student/password_edit")
     end
 
+  end
+
+  def recruit_profile
+    @student = Student.find_by(id: @current_user.id)
+    @company_categories = RecruitCompanyCategory.all
+    @job_categories = RecruitJobCategory.all
+    @student_company_categories = RecruitFavoriteStudentIndustry.where(student_id:@student.id).pluck(:industry_id)
+    @student_job_categories = RecruitFavoriteStudentJobCategory.where(student_id: @student.id).pluck(:job_category_id)
+
+    # サブヘッダー
+    set_sub_header_title("就活プロファイル")
+    add_sub_header_path("プロフィール", "/student/#{@student.id}")
+    add_sub_header_path("就活プロファイル", nil)
+
+    add_custom_js("/assets/js/pages/student/recruit_profile.js")
+  end
+
+  def recruit_profile_update
+    # 業種
+    param_company_categories = params[:company_categories]
+    RecruitFavoriteStudentIndustry.where(student_id: @current_user.id).destroy_all
+    if param_company_categories
+      param_company_categories.each do |param_company_category|
+        company_category = RecruitCompanyCategory.find_by(id: param_company_category)
+        RecruitFavoriteStudentIndustry.new(student_id: @current_user.id, industry_id: company_category.id).save if company_category
+      end
+    end
+
+    # 職種
+    param_job_categories = params[:job_categories]
+    RecruitFavoriteStudentJobCategory.where(student_id: @current_user.id).destroy_all
+    if param_job_categories
+      param_job_categories.each do |param_job_category|
+        job_category = RecruitJobCategory.find_by(id: param_job_category)
+        RecruitFavoriteStudentJobCategory.new(student_id: @current_user.id, job_category_id: job_category.id).save if job_category
+      end
+    end
+
+    flash[:notice] = "就活プロファイルを更新しました。"
+    redirect_to("/student/my/recruit_profile")
   end
 end
