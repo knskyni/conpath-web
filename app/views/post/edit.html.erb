@@ -1,11 +1,11 @@
 <div class="card card-custom">
   <div class="card-body">
-    <%=form_tag("/post/#{@recruit_post.id}/update", {multipart: true}) do %>
-      <% if @recruit_post.errors.full_messages.any? %>
+    <%=form_tag("/post/#{@post.id}/update", {multipart: true}) do %>
+      <% if @post.errors.full_messages.any? %>
         <div class="alert alert-danger" role="alert">
           <h4 class="alert-heading">エラー</h4>
           <ul class="m-0">
-            <% @recruit_post.errors.full_messages.each do |message| %>
+            <% @post.errors.full_messages.each do |message| %>
               <li><%= message %></li>
             <% end %>
           </ul>
@@ -15,37 +15,37 @@
         <label>求人コード
           <span class="text-danger">*</span>
         </label>
-        <input type="text" class="form-control" name="recruit_code" value="<%= @recruit_post.recruit_code %>">
+        <input type="text" class="form-control" name="recruit_code" value="<%= @post.recruit_code %>">
       </div>
       <div class="form-group">
         <label>採用年度
           <span class="text-danger">*</span>
         </label>
-        <input type="number" class="form-control" name="year" value="<%= @recruit_post.year %>">
+        <input type="number" class="form-control" name="year" value="<%= @post.year %>">
       </div>
       <div class="form-group">
         <label>職種
           <span class="text-danger">*</span>
         </label>
-        <input type=text class="form-control" name="job_category_id" value="<%= @recruit_post.job_category_id %>">
+        <input type=text class="form-control" name="job_category_id" value="<%= @post.job_category_id %>">
       </div>
       <div class="form-group">
         <label>仕事内容
           <span class="text-danger">*</span>
         </label>
-        <input type="text" class="form-control" name="job_description" value="<%= @recruit_post.job_description %>">
+        <input type="text" class="form-control" name="job_description" value="<%= @post.job_description %>">
       </div>
       <div class="form-group">
         <label>採用人数
           <span class="text-danger">*</span>
         </label>
-        <input type="number" class="form-control" name="recruitment_numbers" value="<%= @recruit_post.recruitment_numbers %>">
+        <input type="number" class="form-control" name="recruitment_numbers" value="<%= @post.recruitment_numbers %>">
       </div>
       <div class="form-group">
         <label>勤務地
           <span class="text-danger">*</span>
         </label>
-        <input type="text" class="form-control" name="working_office" value="<%= @recruit_post.working_office %>">
+        <input type="text" class="form-control" name="working_office" value="<%= @post.working_office %>">
       </div>
       <div class="form-group">
         <label>求人公開状況
@@ -70,33 +70,33 @@
         <label>雇用形態(その他)
           <span class="text-danger">*</span>
         </label>
-        <input type="text" class="form-control" name="employment_status_other" value="<%= @recruit_post.employment_status_other %>">
+        <input type="text" class="form-control" name="employment_status_other" value="<%= @post.employment_status_other %>">
       </div>
       <div class="form-group">
         <label>初任給
           <span class="text-danger">*</span>
         </label>
-        <input type="number" class="form-control" name="salary_2year" value="<%= @recruit_post.salary_2year %>">
-        <input type="number" class="form-control" name="salary_3year" value="<%= @recruit_post.salary_3year %>">
-        <input type="number" class="form-control" name="salary_4year" value="<%= @recruit_post.salary_4year %>">
+        <input type="number" class="form-control" name="salary_2year" value="<%= @post.salary_2year %>">
+        <input type="number" class="form-control" name="salary_3year" value="<%= @post.salary_3year %>">
+        <input type="number" class="form-control" name="salary_4year" value="<%= @post.salary_4year %>">
       </div>
       <div class="form-group">
         <label>提出方法
           <span class="text-danger">*</span>
         </label>
-        <input type="text" class="form-control" name="apply_method" value="<%= @recruit_post.apply_method %>">
+        <input type="text" class="form-control" name="apply_method" value="<%= @post.apply_method %>">
       </div>
       <div class="form-group">
         <label>提出書類
           <span class="text-danger">*</span>
         </label>
-        <input type="text" class="form-control" name="submit_document" value=<%= @recruit_post.submit_document %>>
+        <input type="text" class="form-control" name="submit_document" value=<%= @post.submit_document %>>
       </div>
       <div class="form-group">
         <label>特記事項
           <span class="text-danger">*</span>
         </label>
-        <input type="text" class="form-control" name="other_description" value="<%= @recruit_post.other_description %>">
+        <input type="text" class="form-control" name="other_description" value="<%= @post.other_description %>">
       </div>
       <input type="submit" value="変更" class="btn btn-primary float-right">
     <% end %>
