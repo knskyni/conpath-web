@@ -5,6 +5,8 @@ class CompanyController < ApplicationController
   def new
     @company = RecruitCompany.new
 
+    @company_categories = RecruitCompanyCategory.all
+
     # サブヘッダー
     set_sub_header_title("企業新規登録")
     add_sub_header_path("企業", nil)
@@ -51,6 +53,16 @@ class CompanyController < ApplicationController
         )
         @tag_assign.save
       end
+      params[:recruit_company_categories].each do |di1,di2|
+        if di2== "1"
+          @category_assign = RecruitCompanyCategoryAssign.new(
+              company_id: @company.id,
+              company_category_id: di1
+          )
+        end
+        @category_assign.save
+      end
+
       flash[:notice] = "企業情報の登録が完了しました"
       redirect_to("/company/#{@company.id}")
     else
