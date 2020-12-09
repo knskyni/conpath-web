@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   # 求人
   get 'post/new/:company_id', to: 'post#new'
   post 'post/create/:company_id', to: "post#create"
-  get 'post/show/:id', to: 'post#show'
-  get 'post/edit/:id', to: 'post#edit'
-  post 'post/update/:id', to: 'post#update'
+  get 'post/:id', to: 'post#show'
+  get 'post/:id/edit', to: 'post#edit'
+  post 'post/:id/update', to: 'post#update'
 
   # 学生
   get 'student/login', to: 'student#login'
