@@ -123,8 +123,8 @@
               <div class="form-group row my-2">
                 <div class="col-8">
                   <span class="form-control-plaintext font-weight-bolder">
-                  <% if @recruit_post.status == 1 %>
-                    <label class="col-4 col-form-label">求人公開状況:</label>非公開
+                  <% if @recruit_post.status == 2 %>
+                    <label class="col-4 col-form-label">募集状況:</label>募集終了
                   <% else %>
                     <div class="tab-pane fade active show" id="kt_tab_pane_1_2" role="tabpanel">
                       <div class="form-group row my-2">
@@ -138,6 +138,12 @@
                         <div class="col-8">
                           <span class="form-control-plaintext font-weight-bolder"><%= @recruit_post.year %>年度</span>
                         </div>
+                      </div>
+                    </div>
+                    <div class="form-group row my-2">
+                      <label class="col-4 col-form-label">職種:</label>
+                      <div class="col-8">
+                        <span class="form-control-plaintext font-weight-bolder"><%= @recruit_post.job_category.name %></span>
                       </div>
                     </div>
                     <div class="form-group row my-2">

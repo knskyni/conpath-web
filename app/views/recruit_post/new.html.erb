@@ -34,31 +34,9 @@
           <span class="text-danger">*</span>
         </label>
         <select class="form-control" name="employment_status">
-          <option value=1>受付・秘書業務</option>
-          <option value=2>一般事務</option>
-          <option value=3>経理事務</option>
-          <option value=4>営業事務</option>
-          <option value=5>医療事務</option>
-          <option value=6>診療情報管理業務</option>
-          <option value=7>営業・販売</option>
-          <option value=8>航空関係職</option>
-          <option value=9>ホテルスタッフ</option>
-          <option value=10>客室乗務員</option>
-          <option value=11>旅行関係職</option>
-          <option value=12>貿易事務</option>
-          <option value=13>製菓・パン製造職</option>
-          <option value=14>ブライダル関係職</option>
-          <option value=15>システムエンジニア</option>
-          <option value=16>プログラマ</option>
-          <option value=17>入力オペレータ</option>
-          <option value=18>汎用オペレータ</option>
-          <option value=19>カスタマーエンジニア</option>
-          <option value=20>幼稚園教諭</option>
-          <option value=21>保育士</option>
-          <option value=22>児童養護施設職員</option>
-          <option value=23>介護施設職員</option>
-          <option value=24>障碍者施設職員</option>
-          <option value=25>福祉関係職</option>
+          <% @job_categories.each do |job_category| %>
+            <option value="<%= job_category.id %>"><%= job_category.name %></option>
+            <% end %>
         </select>
       </div>
       <div class="form-group">
@@ -80,12 +58,12 @@
         <input type="text" class="form-control" name="working_office">
       </div>
       <div class="form-group">
-        <label>求人公開状況
+        <label>募集状況
           <span class="text-danger">*</span>
         </label>
         <select class="form-control" name="status">
-          <option value=0>公開</option>
-          <option value=1>非公開</option>
+          <option value=1>募集</option>
+          <option value=2>募集終了</option>
         </select>
       </div>
       <div class="form-group">
