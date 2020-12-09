@@ -117,7 +117,7 @@ class PostController < ApplicationController
 
     if @post.save
       flash[:notice] = "求人票を変更しました。"
-      redirect_to("/")
+      redirect_to("/post/#{@post.id}")
     else
       # view用
       @job_categories = RecruitJobCategory.all
