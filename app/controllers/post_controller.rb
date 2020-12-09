@@ -1,4 +1,4 @@
-class RecruitPostController < ApplicationController
+class PostController < ApplicationController
   def new
 
     @recruit_company = RecruitCompany.find_by(id: params[:company_id])
