@@ -164,6 +164,7 @@ class CompanyController < ApplicationController
       flash[:notice] = "企業情報の修正が完了しました"
       redirect_to("/company/#{@company.id}")
     else
+      @assign = RecruitCompanyTagAssign.where(company_id: @company.id)
       add_custom_js("/assets/js/pages/image_input.js")
 
       # サブヘッダー
