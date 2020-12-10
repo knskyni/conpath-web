@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="example-search-input" class="col-2 col-form-label">キーワード</label>
+        <label for="example-search-input" class="col-2 col-form-label">キーワード<br>(会社名のふりがな)</label>
         <div class="col-10">
           <input class="form-control" type="text" name="keyword" value="<%= @keyword %>" id="example-search-input" />
         </div>
@@ -103,7 +103,7 @@
                   <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><%= recruit_post.year %></span>
                 </td>
                 <td>
-                  <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><%= recruit_post.jobCategory.name %></span>
+                  <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><%= recruit_post.job_category.name %></span>
                 </td>
                 <td>
                   <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><%= recruit_post.salary_2year.to_s(:delimited) %> ~ <%= recruit_post.salary_4year.to_s(:delimited) %></span>
