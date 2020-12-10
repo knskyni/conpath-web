@@ -45,4 +45,14 @@ class Student < ApplicationRecord
   def full_name
     return "#{self.last_name} #{self.first_name}"
   end
+
+  def favorite_company_categories
+    company_categories = RecruitFavoriteStudentIndustry.where(student_id: self.id).pluck(:industry_id)
+    return company_categories
+  end
+
+  def favorite_job_categories
+    job_categories = RecruitFavoriteStudentJobCategory.where(student_id: self.id).pluck(:job_category_id)
+    return job_categories
+  end
 end
