@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-xl-3">
+  <div class="col-md-4 col-xl-3">
     <div class="card card-custom gutter-b">
       <div class="card-body">
         <div class="d-flex justify-content-between flex-column h-100">
@@ -53,13 +53,22 @@
             </div>
           </div>
           <div class="d-flex flex-center" id="kt_sticky_toolbar_chat_toggler_2" data-toggle="tooltip" title="" data-placement="right">
-            <%= link_to("編集", "/school/#{@course.id}/edit", {class: ["btn", "btn-primary", "font-weight-bolder", "font-size-sm", "py-3", "px-14"]}) %>
+            <%= link_to("編集", "/course/#{@course.id}/edit", {class: ["btn", "btn-primary", "font-weight-bolder", "font-size-sm", "py-3", "px-14"]}) %>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-xl-9">
+  <div class="col-md-8 col-xl-9">
+    <div class="row">
+      <div class="col">
+        <div class="card card-custom gutter-b card-stretch">
+          <div class="card-body py-4">
+            <%= link_to("クラスを新しく登録する", "/class/new/#{@course.id}", {class: %w(btn btn-primary font-weight-bolder font-size-sm float-right py-3 px-14)}) %>
+          </div>
+        </div>
+      </div>
+    </div>
     <% @course.school_classes_now.each_slice(3) do |classess_sliced| %>
       <div class="row">
         <% classess_sliced.each do |classes| %>

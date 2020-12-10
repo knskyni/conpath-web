@@ -6,4 +6,7 @@ class CreateRecruitCompanyTags < ActiveRecord::Migration[5.2]
       t.timestamps
     end
   end
+  def tag
+    return RecruitCompanyTag.find_by(id: self.tag_id)
+  end
 end

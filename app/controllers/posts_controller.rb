@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :check_login
 
   def search
     set_sub_header_title("求人票検索")
