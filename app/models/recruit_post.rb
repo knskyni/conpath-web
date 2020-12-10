@@ -1,4 +1,6 @@
 class RecruitPost < ApplicationRecord
+  belongs_to :recruit_company, foreign_key: :company_id
+
   validates :recruit_code, {presence: true}
   validates :company_id, {presence: true}
   validates :year, {presence: true}
@@ -11,11 +13,7 @@ class RecruitPost < ApplicationRecord
     return RecruitCompany.find_by(id: self.company_id)
   end
 
-  def category
-    return RecruitCompanyCategory.find_by(id: self.company_category_id)
-  end
-
-  def jobCategory
+  def job_category
     return RecruitJobCategory.find_by(id: self.job_category_id)
   end
 end

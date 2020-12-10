@@ -19,51 +19,50 @@ class PostsController < ApplicationController
     @keyword = params[:keyword]
     @recruit_post = RecruitPost.new(
         year: params[:year],
-
     )
-    recruit_company = RecruitCompany.find_by(name: params[:keyword])
     category_assigns = RecruitCompanyCategoryAssign.where(company_category_id: params[:company_category_id])
-    recruit_posts = RecruitPost.all
+    @recruit_posts = RecruitPost.joins("INNER JOIN `recruit_companies` ON `recruit_companies`.`id` = `recruit_posts`.`company_id` LEFT OUTER JOIN `recruit_company_category_assigns` ON `recruit_company_category_assigns`.`company_id` = `recruit_companies`.`id`").all
 
-    unless params[:year] == ""
-      recruit_posts = recruit_posts.where(year: params[:year])
+    unless @recruit_posts==nil?
+      unless params[:year] == ""
+        @recruit_posts = @recruit_posts.where(year: params[:year])
+      end
     end
 
-    unless params[:keyword] == ""
-      recruit_posts = recruit_posts.where(company_id: recruit_company.id)
+    unless @recruit_posts==nil?
+      unless params[:keyword] == ""
+        @recruit_posts = @recruit_posts.where("name_furigana like ?", "%#{params[:keyword]}%")
+      end
     end
 
-    unless params[:company_category_id] == ""
-      count = 1
-      category_assigns.each do |category_assign|
-        if count == 1
-          recruit_posts = recruit_posts.where(company_id: category_assign.company_id)
-        else
-          recruit_posts = recruit_posts.or(company_id: category_assign.company_id)
+    unless @recruit_posts==nil?
+      unless params[:company_category_id] == ""
+        @recruit_posts = @recruit_posts.where("`company_category_id` = ?", "#{params[:company_category_id]}")
+      end
+    end
+
+    unless @recruit_posts==nil?
+      unless params[:job_category_id] == ""
+        @recruit_posts = @recruit_posts.where(job_category_id: params[:job_category_id])
+      end
+    end
+
+    unless @recruit_posts==nil?
+      unless params[:grade] == "" or params[:salary] == ""
+        if params[:grade] == "2"
+          @recruit_posts = @recruit_posts.where("salary_2year >= ?", params[:salary])
+        elsif params[:grade] == "3"
+          @recruit_posts = @recruit_posts.where("salary_3year >= ?", params[:salary])
+        elsif params[:grade] == "4"
+          @recruit_posts = @recruit_posts.where("salary_4year >= ?", params[:salary])
         end
-        count = count + 1
       end
     end
 
-    unless params[:job_category_id] == ""
-      recruit_posts = recruit_posts.where(job_category_id: params[:job_category_id])
-    end
-
-    unless params[:grade] == "" or params[:salary] == ""
-      if params[:grade] == 2
-        recruit_posts = recruit_posts.where("salary_2year >= ?", params[:salary])
-      elsif params[:grade] == 3
-        recruit_posts = recruit_posts.where("salary_3year >= ?", params[:salary])
-      else
-        recruit_posts = recruit_posts.where("salary_4year >= ?", params[:salary])
+    unless @recruit_posts==nil?
+      unless params[:working_office] == ""
+        @recruit_posts = @recruit_posts.where("working_office like ?", "%#{params[:working_office]}%")
       end
     end
-
-    unless params[:working_office]
-      recruit_posts = recruit_posts.where(working_office: params[:working_office])
-    end
-
-    @recruit_posts = recruit_posts
-
   end
 end
