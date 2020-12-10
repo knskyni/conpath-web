@@ -3,7 +3,9 @@ class CompanyController < ApplicationController
   before_action :check_teacher, {only: [:new, :create, :edit, :update]}
 
   def new
-    @company = RecruitCompany.new
+    @company = RecruitCompany.new(icon: "/assets/media/no-image.png")
+
+    add_custom_js("/assets/js/pages/image_input.js")
 
     # サブヘッダー
     set_sub_header_title("企業新規登録")
@@ -16,6 +18,7 @@ class CompanyController < ApplicationController
         company_code: params[:recruit_company][:company_code],
         name: params[:recruit_company][:name],
         name_furigana: params[:recruit_company][:name_furigana],
+        icon: "/assets/media/no-image.png",
         postal_code: params[:recruit_company][:postal_code],
         prefecture_id: params[:recruit_company][:prefecture_id],
         address: params[:recruit_company][:address],
@@ -33,8 +36,19 @@ class CompanyController < ApplicationController
         recruit_url: params[:recruit_company][:recruit_url],
         teacher_comment: params[:recruit_company][:teacher_comment]
     )
+
     @tag_name = params[:recruit_company_tags]
     if @company.save
+      if params[:icon]
+        image_name = "/assets/media/company/#{@company.id}.png"
+        image_bin = params[:icon]
+        File.binwrite("public#{image_name}", image_bin.read)
+
+        @company.icon = "#{image_name}?v=#{Time.now.to_i}"
+        @company.save
+      end
+
+
       tag_array = params[:recruit_company_tags]
       tags = tag_array.to_s.split(nil)
       tags.each do |tag|
@@ -54,6 +68,8 @@ class CompanyController < ApplicationController
       flash[:notice] = "企業情報の登録が完了しました"
       redirect_to("/company/#{@company.id}")
     else
+      add_custom_js("/assets/js/pages/image_input.js")
+
       # サブヘッダー
       set_sub_header_title("企業新規登録")
       add_sub_header_path("企業", nil)
@@ -77,6 +93,8 @@ class CompanyController < ApplicationController
   def edit
     @company = RecruitCompany.find_by(id: params[:id])
     @assign = RecruitCompanyTagAssign.where(company_id: @company.id)
+
+    add_custom_js("/assets/js/pages/image_input.js")
 
     # サブヘッダー
     set_sub_header_title("企業情報編集")
@@ -104,6 +122,13 @@ class CompanyController < ApplicationController
     @company.business_details = params[:recruit_company][:business_details]
     @company.url = params[:recruit_company][:url]
     @company.recruit_url = params[:recruit_company][:recruit_url]
+
+    if params[:icon]
+      image_name = "/assets/media/company/#{@company.id}.png"
+      image_bin = params[:icon]
+      @company.icon = "#{image_name}?v=#{Time.now.to_i}"
+      File.binwrite("public#{image_name}", image_bin.read)
+    end
 
     if @company.save
       # 企業とタグの紐付けを全削除
@@ -139,6 +164,9 @@ class CompanyController < ApplicationController
       flash[:notice] = "企業情報の修正が完了しました"
       redirect_to("/company/#{@company.id}")
     else
+      @assign = RecruitCompanyTagAssign.where(company_id: @company.id)
+      add_custom_js("/assets/js/pages/image_input.js")
+
       # サブヘッダー
       set_sub_header_title("企業情報編集")
       add_sub_header_path(@company.name, "/company/#{@company.id}")
