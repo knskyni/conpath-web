@@ -90,12 +90,12 @@
           </tr>
           </thead>
           <tbody>
-            <% @recruit_posts.each do |recruit_post| %>
+            <% @recrit_posts.each do |recruit_post| %>
               <tr>
                 <td class="pl-0 py-8">
                   <div class="d-flex align-items-center">
                     <div>
-                      <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><%= recruit_post.company.name %></a>
+                      <a href="/post/<%= recruit_post.id %>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><%= recruit_post.company.name %></a>
                     </div>
                   </div>
                 </td>
