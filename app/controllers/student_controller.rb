@@ -1,4 +1,7 @@
 class StudentController < ApplicationController
+  before_action :check_login, {only: [:logout, :edit, :update, :favorite_edit, :favorite_list, :password_edit, :password_update]}
+  before_action :check_student, {only: [:logout, :edit, :update, :favorite_edit, :favorite_list, :password_edit, :password_update]}
+
   def login
     render(layout: false)
   end
@@ -21,7 +24,8 @@ class StudentController < ApplicationController
   def logout
     session[:user_type] = nil
     session[:user_id] = nil
-    redirect_to("/")
+    flash[:notice] = "ログアウトしました。"
+    redirect_to("/student/login")
   end
 
   def new
@@ -52,7 +56,14 @@ class StudentController < ApplicationController
 
     @student_temp.auth_key = SecureRandom.uuid
 
-    unless @student_temp.save
+    if @student_temp.save
+      StudentMailer.verify(@student_temp).deliver_now
+
+      # サブヘッダー
+      set_sub_header_title("仮登録完了")
+      add_sub_header_path("学生", nil)
+      add_sub_header_path("登録", nil)
+    else
       @sub_header = {
           title: "登録ページ",
           list: [
@@ -111,7 +122,7 @@ class StudentController < ApplicationController
 
     if @student.save and @error_message.nil?
       flash[:notice] = "ユーザー登録が完了しました"
-      redirect_to("/student/new")
+      redirect_to("/student/login")
     else
       render("student/activate")
     end
