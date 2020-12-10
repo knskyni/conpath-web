@@ -41,16 +41,16 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="example-date-input" class="col-2 col-form-label">何年制</label>
+        <label for="example-date-input" class="col-2 col-form-label">給与</label>
         <div class="col-2">
           <select class="form-control" name="grade">
-            <option value="" >-------</option>
-            <option value="2" <%= "selected" if 2 == params[:grade].to_i %>>2年生</option>
-            <option value="3" <%= "selected" if 3 == params[:grade].to_i %>>3年生</option>
-            <option value="4" <%= "selected" if 4 == params[:grade].to_i %>>4年生</option>
+            <option value="">-------</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
           </select>
         </div>
-        <label for="example-date-input" class="col-form-label">給与</label>
+        <label for="example-date-input" class="col-form-label">年次卒 の給与が</label>
         <div class="col-2">
           <input type="text" class="form-control" name="salary" value="<%= params[:salary] %>">
         </div>
