@@ -39,7 +39,7 @@
       <div class="card-header border-0 mt-5">
         <h3 class="card-title align-items-start flex-column text-dark">
           <span class="font-weight-bolder text-dark">お気に入りの業界</span>
-          <span class="text-muted mt-3 font-weight-bold font-size-sm">あなたが就活プロファイルから選んだ業界の企業をピックアップしています。</span>
+          <span class="text-muted mt-3 font-weight-bold font-size-sm">あなたが<%= link_to("就活プロファイル", "/student/my/recruit_profile") %>から選んだ業界の企業をピックアップしています。</span>
         </h3>
       </div>
       <div class="card-body pt-2">
@@ -61,7 +61,7 @@
             </div>
           <% end %>
         <% else %>
-          <div class="text-center">おすすめはありません。就活プロファイルから好きな業界を登録すると表示されるようになります。</div>
+          <div class="text-center">おすすめはありません。<%= link_to("就活プロファイル", "/student/my/recruit_profile") %>から好きな業界を登録すると表示されるようになります。</div>
         <% end %>
       </div>
     </div>
@@ -74,7 +74,7 @@
       <div class="card-header border-0 mt-5">
         <h3 class="card-title align-items-start flex-column text-dark">
           <span class="font-weight-bolder text-dark">募集中の求人票</span>
-          <span class="text-muted mt-3 font-weight-bold font-size-sm">就活プロファイルからあなたが選んだ職種の求人票を表示しています。</span>
+          <span class="text-muted mt-3 font-weight-bold font-size-sm"><%= link_to("就活プロファイル", "/student/my/recruit_profile") %>からあなたが選んだ職種の求人票を表示しています。</span>
         </h3>
       </div>
       <div class="card-body pt-2">
@@ -102,7 +102,7 @@
             </div>
           <% end %>
         <% else %>
-          <div class="text-center">おすすめはありません。就活プロファイルから好きな職種を登録すると表示されるようになります。</div>
+          <div class="text-center">おすすめはありません。<%= link_to("就活プロファイル", "/student/my/recruit_profile") %>から好きな職種を登録すると表示されるようになります。</div>
         <% end %>
       </div>
     </div>
