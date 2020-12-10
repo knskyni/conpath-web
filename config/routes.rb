@@ -61,11 +61,10 @@ Rails.application.routes.draw do
   # 求人
   get 'post/new/:company_id', to: 'post#new'
   post 'post/create/:company_id', to: "post#create"
+  get 'post/search', to: 'post#search'
+  get 'post/search_result', to: 'post#search_result'
   get 'post/:id', to: 'post#show'
   get 'post/:id/edit', to: 'post#edit'
   post 'post/:id/update', to: 'post#update'
-
-  get 'posts/search', to: 'posts#search'
-  get 'posts/search_result', to: 'posts#search_result'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
