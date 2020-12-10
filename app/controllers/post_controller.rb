@@ -152,10 +152,6 @@ class PostController < ApplicationController
     @recruit_job_category = RecruitJobCategory.all.order(created_at: :desc)
     @recruit_company_category = RecruitCompanyCategory.all.order(id: :asc)
     @keyword = params[:keyword]
-    @recruit_post = RecruitPost.new(
-      year: params[:year],
-      )
-    category_assigns = RecruitCompanyCategoryAssign.where(company_category_id: params[:company_category_id])
     @recruit_posts = RecruitPost.joins("INNER JOIN `recruit_companies` ON `recruit_companies`.`id` = `recruit_posts`.`company_id` LEFT OUTER JOIN `recruit_company_category_assigns` ON `recruit_company_category_assigns`.`company_id` = `recruit_companies`.`id`").all
 
     unless params[:year] == ""
