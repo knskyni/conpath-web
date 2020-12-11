@@ -80,9 +80,9 @@
         <div class="col-9 col-form-label">
           <div class="checkbox-list">
             <% @company_categories.each do |company_category| %>
-              <ul>
-                <li><%= check_box "recruit_company_categories", "company_category.id" %><%=company_category.name %></li>
-              </ul>
+              <label class="checkbox">
+                <input type="checkbox"  name="company_category[]" value="<%= company_category.id %>"><span></span><%= company_category.name %>
+              </label>
             <% end %>
           </div>
         </div>
