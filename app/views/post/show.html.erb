@@ -16,9 +16,14 @@
               <span class="text-muted font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
                 <i class="fas fa-map-marked-alt mr-2"></i><%= @post.company.prefecture.name %>
               </span>
-              <span class="text-muted font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
-                <i class="fas fa-tag mr-2"></i><%= @post.company.business_details %>
-              </span>
+              <% if @post.company.tag_assigns.any? %>
+                <span class="text-muted font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
+                  <i class="fas fa-tag mr-2"></i>
+                  <% @post.company.tag_assigns.each_with_index do |tag_assign, index| %>
+                    <a><%= tag_assign.tag.name %></a><%= "," if index < @post.company.tag_assigns.size - 1 %>
+                  <% end %>
+                </span>
+              <% end %>
             </div>
           </div>
         </div>
