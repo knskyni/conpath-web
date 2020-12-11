@@ -1,5 +1,12 @@
 <div class="card card-custom gutter-b">
   <div class="card-body">
+    <% if @error_messages %>
+      <ul>
+        <% @error_messages.each do |error_message| %>
+          <li><span class="form-text text-danger"><%= error_message %></span></li>
+        <% end %>
+      </ul>
+    <% end %>
     <% if @student.errors.any? %>
       <div class="alert alert-danger" role="alert">
         <h4 class="alert-heading">エラー</h4>
