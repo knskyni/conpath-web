@@ -134,4 +134,54 @@ class PostController < ApplicationController
       render("post/edit")
     end
   end
+
+  def search
+    # サブヘッダー
+    set_sub_header_title("求人票検索")
+    add_sub_header_path("求人票", nil)
+    add_sub_header_path("検索", nil)
+
+    # view用（selectタグ用）
+    @recruit_job_category = RecruitJobCategory.all.order(created_at: :desc)
+    @recruit_company_category = RecruitCompanyCategory.all.order(id: :asc)
+
+    # view用（formタグ用）
+    @recruit_post = RecruitPost.new
+  end
+
+  def search_result
+    # サブヘッダー
+    set_sub_header_title("求人票検索結果")
+    add_sub_header_path("求人票", nil)
+    add_sub_header_path("検索", "/posts/search")
+    add_sub_header_path("結果", nil)
+
+    # view用（selectタグ用）
+    @recruit_job_category = RecruitJobCategory.all.order(created_at: :desc)
+    @recruit_company_category = RecruitCompanyCategory.all.order(id: :asc)
+
+    # view用（inputタグ用）
+    @keyword = params[:keyword]
+
+    # 求人票をすべて取得（企業テーブルと業種紐付けテーブルを結合）
+    @recruit_posts = RecruitPost.joins("INNER JOIN `recruit_companies` ON `recruit_companies`.`id` = `recruit_posts`.`company_id` LEFT OUTER JOIN `recruit_company_category_assigns` ON `recruit_company_category_assigns`.`company_id` = `recruit_companies`.`id`").all
+
+    # 検索条件
+    @recruit_posts = @recruit_posts.where(year: params[:year]) unless params[:year] == "" # 年度
+    @recruit_posts = @recruit_posts.where("`name_furigana` LIKE ?", "%#{params[:keyword]}%") unless params[:keyword] == "" # 企業名（ひらがな）
+    @recruit_posts = @recruit_posts.where("`company_category_id` = ?", "#{params[:company_category_id]}") unless params[:company_category_id] == "" # 業種
+    @recruit_posts = @recruit_posts.where(job_category_id: params[:job_category_id]) unless params[:job_category_id] == "" # 職種
+    @recruit_posts = @recruit_posts.where("`working_office` LIKE ?", "%#{params[:working_office]}%") unless params[:working_office] == "" # 勤務地
+
+    # 検索条件（年次と給与を両方入れなければ検索しない）
+    unless params[:grade] == "" or params[:salary] == ""
+      if params[:grade] == "2"
+        @recruit_posts = @recruit_posts.where("salary_2year >= ?", params[:salary])
+      elsif params[:grade] == "3"
+        @recruit_posts = @recruit_posts.where("salary_3year >= ?", params[:salary])
+      elsif params[:grade] == "4"
+        @recruit_posts = @recruit_posts.where("salary_4year >= ?", params[:salary])
+      end
+    end
+  end
 end
