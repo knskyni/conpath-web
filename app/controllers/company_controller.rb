@@ -14,6 +14,8 @@ class CompanyController < ApplicationController
   end
 
   def create
+    @company_categories = RecruitCompanyCategory.all
+
     @company = RecruitCompany.new(
         company_code: params[:recruit_company][:company_code],
         name: params[:recruit_company][:name],
@@ -53,13 +55,11 @@ class CompanyController < ApplicationController
         )
         @tag_assign.save
       end
-      params[:recruit_company_categories].each do |di1,di2|
-        if di2== "1"
-          @category_assign = RecruitCompanyCategoryAssign.new(
-              company_id: @company.id,
-              company_category_id: di1
-          )
-        end
+      params[:company_category].each do |id|
+        @category_assign = RecruitCompanyCategoryAssign.new(
+            company_id: @company.id,
+            company_category_id: id
+        )
         @category_assign.save
       end
 
