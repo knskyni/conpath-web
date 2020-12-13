@@ -72,23 +72,27 @@
               </div>
             </div>
           </div>
-          <div class="d-flex flex-center" id="kt_sticky_toolbar_chat_toggler_2" data-toggle="tooltip" title="" data-placement="right">
-            <%= link_to("編集", "/school/#{@school.id}/edit", {class: %w(btn btn-primary font-weight-bolder font-size-sm py-3 px-14)}) %>
-          </div>
+          <% if session[:user_type] == "teacher" %>
+            <div class="d-flex flex-center" id="kt_sticky_toolbar_chat_toggler_2" data-toggle="tooltip" title="" data-placement="right">
+              <%= link_to("編集", "/school/#{@school.id}/edit", {class: %w(btn btn-primary font-weight-bolder font-size-sm py-3 px-14)}) %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
   <div class="col-md-8 col-xl-9">
-    <div class="row">
-      <div class="col">
-        <div class="card card-custom gutter-b card-stretch">
-          <div class="card-body py-4">
-            <%= link_to("学科を新しく登録する", "/course/new/#{@school.id}", {class: %w(btn btn-primary font-weight-bolder font-size-sm float-right py-3 px-14)}) %>
+    <% if session[:user_type] == "teacher" %>
+      <div class="row">
+        <div class="col">
+          <div class="card card-custom gutter-b card-stretch">
+            <div class="card-body py-4">
+              <%= link_to("学科を新しく登録する", "/course/new/#{@school.id}", {class: %w(btn btn-primary font-weight-bolder font-size-sm float-right py-3 px-14)}) %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    <% end %>
     <% @courses.each_slice(3) do |courses_sliced| %>
       <div class="row">
         <% courses_sliced.each do |course| %>
