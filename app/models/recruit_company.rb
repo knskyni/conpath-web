@@ -1,6 +1,7 @@
 class RecruitCompany < ApplicationRecord
   has_many :recruit_posts, foreign_key: :company_id
   has_many :recruit_company_category_assigns, foreign_key: :company_id
+  has_many :entries, foreign_key: :company_id
 
   validates :company_code, {presence: true, numericality: {only_integer: true}}
   validates :name, {presence: true}
