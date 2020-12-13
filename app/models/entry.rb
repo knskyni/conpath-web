@@ -10,4 +10,8 @@ class Entry < ApplicationRecord
   def student
     return Student.find_by(id: self.student_id)
   end
+
+  def company
+    return RecruitCompany.find_by(id: self.student_id)
+  end
 end
