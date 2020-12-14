@@ -5,7 +5,6 @@ class Entry < ApplicationRecord
   validates :student_id, {presence: true, uniqueness: {scope: :company_id}}
   validates :company_id, {presence: true}
   validates :status, {presence: true}
-  validates :start_date, {presence: true}
 
   def student
     return Student.find_by(id: self.student_id)
