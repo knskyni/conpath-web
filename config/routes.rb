@@ -69,5 +69,7 @@ Rails.application.routes.draw do
 
   # 就職活動
   post 'activity/new/:post_id', to: 'activity#create'
+  get 'activity/:id', to: 'activity#show'
+  post 'activity/:id/action/create', to: 'activity#create_action'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
