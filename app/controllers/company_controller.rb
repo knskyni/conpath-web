@@ -6,6 +6,7 @@ class CompanyController < ApplicationController
     # view用
     @company = RecruitCompany.new(icon: "/assets/media/no-image.png")
     @company_categories = RecruitCompanyCategory.all
+    @pick_company_categories = []
 
     # JavaScript追加
     add_custom_js("/assets/js/pages/image_input.js")
@@ -84,6 +85,7 @@ class CompanyController < ApplicationController
     else
       # view用
       @company_categories = RecruitCompanyCategory.all
+      @pick_company_categories = params[:company_category]
 
       # JavaScript追加
       add_custom_js("/assets/js/pages/image_input.js")
@@ -111,6 +113,7 @@ class CompanyController < ApplicationController
     @company_categories = RecruitCompanyCategory.all
     @company = RecruitCompany.find_by(id: params[:id])
     @assign = RecruitCompanyTagAssign.where(company_id: @company.id)
+    @pick_company_categories = RecruitCompanyCategoryAssign.where(company_id: @company.id).pluck(:company_category_id)
 
     # サブヘッダー
     set_sub_header_title("企業情報編集")
@@ -176,22 +179,24 @@ class CompanyController < ApplicationController
             @assign.save
           end
         end
-
-        # 業種
-        # 紐付けをすべて解除
-        RecruitCompanyCategoryAssign.where(company_id: @company.id).destroy_all
-
-        # 選択した業種を一つずつ登録
-        params[:company_category].each do |company_category_id|
-          @category_assign = RecruitCompanyCategoryAssign.new(company_id: @company.id, company_category_id: company_category_id)
-          @category_assign.save
-        end
       end
+
+      # 業種
+      # 紐付けをすべて解除
+      RecruitCompanyCategoryAssign.where(company_id: @company.id).destroy_all
+
+      # 選択した業種を一つずつ登録
+      params[:company_category].each do |company_category_id|
+        @category_assign = RecruitCompanyCategoryAssign.new(company_id: @company.id, company_category_id: company_category_id)
+        @category_assign.save
+      end
+
       flash[:notice] = "企業情報の修正が完了しました"
       redirect_to("/company/#{@company.id}")
     else
       # view用
       @assign = RecruitCompanyTagAssign.where(company_id: @company.id)
+      @pick_company_categories = RecruitCompanyCategoryAssign.where(company_id: @company.id).pluck(:company_category_id)
 
       # JavaScript追加
       add_custom_js("/assets/js/pages/image_input.js")

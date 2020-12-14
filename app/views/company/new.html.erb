@@ -97,7 +97,7 @@
         <div class="checkbox-list">
           <% @company_categories.each do |company_category| %>
             <label class="checkbox">
-              <input type="checkbox"  name="company_category[]" value="<%= company_category.id %>"><span></span><%= company_category.name %>
+              <input type="checkbox"  name="company_category[]" value="<%= company_category.id %>" <%= "checked" if @pick_company_categories.include?(company_category.id.to_s) %>><span></span><%= company_category.name %>
             </label>
           <% end %>
         </div>
