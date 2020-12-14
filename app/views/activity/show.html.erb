@@ -1,0 +1,147 @@
+<div class="card card-custom gutter-b">
+  <div class="card-body">
+    <div class="d-flex">
+      <div class="flex-shrink-0 mr-7">
+        <div class="symbol symbol-50 symbol-lg-120">
+          <img alt="Pic" src="<%= @entry.post.company.icon %>">
+        </div>
+      </div>
+      <div class="flex-grow-1">
+        <div class="d-flex justify-content-between flex-wrap mt-1">
+          <div class="d-flex mr-3">
+            <a href="#" class="text-dark-75 text-hover-primary font-size-h5 font-weight-bold mr-3"><%= @entry.post.company.name %></a>
+          </div>
+          <div class="my-lg-0 my-3">
+            <%= link_to("内定報告", "/activity/new/#{@entry.post.id}", {method: "post", class: %w(btn btn-sm btn-primary font-weight-bolder ml-3)}) if session[:user_type] == "student" %>
+            <%= link_to("辞退報告", "/activity/new/#{@entry.post.id}", {method: "post", class: %w(btn btn-sm btn-danger font-weight-bolder ml-3)}) if session[:user_type] == "student" %>
+          </div>
+        </div>
+        <div class="d-flex flex-wrap justify-content-between mt-1">
+          <div class="d-flex flex-column flex-grow-1 pr-8">
+            <div class="d-flex flex-wrap mb-4">
+              <a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
+                <i class="fas fa-map-marked-alt mr-2"></i><%= @entry.post.company.prefecture.name %>
+              </a>
+              <% if @entry.post.company.tag_assigns.any? %>
+                <span class="text-muted font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
+                  <i class="fas fa-tag mr-2"></i>
+                  <% @entry.post.company.tag_assigns.each_with_index do |tag_assign, index| %>
+                    <a><%= tag_assign.tag.name %></a><%= "," if index < @entry.post.company.tag_assigns.size - 1 %>
+                  <% end %>
+                </span>
+              <% end %>
+            </div>
+            <span class="font-weight-bold text-dark-50"><%= @entry.post.company.teacher_comment %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xl-7">
+    <div class="card card-custom gutter-b">
+      <div class="card-header align-items-center border-0 mt-4">
+        <h3 class="card-title align-items-start flex-column">
+          <span class="font-weight-bolder text-dark">活動状況</span>
+          <span class="text-muted mt-3 font-weight-bold font-size-sm">Recruit Activity</span>
+        </h3>
+      </div>
+      <div class="card-body pt-4">
+        <div class="timeline timeline-3">
+          <div class="timeline-items">
+            <% @actions.each do |action| %>
+              <div class="timeline-item">
+                <div class="timeline-media">
+                  <span class="text-primary font-weight-bolder h4 m-0">1</span>
+                </div>
+                <div class="timeline-content">
+                  <div class="d-flex align-items-center justify-content-between mb-3">
+                    <div class="mr-2">
+                      <a href="#" class="text-dark-75 text-hover-primary font-weight-bold"><%= action.title %>></a>
+                      <span class="text-muted ml-2"><%= action.date %></span>
+                    </div>
+                    <div class="dropdown ml-2" data-toggle="tooltip" title="" data-placement="left">
+                      <a href="#" class="btn btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="ki ki-more-hor font-size-lg text-primary"></i>
+                      </a>
+                      <div class="dropdown-menu p-0 m-0 dropdown-menu-right" style="">
+                        <ul class="navi navi-hover">
+                          <li class="navi-item">
+                            <a href="#" class="navi-link">
+                            <span class="navi-text">
+                              編集
+                            </span>
+                            </a>
+                          </li>
+                          <li class="navi-item">
+                            <a href="#" class="navi-link">
+                            <span class="navi-text">
+                              削除
+                            </span>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="p-0"><%= action.comment %></p>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-5">
+    <%= form_for(@new_action, url: {controller: 'activity', action: 'create_action'}) do |f| %>
+      <div class="card card-custom gutter-b">
+        <div class="card-header h-auto py-4">
+          <div class="card-title">
+            <h3 class="card-label">
+              学校情報を入力してください。
+            </h3>
+          </div>
+        </div>
+        <div class="card-body py-4">
+          <% if @new_action.errors.any? %>
+            <div class="alert alert-danger" role="alert">
+              <h4 class="alert-heading">エラー</h4>
+              <ul class="m-0">
+                <% @new_action.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <div class="form-group row my-2">
+            <label class="col-2 col-form-label text-right">件名:</label>
+            <div class="col-10">
+              <%= f.text_field(:title, {class: ["form-control"], placeholder: "インターンシップ、1次選考、最終試験など"}) %>
+              <span class="form-text text-muted">何の選考がわかるように入力してください。</span>
+            </div>
+          </div>
+          <div class="form-group row my-2">
+            <label class="col-2 col-form-label text-right">日付:</label>
+            <div class="col-10">
+              <%= f.date_field(:date, {class: ["form-control"]}) %>
+              <span class="form-text text-muted">選考が行われた日付を入力してください。</span>
+            </div>
+          </div>
+          <div class="form-group row my-2">
+            <label class="col-2 col-form-label text-right">内容:</label>
+            <div class="col-10">
+              <%= f.text_area(:comment, {class: ["form-control"]}) %>
+              <span class="form-text text-muted">質問の内容や感想、選考のポイントなどあればお願いします。</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <%= f.submit("送信", {class: %w(btn btn-primary)}) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -21,4 +21,22 @@ class ActivityController < ApplicationController
       redirect_to("/post/#{post.id}")
     end
   end
+
+  def show
+    @entry = Entry.find_by(id: params[:id])
+    @actions = Action.joins(:entry).where(entries: {student_id: @current_user.id})
+    @new_action = Action.new(date: Time.now.to_date)
+
+    # エントリーIDが存在しなければ404エラー
+    render_404 and return if @entry.nil?
+
+    # サブヘッダー
+    set_sub_header_title("活動状況: #{@entry.post.company.name}")
+    add_sub_header_path("就職活動", nil)
+    add_sub_header_path("状況", nil)
+  end
+
+  def create_action
+
+  end
 end
