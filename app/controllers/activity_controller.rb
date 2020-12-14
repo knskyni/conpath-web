@@ -77,4 +77,14 @@ class ActivityController < ApplicationController
       render("activity/edit_action")
     end
   end
+
+  def destroy_action
+    @action = Action.joins(:entry).find_by(entries: {id: params[:entry_id]}, actions: {id: params[:action_id]})
+
+    # URLのIDが存在しなければ404エラー
+    render_404 and return if @action.nil?
+
+    @action.destroy
+    redirect_to("/activity/#{@action.entry.id}")
+  end
 end

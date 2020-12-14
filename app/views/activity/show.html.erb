@@ -77,11 +77,11 @@
                             <% end %>
                           </li>
                           <li class="navi-item">
-                            <a href="#" class="navi-link">
-                            <span class="navi-text">
-                              削除
-                            </span>
-                            </a>
+                            <%= link_to("/activity/#{@entry.id}/action/#{action.id}/destroy", {method: "delete", class: %w(navi-link), data: {confirm: "削除してもよろしいですか？"}}) do %>
+                              <span class="navi-text">
+                                削除
+                              </span>
+                            <% end %>
                           </li>
                         </ul>
                       </div>
