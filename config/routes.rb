@@ -66,5 +66,8 @@ Rails.application.routes.draw do
   get 'post/:id', to: 'post#show'
   get 'post/:id/edit', to: 'post#edit'
   post 'post/:id/update', to: 'post#update'
+
+  # 就職活動
+  post 'activity/new/:company_id', to: 'activity#create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
