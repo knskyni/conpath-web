@@ -1,0 +1,121 @@
+<div class="card card-custom gutter-b">
+  <div class="card-body">
+    <%= form_tag("/post/search_result", {method: "get", enforce_utf8: false}) do %>
+      <div class="form-group row">
+        <label for="example-week-input" class="col-2 col-form-label">年度</label>
+        <div class="col-2">
+          <select name="year" class="form-control">
+            <option value="">-------</option>
+            <% RecruitPost.group(:year).select(:year).order(year: :asc).each do |obj| %>
+              <option value="<%= obj.year %>" <%= "selected" if obj.year == params[:year].to_i %>><%= obj.year %></option>
+            <% end %>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="example-search-input" class="col-2 col-form-label">企業名（ひらがな）</label>
+        <div class="col-10">
+          <input class="form-control" type="text" name="keyword" value="<%= @keyword %>" id="example-search-input" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="example-week-input" class="col-2 col-form-label">業種</label>
+        <div class="col-4">
+          <select class="form-control" name="company_category_id">
+            <option value="">-------</option>
+            <% @recruit_company_category.each do |company_category| %>
+              <option value="<%= company_category.id %>" <%= "selected" if company_category.id == params[:company_category_id].to_i %>><%= company_category.name %></option>
+            <% end %>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="example-week-input" class="col-2 col-form-label">職種</label>
+        <div class="col-4">
+          <select class="form-control" name="job_category_id">
+            <option value="">-------</option>
+            <% @recruit_job_category.each do |job_category| %>
+              <option value="<%= job_category.id %>" <%= "selected" if job_category.id == params[:job_category_id].to_i %>><%= job_category.name %></option>
+            <% end %>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="example-date-input" class="col-2 col-form-label">給与</label>
+        <div class="col-2">
+          <select class="form-control" name="grade">
+            <option value="">-------</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </div>
+        <label for="example-date-input" class="col-form-label">年次卒 の給与が</label>
+        <div class="col-2">
+          <input type="text" class="form-control" name="salary" value="<%= params[:salary] %>">
+        </div>
+        <span class="col-form-label">円 以上</span>
+      </div>
+      <div class="form-group row">
+        <label for="example-week-input" class="col-2 col-form-label">勤務地</label>
+        <div class="col-10">
+          <input type="text" class="form-control" name="working_office" value="<%= params[:working_office] %>">
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-success ml-3">検索</button>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="card card-custom gutter-b">
+  <div class="card-header border-0 py-5">
+    <h3 class="card-title align-items-start flex-column">
+      <span class="card-label font-weight-bolder text-dark">検索結果</span>
+    </h3>
+  </div>
+  <div class="card-body pt-0 pb-3">
+    <div class="tab-content">
+      <div class="table-responsive">
+        <table class="table table-head-custom table-head-bg table-borderless table-vertical-center">
+          <thead>
+          <tr class="text-left text-uppercase">
+            <th style="min-width: 250px" class="pl-7">
+              <span class="text-dark-75">企業名</span>
+            </th>
+            <th style="min-width: 100px">年度</th>
+            <th style="min-width: 100px">職種</th>
+            <th style="min-width: 100px">給与</th>
+            <th style="min-width: 100px">勤務地</th>
+          </tr>
+          </thead>
+          <tbody>
+            <% @recruit_posts.each do |recruit_post| %>
+              <tr>
+                <td class="pl-0 py-8">
+                  <div class="d-flex align-items-center">
+                    <div>
+                      <a href="/post/<%= recruit_post.id %>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><%= recruit_post.company.name %></a>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><%= recruit_post.year %></span>
+                </td>
+                <td>
+                  <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><%= recruit_post.job_category.name %></span>
+                </td>
+                <td>
+                  <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><%= recruit_post.salary_2year.to_s(:delimited) %>円 ~ <%= recruit_post.salary_4year.to_s(:delimited) %>円</span>
+                </td>
+                <td>
+                  <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><%= recruit_post.working_office %></span>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
