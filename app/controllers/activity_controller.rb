@@ -37,6 +37,19 @@ class ActivityController < ApplicationController
   end
 
   def create_action
+    @action = Action.new(
+      entry_id: params[:id],
+      title: params[:title],
+      date: params[:date],
+      comment: params[:comment]
+    )
 
+    if @action.save
+      flash[:notice] = "選考を新規登録しました。"
+      redirect_to("/activity/#{@action.entry_id}")
+    else
+      flash[:notice] = "登録することができませんでした。"
+      redirect_to("/activity/#{@action.entry_id}")
+    end
   end
 end

@@ -42,7 +42,7 @@
 <div class="row">
   <div class="col-xl-7">
     <div class="card card-custom gutter-b">
-      <div class="card-header align-items-center border-0 mt-4">
+      <div class="card-header align-items-center h-auto py-4">
         <h3 class="card-title align-items-start flex-column">
           <span class="font-weight-bolder text-dark">活動状況</span>
           <span class="text-muted mt-3 font-weight-bold font-size-sm">Recruit Activity</span>
@@ -98,14 +98,13 @@
     </div>
   </div>
   <div class="col-xl-5">
-    <%= form_for(@new_action, url: {controller: 'activity', action: 'create_action'}) do |f| %>
+    <%= form_tag("/activity/#{@entry.id}/action/create") do %>
       <div class="card card-custom gutter-b">
-        <div class="card-header h-auto py-4">
-          <div class="card-title">
-            <h3 class="card-label">
-              学校情報を入力してください。
-            </h3>
-          </div>
+        <div class="card-header align-items-center h-auto py-4">
+          <h3 class="card-title align-items-start flex-column">
+            <span class="font-weight-bolder text-dark">活動報告</span>
+            <span class="text-muted mt-3 font-weight-bold font-size-sm">Report Activity</span>
+          </h3>
         </div>
         <div class="card-body py-4">
           <% if @new_action.errors.any? %>
@@ -121,27 +120,27 @@
           <div class="form-group row my-2">
             <label class="col-2 col-form-label text-right">件名:</label>
             <div class="col-10">
-              <%= f.text_field(:title, {class: ["form-control"], placeholder: "インターンシップ、1次選考、最終試験など"}) %>
+              <input class="form-control" type="text" name="title" placeholder="インターンシップ、1次選考、最終試験など" value="<%= @new_action.title %>">
               <span class="form-text text-muted">何の選考がわかるように入力してください。</span>
             </div>
           </div>
           <div class="form-group row my-2">
             <label class="col-2 col-form-label text-right">日付:</label>
             <div class="col-10">
-              <%= f.date_field(:date, {class: ["form-control"]}) %>
+              <input class="form-control" type="date" name="date" value="<%= @new_action.date %>">
               <span class="form-text text-muted">選考が行われた日付を入力してください。</span>
             </div>
           </div>
           <div class="form-group row my-2">
             <label class="col-2 col-form-label text-right">内容:</label>
             <div class="col-10">
-              <%= f.text_area(:comment, {class: ["form-control"]}) %>
+              <textarea class="form-control" name="comment"><%= @new_action.comment %></textarea>
               <span class="form-text text-muted">質問の内容や感想、選考のポイントなどあればお願いします。</span>
             </div>
           </div>
         </div>
         <div class="card-footer text-center">
-          <%= f.submit("送信", {class: %w(btn btn-primary)}) %>
+          <input class="btn btn-primary" type="submit" value="送信">
         </div>
       </div>
     <% end %>
