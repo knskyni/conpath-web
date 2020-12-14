@@ -82,12 +82,15 @@ class CompanyController < ApplicationController
 
 
   def show
-    @company = RecruitCompany.find_by(id:params[:id])
+    @company = RecruitCompany.find_by(id: params[:id])
+    @favorite = RecruitStudentCompanyFavorite.find_by(company_id: params[:id],student_id: @current_user.id)
 
     # サブヘッダー
     set_sub_header_title(@company.name)
     add_sub_header_path("企業", nil)
     add_sub_header_path(@company.name, "/company/#{@company.id}")
+
+    add_custom_js("/assets/js/pages/favorite/favorite_edit.js")
   end
 
   def edit
