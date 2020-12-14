@@ -26,6 +26,13 @@
               <% end %>
             </div>
           </div>
+          <div class="my-lg-0 my-3">
+            <% if @favorite %>
+              <button id="favorite" class="btn btn-sm btn-light-warning font-weight-bolder text-uppercase mr-3">お気に入り解除</button>
+            <% else %>
+              <button id="favorite" class="btn btn-sm btn-light-warning font-weight-bolder text-uppercase mr-3">お気に入り登録</button>
+            <% end %>
+          </div>
         </div>
         <div class="d-flex align-items-center flex-wrap justify-content-between">
           <div class="flex-grow-1 font-weight-bold text-dark-50 py-2 py-lg-2 mr-5">
@@ -135,6 +142,12 @@
             </div>
           </div>
           <div class="form-group row my-2">
+            <label class="col-4 col-form-label">業種</label>
+            <div class="col-8">
+              <span class="form-control-plaintext font-weight-bolder"><% @category_assigns.each do |category_assign| %><%= category_assign.category.name %>  <% end %></span>
+            </div>
+          </div>
+          <div class="form-group row my-2">
             <label class="col-4 col-form-label">事業内容:</label>
             <div class="col-8">
               <span class="form-control-plaintext font-weight-bolder"><%= @company.business_details %></span>
@@ -157,3 +170,4 @@
     </div>
   </div>
 </div>
+<script>const companyId = <%= @company.id %>;</script>
