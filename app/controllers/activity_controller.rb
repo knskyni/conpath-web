@@ -24,7 +24,7 @@ class ActivityController < ApplicationController
 
   def show
     @entry = Entry.find_by(id: params[:id])
-    @actions = Action.joins(:entry).where(entries: {student_id: @current_user.id}).order(date: :asc).order(id: :asc)
+    @actions = Action.joins(:entry).where(entries: {student_id: @entry.student_id}).order(date: :asc).order(id: :asc)
     @new_action = Action.new(date: Time.now.to_date)
 
     # エントリーIDが存在しなければ404エラー
