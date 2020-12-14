@@ -212,15 +212,20 @@ class StudentController < ApplicationController
       @error_messages.push("現在のパスワードが違います")
     end
 
-    if params[:new_password] != params[:password_confirm]
-      @error_messages.push("パスワードが一致しません")
+    if params[:new_password] == ""
+      @error_messages.push("新しいパスワードを入力してください")
+    else
+      if params[:new_password] != params[:password_confirm]
+        @error_messages.push("パスワードが一致しません")
+      end
     end
 
     @student.password = params[:new_password]
 
-    if @student.save and not @error_messages.any?
+    unless @error_messages.any?
+      @student.save
       flash[:notice] = "パスワードを変更しました"
-      redirect_to("/student/new")
+      redirect_to("/")
     else
       render("student/password_edit")
     end
