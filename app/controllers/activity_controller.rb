@@ -62,6 +62,10 @@ class ActivityController < ApplicationController
 
   def update_action
     @action = Action.joins(:entry).find_by(entries: {id: params[:entry_id]}, actions: {id: params[:action_id]})
+
+    # URLのIDが存在しなければ404エラー
+    render_404 and return if @action.nil?
+
     @action.title = params[:title]
     @action.date = params[:date]
     @action.comment = params[:comment]
