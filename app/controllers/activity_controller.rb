@@ -6,6 +6,11 @@ class ActivityController < ApplicationController
     render_404 and return if post.nil?
 
     entry = Entry.find_by(student_id: @current_user.id, post_id: post.id)
+    if entry
+      flash[:notice] = "既に登録済みです。"
+      redirect_to("/activity/#{entry.id}")
+      return
+    end
 
     entry = Entry.new(student_id: @current_user.id, post_id: post.id, status: 1)
 
