@@ -1,0 +1,31 @@
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <h3 class="card-title">就活プロファイル</h3>
+  </div>
+  <%= form_tag("/student/my/recruit_profile") do %>
+    <div class="card-body">
+      <div class="form-group row my-2">
+        <label class="col-2 col-form-label">興味のある業種:</label>
+        <div class="col-10">
+          <select class="form-control select2" id="company_category" name="company_categories[]" multiple="multiple">
+            <%= @company_categories.each do |company_category| %>
+              <option value="<%= company_category.id %>" <%= "selected" if @student_company_categories.include?(company_category.id) %>><%= company_category.name %></option>
+            <% end %>
+          </select>
+        </div>
+      </div><div class="form-group row my-2">
+        <label class="col-2 col-form-label">希望職種:</label>
+        <div class="col-10">
+          <select class="form-control select2" id="job_category" name="job_categories[]" multiple="multiple">
+            <%= @job_categories.each do |job_category| %>
+              <option value="<%= job_category.id %>" <%= "selected" if @student_job_categories.include?(job_category.id) %>><%= job_category.name %></option>
+            <% end %>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer text-right">
+      <button type="submit" class="btn btn-primary mr-2">送信</button>
+    </div>
+  <% end %>
+</div>
