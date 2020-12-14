@@ -4,4 +4,8 @@ class Action < ApplicationRecord
   validates :entry_id, {presence: true}
   validates :title, {presence: true}
   validates :date, {presence: true}
+
+  def entry
+    return Entry.find_by(id: self.entry_id)
+  end
 end
