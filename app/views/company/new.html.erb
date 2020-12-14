@@ -93,6 +93,16 @@
         <%= f.number_field(:proceed, {class: ["form-control"], placeholder: "100000000"}) %>
       </div>
       <div class="form-group">
+        <label class="form-label">業種<span class="text-danger">*</span></label>
+        <div class="checkbox-list">
+          <% @company_categories.each do |company_category| %>
+            <label class="checkbox">
+              <input type="checkbox"  name="company_category[]" value="<%= company_category.id %>" <%= "checked" if @pick_company_categories.include?(company_category.id.to_s) %>><span></span><%= company_category.name %>
+            </label>
+          <% end %>
+        </div>
+      </div>
+      <div class="form-group">
         <label>事業内容<span class="text-danger">*</span></label>
         <%= f.text_field(:business_details, {class: ["form-control"], placeholder: "Webサイト・スマホアプリ開発"}) %>
       </div>
@@ -114,5 +124,3 @@
     </div>
   <% end %>
 </div>
-
-

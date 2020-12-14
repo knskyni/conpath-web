@@ -3,8 +3,12 @@ class CompanyController < ApplicationController
   before_action :check_teacher, {only: [:new, :create, :edit, :update]}
 
   def new
+    # view用
     @company = RecruitCompany.new(icon: "/assets/media/no-image.png")
+    @company_categories = RecruitCompanyCategory.all
+    @pick_company_categories = []
 
+    # JavaScript追加
     add_custom_js("/assets/js/pages/image_input.js")
 
     # サブヘッダー
@@ -48,26 +52,42 @@ class CompanyController < ApplicationController
         @company.save
       end
 
+      # 業種
+      params[:company_category].each do |id|
+        @category_assign = RecruitCompanyCategoryAssign.new(
+          company_id: @company.id,
+          company_category_id: id
+        )
+        @category_assign.save
+      end
 
+      # 企業タグ
       tag_array = params[:recruit_company_tags]
       tags = tag_array.to_s.split(nil)
       tags.each do |tag|
+        # タグ検索
         @tag = RecruitCompanyTag.find_by(name: tag)
+
+        # タグ存在
         if @tag.nil?
-          @tag = RecruitCompanyTag.new(
-              name: tag
-          )
+          # 新規タグ保存
+          @tag = RecruitCompanyTag.new(name: tag)
           @tag.save
         end
-        @tag_assign = RecruitCompanyTagAssign.new(
-            company_id: @company.id,
-            tag_id: @tag.id
-        )
+
+        # 企業とタグを紐付け
+        @tag_assign = RecruitCompanyTagAssign.new(company_id: @company.id, tag_id: @tag.id)
         @tag_assign.save
       end
+
       flash[:notice] = "企業情報の登録が完了しました"
       redirect_to("/company/#{@company.id}")
     else
+      # view用
+      @company_categories = RecruitCompanyCategory.all
+      @pick_company_categories = params[:company_category]
+
+      # JavaScript追加
       add_custom_js("/assets/js/pages/image_input.js")
 
       # サブヘッダー
@@ -79,10 +99,9 @@ class CompanyController < ApplicationController
     end
   end
 
-
-
   def show
     @company = RecruitCompany.find_by(id:params[:id])
+    @category_assigns = RecruitCompanyCategoryAssign.where(company_id: @company.id)
 
     # サブヘッダー
     set_sub_header_title(@company.name)
@@ -91,10 +110,10 @@ class CompanyController < ApplicationController
   end
 
   def edit
+    @company_categories = RecruitCompanyCategory.all
     @company = RecruitCompany.find_by(id: params[:id])
     @assign = RecruitCompanyTagAssign.where(company_id: @company.id)
-
-    add_custom_js("/assets/js/pages/image_input.js")
+    @pick_company_categories = RecruitCompanyCategoryAssign.where(company_id: @company.id).pluck(:company_category_id)
 
     # サブヘッダー
     set_sub_header_title("企業情報編集")
@@ -161,10 +180,25 @@ class CompanyController < ApplicationController
           end
         end
       end
+
+      # 業種
+      # 紐付けをすべて解除
+      RecruitCompanyCategoryAssign.where(company_id: @company.id).destroy_all
+
+      # 選択した業種を一つずつ登録
+      params[:company_category].each do |company_category_id|
+        @category_assign = RecruitCompanyCategoryAssign.new(company_id: @company.id, company_category_id: company_category_id)
+        @category_assign.save
+      end
+
       flash[:notice] = "企業情報の修正が完了しました"
       redirect_to("/company/#{@company.id}")
     else
+      # view用
       @assign = RecruitCompanyTagAssign.where(company_id: @company.id)
+      @pick_company_categories = RecruitCompanyCategoryAssign.where(company_id: @company.id).pluck(:company_category_id)
+
+      # JavaScript追加
       add_custom_js("/assets/js/pages/image_input.js")
 
       # サブヘッダー
