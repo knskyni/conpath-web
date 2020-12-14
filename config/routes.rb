@@ -74,5 +74,7 @@ Rails.application.routes.draw do
   get 'activity/:entry_id/action/:action_id/edit', to:'activity#edit_action'
   post 'activity/:entry_id/action/:action_id/update', to:'activity#update_action'
   delete 'activity/:entry_id/action/:action_id/destroy', to:'activity#destroy_action'
+  get 'activity/:entry_id/success', to: 'activity#new_success'
+  post 'activity/:entry_id/success', to: 'activity#create_success'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

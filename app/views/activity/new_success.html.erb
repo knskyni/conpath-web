@@ -1,0 +1,39 @@
+<%= form_tag("/activity/#{@action.entry.id}/success") do %>
+  <div class="card card-custom gutter-b">
+    <div class="card-header align-items-center h-auto py-4">
+      <h3 class="card-title align-items-start flex-column">
+        <span class="font-weight-bolder text-dark">内定報告</span>
+        <span class="text-muted mt-3 font-weight-bold font-size-sm">Report Success</span>
+      </h3>
+    </div>
+    <div class="card-body py-4">
+      <% if @action.errors.any? %>
+        <div class="alert alert-danger" role="alert">
+          <h4 class="alert-heading">エラー</h4>
+          <ul class="m-0">
+            <% @action.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="form-group row my-2">
+        <label class="col-2 col-form-label text-right">日付:</label>
+        <div class="col-10">
+          <input class="form-control" type="date" name="date" value="<%= @action.date %>">
+          <span class="form-text text-muted">内定通知がなされた日付を入力してください。</span>
+        </div>
+      </div>
+      <div class="form-group row my-2">
+        <label class="col-2 col-form-label text-right">コメント:</label>
+        <div class="col-10">
+          <textarea class="form-control" name="comment" rows="4"><%= @action.comment %></textarea>
+          <span class="form-text text-muted">今回の選考で一番よかったことなど、決め手を教えて下さい。</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer text-center">
+      <input class="btn btn-primary" type="submit" value="送信">
+    </div>
+  </div>
+<% end %>

@@ -87,4 +87,37 @@ class ActivityController < ApplicationController
     @action.destroy
     redirect_to("/activity/#{@action.entry.id}")
   end
+
+  def new_success
+    entry = Entry.find_by(id: params[:entry_id])
+
+    # URLのIDが存在しなければ404エラー
+    render_404 and return if entry.nil?
+
+    @action = Action.new(entry_id: entry.id, date: Time.now.to_date)
+  end
+
+  def create_success
+    entry = Entry.find_by(id: params[:entry_id])
+
+    # URLのIDが存在しなければ404エラー
+    render_404 and return if entry.nil?
+
+    @action = Action.new(
+      entry_id: entry.id,
+      title: "内定",
+      date: params[:date],
+      comment: params[:comment]
+    )
+
+    if @action.save
+      entry.status = 2
+      entry.save
+
+      flash[:notice] = "内定処理を行いました。"
+      redirect_to("/activity/#{entry.id}")
+    else
+      render("activity/new_success")
+    end
+  end
 end
