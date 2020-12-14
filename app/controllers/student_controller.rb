@@ -170,6 +170,7 @@ class StudentController < ApplicationController
     @favorite = RecruitStudentCompanyFavorite.find_by(student_id: @current_user.id,company_id: params[:id])
     if @favorite
       @favorite.destroy
+      flash[:notice] = "お気に入りから削除しました"
       render json: { action: 'destroy' } ,layout: false
     else
       @favorite = RecruitStudentCompanyFavorite.new(
@@ -177,6 +178,7 @@ class StudentController < ApplicationController
           company_id: params[:id]
       )
       if @favorite.save
+        flash[:notice] = "お気に入りに追加しました"
         render json: { action: 'add' },layout: false
       else
         render status: 400,layout: false
