@@ -52,4 +52,25 @@ class ActivityController < ApplicationController
       redirect_to("/activity/#{@action.entry_id}")
     end
   end
+
+  def edit_action
+    @action = Action.joins(:entry).find_by(entries: {id: params[:entry_id]}, actions: {id: params[:action_id]})
+
+    # URLのIDが存在しなければ404エラー
+    render_404 and return if @action.nil?
+  end
+
+  def update_action
+    @action = Action.joins(:entry).find_by(entries: {id: params[:entry_id]}, actions: {id: params[:action_id]})
+    @action.title = params[:title]
+    @action.date = params[:date]
+    @action.comment = params[:comment]
+
+    if @action.save
+      flash[:notice] = "選考活動を更新しました。"
+      redirect_to("/activity/#{@action.entry.id}")
+    else
+      render("activity/edit_action")
+    end
+  end
 end

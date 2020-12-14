@@ -70,11 +70,11 @@
                       <div class="dropdown-menu p-0 m-0 dropdown-menu-right" style="">
                         <ul class="navi navi-hover">
                           <li class="navi-item">
-                            <a href="#" class="navi-link">
-                            <span class="navi-text">
-                              編集
-                            </span>
-                            </a>
+                            <%= link_to("/activity/#{@entry.id}/action/#{action.id}/edit", {class: %w(navi-link)}) do %>
+                              <span class="navi-text">
+                                編集
+                              </span>
+                            <% end %>
                           </li>
                           <li class="navi-item">
                             <a href="#" class="navi-link">
