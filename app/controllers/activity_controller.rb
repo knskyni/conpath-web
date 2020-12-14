@@ -8,11 +8,12 @@ class ActivityController < ApplicationController
     entry = Entry.find_by(student_id: @current_user.id, post_id: post.id)
 
     entry = Entry.new(student_id: @current_user.id, post_id: post.id, status: 1)
+
     if entry.save
       redirect_to("/activity/#{entry.id}")
     else
       flash[:notice] = "登録することができませんでした。"
-      redirect_to("/")
+      redirect_to("/post/#{post.id}")
     end
   end
 end
