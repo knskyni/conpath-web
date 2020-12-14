@@ -79,6 +79,7 @@ class CompanyController < ApplicationController
 
   def show
     @company = RecruitCompany.find_by(id:params[:id])
+    @category_assigns = RecruitCompanyCategoryAssign.where(company_id: @company.id)
 
     # サブヘッダー
     set_sub_header_title(@company.name)
@@ -90,6 +91,8 @@ class CompanyController < ApplicationController
     @company = RecruitCompany.find_by(id: params[:id])
     @assign = RecruitCompanyTagAssign.where(company_id: @company.id)
 
+    @company_categories = RecruitCompanyCategory.all
+
     # サブヘッダー
     set_sub_header_title("企業情報編集")
     add_sub_header_path(@company.name, "/company/#{@company.id}")
@@ -97,6 +100,9 @@ class CompanyController < ApplicationController
   end
 
   def update
+
+    @company_categories = RecruitCompanyCategory.all
+
     @company = RecruitCompany.find_by(id: params[:id])
     @company.company_code = params[:recruit_company][:company_code]
     @company.name = params[:recruit_company][:name]
@@ -146,6 +152,16 @@ class CompanyController < ApplicationController
             @assign = RecruitCompanyTagAssign.new(company_id: @company.id, tag_id: @tag.id)
             @assign.save
           end
+        end
+
+        RecruitCompanyCategoryAssign.where(company_id: @company.id).destroy_all
+
+        params[:company_category].each do |id|
+          @category_assign = RecruitCompanyCategoryAssign.new(
+            company_id: @company.id,
+            company_category_id: id
+          )
+          @category_assign.save
         end
       end
       flash[:notice] = "企業情報の修正が完了しました"
