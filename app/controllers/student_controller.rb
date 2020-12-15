@@ -120,7 +120,7 @@ class StudentController < ApplicationController
       @error_message = "パスワードが一致しません"
     end
 
-    if @student.save and @error_message.nil?
+    if @error_message.nil? and @student.save
       flash[:notice] = "ユーザー登録が完了しました"
       redirect_to("/student/login")
     else
@@ -139,7 +139,9 @@ class StudentController < ApplicationController
         ]
     }
 
-    add_custom_js("/assets/js/pages/crud/file-upload/image-input.js")
+    # JavaScript追加
+    add_custom_js("/assets/js/pages/image_input.js")
+
     @student = Student.find_by(id: @current_user.id)
   end
 
@@ -162,6 +164,9 @@ class StudentController < ApplicationController
       flash[:notice] = "ユーザー情報変更完了しました"
       redirect_to("/student/my/edit")
     else
+      # JavaScript追加
+      add_custom_js("/assets/js/pages/image_input.js")
+      
       render("student/edit")
     end
   end
