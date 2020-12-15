@@ -168,7 +168,7 @@ class PostController < ApplicationController
     @keyword = params[:keyword]
 
     # 求人票をすべて取得（企業テーブルと業種紐付けテーブルを結合）
-    @recruit_posts = RecruitPost.joins("INNER JOIN `recruit_companies` ON `recruit_companies`.`id` = `recruit_posts`.`company_id` LEFT OUTER JOIN `recruit_company_category_assigns` ON `recruit_company_category_assigns`.`company_id` = `recruit_companies`.`id`").all
+    @recruit_posts = RecruitPost.distinct(:id).joins("INNER JOIN `recruit_companies` ON `recruit_companies`.`id` = `recruit_posts`.`company_id` LEFT OUTER JOIN `recruit_company_category_assigns` ON `recruit_company_category_assigns`.`company_id` = `recruit_companies`.`id`").all
 
     # 検索条件
     @recruit_posts = @recruit_posts.where(year: params[:year]) unless params[:year] == "" # 年度
@@ -186,7 +186,6 @@ class PostController < ApplicationController
       elsif params[:grade] == "4"
         @recruit_posts = @recruit_posts.where("salary_4year >= ?", params[:salary])
       end
-      @recruit_posts.group(:company_id)
     end
   end
 end
