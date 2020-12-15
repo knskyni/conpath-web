@@ -10,7 +10,7 @@
       <div class="card-body pt-2">
         <% if @recommend_companies.any? %>
           <% @recommend_companies.each do |company| %>
-            <div class="d-flex flex-wrap align-items-center mb-10">
+            <div class="d-flex flex-nowrap align-items-center mb-10">
               <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
                 <div class="symbol-label" style="background-image: url('<%= company.icon %>')"></div>
               </div>
@@ -18,7 +18,7 @@
                 <span class="text-dark-75 font-weight-bolder font-size-lg"><%= company.name %></span>
                 <span class="text-muted font-weight-bold font-size-sm my-1"><%= company.business_details %></span>
               </div>
-              <div class="d-flex align-items-center py-lg-0 py-2 ml-5">
+              <div class="d-flex flex-shrink-0 align-items-center py-lg-0 py-2 ml-5">
                 <div class="d-flex flex-column text-right">
                   <%= link_to("詳細", "/company/#{company.id}", {class: %w(btn btn-primary)}) %>
                 </div>
@@ -45,7 +45,7 @@
       <div class="card-body pt-2">
         <% if @recommend_company_category_companies.any? %>
           <% @recommend_company_category_companies.each do |company| %>
-            <div class="d-flex flex-wrap align-items-center mb-10">
+            <div class="d-flex flex-nowrap align-items-center mb-10">
               <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
                 <div class="symbol-label" style="background-image: url('<%= company.icon %>')"></div>
               </div>
@@ -53,7 +53,7 @@
                 <span class="text-dark-75 font-weight-bolder font-size-lg"><%= company.name %></span>
                 <span class="text-muted font-weight-bold font-size-sm my-1"><%= company.business_details %></span>
               </div>
-              <div class="d-flex align-items-center py-lg-0 py-2 ml-5">
+              <div class="d-flex flex-shrink-0 align-items-center py-lg-0 py-2 ml-5">
                 <div class="d-flex flex-column text-right">
                   <%= link_to("詳細", "/company/#{company.id}", {class: %w(btn btn-primary)}) %>
                 </div>
@@ -80,7 +80,7 @@
       <div class="card-body pt-2">
         <% if @recommend_job_category_posts.any? %>
           <% @recommend_job_category_posts.each do |post| %>
-            <div class="d-flex flex-wrap align-items-center mb-10">
+            <div class="d-flex flex-wrap flex-sm-nowrap align-items-center mb-10">
               <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
                 <div class="symbol-label" style="background-image: url(<%= post.company.icon %>)"></div>
               </div>
@@ -88,7 +88,7 @@
                 <span class="text-dark-75 font-weight-bolder font-size-lg"><%= post.company.name %></span>
                 <span class="text-muted font-weight-bold font-size-sm my-1"><%= post.job_description %></span>
               </div>
-              <div class="d-flex align-items-center py-lg-0 py-2 ml-5">
+              <div class="d-flex flex-shrink-0 align-items-center py-lg-0 py-2 ml-5">
                 <div class="d-flex flex-column text-right mx-2">
                   <span class="label label-lg label-light-primary label-inline font-weight-bold py-4">職種: <%= post.job_category.name %></span>
                 </div>
