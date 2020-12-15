@@ -15,6 +15,7 @@ class ActivityController < ApplicationController
     entry = Entry.new(student_id: @current_user.id, post_id: post.id, status: 1)
 
     if entry.save
+      flash[:notice] = "登録が完了しました。"
       redirect_to("/activity/#{entry.id}")
     else
       flash[:notice] = "登録することができませんでした。"
