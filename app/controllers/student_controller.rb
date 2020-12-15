@@ -192,7 +192,6 @@ class StudentController < ApplicationController
   end
 
   def favorite_list
-    @favorites = RecruitStudentCompanyFavorite.where(student_id: @current_user.id)
   end
 
   def password_edit
