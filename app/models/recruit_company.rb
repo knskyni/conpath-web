@@ -24,4 +24,10 @@ class RecruitCompany < ApplicationRecord
   def posts
     return RecruitPost.where(company_id: self.id)
   end
+
+  def similar_companies
+    categories = RecruitCompanyCategoryAssign.where(company_id: self.id).pluck(:company_category_id)
+    picks = RecruitCompanyTagAssign.joins(:recruit_company).joins("LEFT OUTER JOIN `recruit_company_category_assigns` ON `recruit_companies`.`id` = `recruit_company_category_assigns`.`company_id`").where.not(recruit_companies: {id: self.id}).where(recruit_company_category_assigns: {company_category_id: categories}).where(recruit_company_tag_assigns: {tag_id: self.tag_assigns.pluck(:tag_id)}).group(:company_id).order("COUNT(`recruit_company_tag_assigns`.`company_id`) DESC").select(:company_id).limit(6).pluck(:company_id)
+    return RecruitCompany.where(id: picks)
+  end
 end
