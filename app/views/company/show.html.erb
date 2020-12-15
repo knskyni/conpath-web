@@ -233,4 +233,36 @@
     </div>
   </div>
 </div>
+
+<div class="card card-custom gutter-b">
+  <div class="card-header py-5">
+    <h3 class="card-title align-items-start flex-column">
+      <span class="card-label text-dark">類似企業</span>
+      <span class="text-muted mt-3 font-weight-bold font-size-sm">この企業に似ている企業を表示しています。</span>
+    </h3>
+  </div>
+  <div class="card-body pb-0">
+    <div class="row">
+      <% @similar_companies.each do |company| %>
+        <div class="col-sm-4">
+          <div class="card card-custom gutter-b card-stretch">
+            <div class="card-body text-center pt-4">
+              <div class="mt-7">
+                <div class="symbol symbol-circle symbol-lg-90">
+                  <img src="<%= company.icon %>">
+                </div>
+              </div>
+              <div class="my-4">
+                <span href="#" class="text-dark font-weight-bold font-size-h4"><%= company.name %></span>
+              </div>
+              <div class="mt-9">
+                <%= link_to("詳細ページ", "/company/#{company.id}", {class: %w(btn btn-light-primary font-weight-bolder btn-sm py-3 px-6)}) %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 <script>const companyId = <%= @company.id %>;</script>

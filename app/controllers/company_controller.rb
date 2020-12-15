@@ -104,6 +104,7 @@ class CompanyController < ApplicationController
     @favorite = RecruitStudentCompanyFavorite.find_by(company_id: params[:id], student_id: @current_user.id)
     @category_assigns = RecruitCompanyCategoryAssign.where(company_id: @company.id)
     @posts = @company.posts.order(year: :desc).order(job_category_id: :asc)
+    @similar_companies = @company.similar_companies
 
     # サブヘッダー
     set_sub_header_title(@company.name)
