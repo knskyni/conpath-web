@@ -120,7 +120,7 @@ class StudentController < ApplicationController
       @error_message = "パスワードが一致しません"
     end
 
-    if @student.save and @error_message.nil?
+    if @error_message.nil? and @student.save
       flash[:notice] = "ユーザー登録が完了しました"
       redirect_to("/student/login")
     else

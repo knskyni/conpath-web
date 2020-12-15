@@ -1,10 +1,8 @@
 <div class="card card-custom gutter-b">
   <div class="card-body">
-    <% if @error_messages %>
+    <% if @error_message %>
       <ul>
-        <% @error_messages.each do |error_message| %>
-          <li><span class="form-text text-danger"><%= error_message %></span></li>
-        <% end %>
+        <li><span class="form-text text-danger"><%= @error_message %></span></li>
       </ul>
     <% end %>
     <% if @student.errors.any? %>
@@ -86,7 +84,7 @@
         <label>パスワード確認
           <span class="text-danger">*</span>
         </label>
-        <input type="password" class="form-control" name="password_confirm">
+        <input type="password" class="form-control" name="password_confirmation">
       </div>
       <input type="submit" value="登録" class="btn btn-primary float-right">
     <% end %>
