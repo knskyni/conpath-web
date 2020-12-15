@@ -19,4 +19,8 @@ class RecruitCompany < ApplicationRecord
   def tag_assigns
     return RecruitCompanyTagAssign.where(company_id: self.id)
   end
+
+  def posts
+    return RecruitPost.where(company_id: self.id)
+  end
 end
