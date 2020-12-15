@@ -13,8 +13,8 @@
           </div>
           <div class="my-lg-0 my-3">
             <% if @entry.status == 1 and @entry.student_id == @current_user.id %>
-              <%= link_to("内定報告", "/activity/new/#{@entry.post.id}", {method: "post", class: %w(btn btn-sm btn-primary font-weight-bolder ml-3)}) if session[:user_type] == "student" %>
-              <%= link_to("辞退報告", "/activity/new/#{@entry.post.id}", {method: "post", class: %w(btn btn-sm btn-danger font-weight-bolder ml-3)}) if session[:user_type] == "student" %>
+              <%= link_to("内定報告", "/activity/#{@entry.id}/success", {class: %w(btn btn-sm btn-primary font-weight-bolder ml-3)}) %>
+              <%= link_to("辞退報告", "/activity/#{@entry.id}/retire", {class: %w(btn btn-sm btn-danger font-weight-bolder ml-3)}) %>
             <% end %>
           </div>
         </div>
