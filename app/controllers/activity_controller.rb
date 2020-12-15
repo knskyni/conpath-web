@@ -1,6 +1,10 @@
 class ActivityController < ApplicationController
   def index
     @entries = Entry.where(student_id: @current_user.id)
+
+    # サブヘッダー
+    set_sub_header_title("就職活動")
+    add_sub_header_path("就職活動", nil)
   end
   def create
     post = RecruitPost.find_by(id: params[:post_id])
@@ -36,8 +40,8 @@ class ActivityController < ApplicationController
 
     # サブヘッダー
     set_sub_header_title("活動状況: #{@entry.post.company.name}")
-    add_sub_header_path("就職活動", nil)
-    add_sub_header_path("状況", nil)
+    add_sub_header_path("就職活動", "/activity")
+    add_sub_header_path("詳細", nil)
   end
 
   def create_action
@@ -62,6 +66,11 @@ class ActivityController < ApplicationController
 
     # URLのIDが存在しなければ404エラー
     render_404 and return if @action.nil?
+
+    # サブヘッダー
+    set_sub_header_title("活動状況: #{@entry.post.company.name}")
+    add_sub_header_path("就職活動", "/activity")
+    add_sub_header_path("詳細", "/activity/#{@action.entry.id}")
   end
 
   def update_action
@@ -78,6 +87,11 @@ class ActivityController < ApplicationController
       flash[:notice] = "選考活動を更新しました。"
       redirect_to("/activity/#{@action.entry.id}")
     else
+      # サブヘッダー
+      set_sub_header_title("活動状況: #{@entry.post.company.name}")
+      add_sub_header_path("就職活動", "/activity")
+      add_sub_header_path("詳細", "/activity/#{@action.entry.id}")
+
       render("activity/edit_action")
     end
   end
@@ -99,6 +113,12 @@ class ActivityController < ApplicationController
     render_404 and return if entry.nil?
 
     @action = Action.new(entry_id: entry.id, date: Time.now.to_date)
+
+    # サブヘッダー
+    set_sub_header_title("活動状況: #{@entry.post.company.name}")
+    add_sub_header_path("就職活動", "/activity")
+    add_sub_header_path("詳細", "/activity/#{@action.entry.id}")
+    add_sub_header_path("内定報告", nil)
   end
 
   def create_success
@@ -121,6 +141,12 @@ class ActivityController < ApplicationController
       flash[:notice] = "内定処理を行いました。"
       redirect_to("/activity/#{entry.id}")
     else
+      # サブヘッダー
+      set_sub_header_title("活動状況: #{@entry.post.company.name}")
+      add_sub_header_path("就職活動", "/activity")
+      add_sub_header_path("詳細", "/activity/#{@action.entry.id}")
+      add_sub_header_path("内定報告", nil)
+
       render("activity/new_success")
     end
   end
@@ -132,6 +158,12 @@ class ActivityController < ApplicationController
     render_404 and return if entry.nil?
 
     @action = Action.new(entry_id: entry.id, date: Time.now.to_date)
+
+    # サブヘッダー
+    set_sub_header_title("活動状況: #{@entry.post.company.name}")
+    add_sub_header_path("就職活動", "/activity")
+    add_sub_header_path("詳細", "/activity/#{@action.entry.id}")
+    add_sub_header_path("辞退報告", nil)
   end
 
   def create_retire
@@ -154,6 +186,12 @@ class ActivityController < ApplicationController
       flash[:notice] = "辞退処理を行いました。"
       redirect_to("/activity/#{entry.id}")
     else
+      # サブヘッダー
+      set_sub_header_title("活動状況: #{@entry.post.company.name}")
+      add_sub_header_path("就職活動", "/activity")
+      add_sub_header_path("詳細", "/activity/#{@action.entry.id}")
+      add_sub_header_path("辞退報告", nil)
+      
       render("activity/new_retire")
     end
   end
