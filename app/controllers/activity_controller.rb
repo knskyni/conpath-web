@@ -3,7 +3,7 @@ class ActivityController < ApplicationController
     @entries = Entry.where(student_id: @current_user.id)
 
     # サブヘッダー
-    set_sub_header_title("就職活動")
+    set_sub_header_title("就職活動一覧")
     add_sub_header_path("就職活動", nil)
   end
   def create
@@ -68,7 +68,7 @@ class ActivityController < ApplicationController
     render_404 and return if @action.nil?
 
     # サブヘッダー
-    set_sub_header_title("活動状況: #{@entry.post.company.name}")
+    set_sub_header_title("活動報告修正")
     add_sub_header_path("就職活動", "/activity")
     add_sub_header_path("詳細", "/activity/#{@action.entry.id}")
   end
@@ -88,7 +88,7 @@ class ActivityController < ApplicationController
       redirect_to("/activity/#{@action.entry.id}")
     else
       # サブヘッダー
-      set_sub_header_title("活動状況: #{@entry.post.company.name}")
+      set_sub_header_title("活動報告修正")
       add_sub_header_path("就職活動", "/activity")
       add_sub_header_path("詳細", "/activity/#{@action.entry.id}")
 
@@ -115,7 +115,7 @@ class ActivityController < ApplicationController
     @action = Action.new(entry_id: entry.id, date: Time.now.to_date)
 
     # サブヘッダー
-    set_sub_header_title("活動状況: #{@entry.post.company.name}")
+    set_sub_header_title("内定報告")
     add_sub_header_path("就職活動", "/activity")
     add_sub_header_path("詳細", "/activity/#{@action.entry.id}")
     add_sub_header_path("内定報告", nil)
@@ -142,7 +142,7 @@ class ActivityController < ApplicationController
       redirect_to("/activity/#{entry.id}")
     else
       # サブヘッダー
-      set_sub_header_title("活動状況: #{@entry.post.company.name}")
+      set_sub_header_title("内定報告")
       add_sub_header_path("就職活動", "/activity")
       add_sub_header_path("詳細", "/activity/#{@action.entry.id}")
       add_sub_header_path("内定報告", nil)
@@ -160,7 +160,7 @@ class ActivityController < ApplicationController
     @action = Action.new(entry_id: entry.id, date: Time.now.to_date)
 
     # サブヘッダー
-    set_sub_header_title("活動状況: #{@entry.post.company.name}")
+    set_sub_header_title("辞退報告")
     add_sub_header_path("就職活動", "/activity")
     add_sub_header_path("詳細", "/activity/#{@action.entry.id}")
     add_sub_header_path("辞退報告", nil)
@@ -187,7 +187,7 @@ class ActivityController < ApplicationController
       redirect_to("/activity/#{entry.id}")
     else
       # サブヘッダー
-      set_sub_header_title("活動状況: #{@entry.post.company.name}")
+      set_sub_header_title("辞退報告")
       add_sub_header_path("就職活動", "/activity")
       add_sub_header_path("詳細", "/activity/#{@action.entry.id}")
       add_sub_header_path("辞退報告", nil)
