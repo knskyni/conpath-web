@@ -122,6 +122,9 @@ class CompanyController < ApplicationController
     set_sub_header_title("企業情報編集")
     add_sub_header_path(@company.name, "/company/#{@company.id}")
     add_sub_header_path("編集", nil)
+
+    # JavaScript追加
+    add_custom_js("/assets/js/pages/image_input.js")
   end
 
   def update
