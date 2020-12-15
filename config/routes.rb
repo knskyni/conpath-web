@@ -66,5 +66,18 @@ Rails.application.routes.draw do
   get 'post/:id', to: 'post#show'
   get 'post/:id/edit', to: 'post#edit'
   post 'post/:id/update', to: 'post#update'
+
+  # 就職活動
+  get 'activity', to: 'activity#index'
+  post 'activity/new/:post_id', to: 'activity#create'
+  get 'activity/:id', to: 'activity#show'
+  post 'activity/:id/action/create', to: 'activity#create_action'
+  get 'activity/:entry_id/action/:action_id/edit', to:'activity#edit_action'
+  post 'activity/:entry_id/action/:action_id/update', to:'activity#update_action'
+  delete 'activity/:entry_id/action/:action_id/destroy', to:'activity#destroy_action'
+  get 'activity/:entry_id/success', to: 'activity#new_success'
+  post 'activity/:entry_id/success', to: 'activity#create_success'
+  get 'activity/:entry_id/retire', to: 'activity#new_retire'
+  post 'activity/:entry_id/retire', to: 'activity#create_retire'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

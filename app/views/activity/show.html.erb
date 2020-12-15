@@ -1,0 +1,174 @@
+<div class="card card-custom gutter-b">
+  <div class="card-body">
+    <div class="d-flex">
+      <div class="flex-shrink-0 mr-7">
+        <div class="symbol symbol-50 symbol-lg-120">
+          <img alt="Pic" src="<%= @entry.post.company.icon %>">
+        </div>
+      </div>
+      <div class="flex-grow-1">
+        <div class="d-flex justify-content-between flex-wrap mt-1">
+          <div class="d-flex mr-3">
+            <a href="#" class="text-dark-75 text-hover-primary font-size-h5 font-weight-bold mr-3"><%= @entry.post.company.name %></a>
+          </div>
+          <div class="my-lg-0 my-3">
+            <% if @entry.status == 1 and @entry.student_id == @current_user.id %>
+              <%= link_to("内定報告", "/activity/#{@entry.id}/success", {class: %w(btn btn-sm btn-primary font-weight-bolder ml-3)}) %>
+              <%= link_to("辞退報告", "/activity/#{@entry.id}/retire", {class: %w(btn btn-sm btn-danger font-weight-bolder ml-3)}) %>
+            <% end %>
+          </div>
+        </div>
+        <div class="d-flex flex-wrap justify-content-between mt-1">
+          <div class="d-flex flex-column flex-grow-1 pr-8">
+            <div class="d-flex flex-wrap mb-4">
+              <a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
+                <i class="fas fa-map-marked-alt mr-2"></i><%= @entry.post.company.prefecture.name %>
+              </a>
+              <% if @entry.post.company.tag_assigns.any? %>
+                <span class="text-muted font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
+                  <i class="fas fa-tag mr-2"></i>
+                  <% @entry.post.company.tag_assigns.each_with_index do |tag_assign, index| %>
+                    <a><%= tag_assign.tag.name %></a><%= "," if index < @entry.post.company.tag_assigns.size - 1 %>
+                  <% end %>
+                </span>
+              <% end %>
+            </div>
+            <span class="font-weight-bold text-dark-50"><%= @entry.post.company.teacher_comment %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="<%= (session[:user_type] == "student") ? "col-xl-7" : "col-xl-12" %>">
+    <div class="card card-custom gutter-b">
+      <div class="card-header align-items-center h-auto py-4">
+        <h3 class="card-title align-items-start flex-column">
+          <span class="font-weight-bolder text-dark">活動状況</span>
+          <span class="text-muted mt-3 font-weight-bold font-size-sm">Recruit Activity</span>
+        </h3>
+      </div>
+      <div class="card-body">
+        <% if @actions.any? %>
+          <div class="timeline timeline-3">
+            <div class="timeline-items">
+              <% count = 1 %>
+              <% @actions.each do |action| %>
+                <div class="timeline-item">
+                  <div class="timeline-media">
+                    <span class="text-primary font-weight-bolder h4 m-0"><%= count %></span>
+                  </div>
+                  <div class="timeline-content">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                      <div class="mr-2">
+                        <a href="#" class="text-dark-75 text-hover-primary font-weight-bold"><%= action.title %></a>
+                        <span class="text-muted ml-2"><%= action.date %></span>
+                      </div>
+                      <% if @entry.status == 1 and @entry.student_id == @current_user.id %>
+                        <div class="dropdown ml-2" data-toggle="tooltip" title="" data-placement="left">
+                          <a href="#" class="btn btn-hover-light-secondary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="ki ki-more-hor font-size-lg text-secondary"></i>
+                          </a>
+                          <div class="dropdown-menu p-0 m-0 dropdown-menu-right" style="">
+                            <ul class="navi navi-hover">
+                              <li class="navi-item">
+                                <%= link_to("/activity/#{@entry.id}/action/#{action.id}/edit", {class: %w(navi-link)}) do %>
+                              <span class="navi-text">
+                                編集
+                              </span>
+                                <% end %>
+                              </li>
+                              <li class="navi-item">
+                                <%= link_to("/activity/#{@entry.id}/action/#{action.id}/destroy", {method: "delete", class: %w(navi-link), data: {confirm: "削除してもよろしいですか？"}}) do %>
+                              <span class="navi-text">
+                                削除
+                              </span>
+                                <% end %>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
+                    <p class="p-0"><%= action.comment %></p>
+                  </div>
+                </div>
+                <% count += 1 %>
+              <% end %>
+            </div>
+          </div>
+        <% else %>
+          <div class="text-center">
+            現在、就職活動は何も報告されていません。
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% if session[:user_type] == "student" %>
+    <div class="col-xl-5">
+      <% if @entry.status == 1 %>
+        <%= form_tag("/activity/#{@entry.id}/action/create") do %>
+          <div class="card card-custom gutter-b">
+            <div class="card-header align-items-center h-auto py-4">
+              <h3 class="card-title align-items-start flex-column">
+                <span class="font-weight-bolder text-dark">活動報告</span>
+                <span class="text-muted mt-3 font-weight-bold font-size-sm">Report Activity</span>
+              </h3>
+            </div>
+            <div class="card-body py-4">
+              <% if @new_action.errors.any? %>
+                <div class="alert alert-danger" role="alert">
+                  <h4 class="alert-heading">エラー</h4>
+                  <ul class="m-0">
+                    <% @new_action.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+              <div class="form-group row my-2">
+                <label class="col-2 col-form-label text-right">件名:</label>
+                <div class="col-10">
+                  <input class="form-control" type="text" name="title" placeholder="インターンシップ、1次選考、最終試験など" value="<%= @new_action.title %>">
+                  <span class="form-text text-muted">何の選考がわかるように入力してください。</span>
+                </div>
+              </div>
+              <div class="form-group row my-2">
+                <label class="col-2 col-form-label text-right">日付:</label>
+                <div class="col-10">
+                  <input class="form-control" type="date" name="date" value="<%= @new_action.date %>">
+                  <span class="form-text text-muted">選考が行われた日付を入力してください。</span>
+                </div>
+              </div>
+              <div class="form-group row my-2">
+                <label class="col-2 col-form-label text-right">内容:</label>
+                <div class="col-10">
+                  <textarea class="form-control" name="comment"><%= @new_action.comment %></textarea>
+                  <span class="form-text text-muted">質問の内容や感想、選考のポイントなどあればお願いします。</span>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer text-center">
+              <input class="btn btn-primary" type="submit" value="送信">
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="card card-custom gutter-b">
+          <div class="card-header align-items-center h-auto py-4">
+            <h3 class="card-title align-items-start flex-column">
+              <span class="font-weight-bolder text-dark">活動報告</span>
+              <span class="text-muted mt-3 font-weight-bold font-size-sm">Report Activity</span>
+            </h3>
+          </div>
+          <div class="card-body text-center py-4">
+            <span>内定報告・辞退報告後は投稿できません。</span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
