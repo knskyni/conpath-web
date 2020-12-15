@@ -121,6 +121,38 @@
                     </a>
                   </li>
                 <% elsif session[:user_type] == "teacher" %>
+                  <li class="menu-section">
+                    <h4 class="menu-text">企業</h4>
+                    <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+                  </li>
+                  <li class="menu-item" aria-haspopup="true">
+                    <a href="/company/new" class="menu-link">
+                      <i class="menu-icon flaticon2-plus"></i>
+                      <span class="menu-text">新規登録</span>
+                    </a>
+                  </li>
+
+                  <li class="menu-section">
+                    <h4 class="menu-text">求人票</h4>
+                    <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+                  </li>
+                  <li class="menu-item" aria-haspopup="true">
+                    <a href="/post/search" class="menu-link">
+                      <i class="menu-icon flaticon2-search-1"></i>
+                      <span class="menu-text">検索</span>
+                    </a>
+                  </li>
+
+                  <li class="menu-section">
+                    <h4 class="menu-text">管理</h4>
+                    <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+                  </li>
+                  <li class="menu-item" aria-haspopup="true">
+                    <a href="/school" class="menu-link">
+                      <i class="menu-icon flaticon-imac"></i>
+                      <span class="menu-text">学校一覧</span>
+                    </a>
+                  </li>
                 <% end %>
               </ul>
             </div>
