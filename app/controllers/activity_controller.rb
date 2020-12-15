@@ -145,7 +145,7 @@ class ActivityController < ApplicationController
     )
 
     if @action.save
-      entry.status = 2
+      entry.status = 3
       entry.save
 
       flash[:notice] = "辞退処理を行いました。"
