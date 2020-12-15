@@ -121,4 +121,37 @@ class ActivityController < ApplicationController
       render("activity/new_success")
     end
   end
+
+  def new_retire
+    entry = Entry.find_by(id: params[:entry_id])
+
+    # URLのIDが存在しなければ404エラー
+    render_404 and return if entry.nil?
+
+    @action = Action.new(entry_id: entry.id, date: Time.now.to_date)
+  end
+
+  def create_retire
+    entry = Entry.find_by(id: params[:entry_id])
+
+    # URLのIDが存在しなければ404エラー
+    render_404 and return if entry.nil?
+
+    @action = Action.new(
+      entry_id: entry.id,
+      title: "辞退",
+      date: params[:date],
+      comment: params[:comment]
+    )
+
+    if @action.save
+      entry.status = 2
+      entry.save
+
+      flash[:notice] = "辞退処理を行いました。"
+      redirect_to("/activity/#{entry.id}")
+    else
+      render("activity/new_retire")
+    end
+  end
 end
