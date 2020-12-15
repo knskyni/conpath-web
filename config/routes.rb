@@ -76,5 +76,7 @@ Rails.application.routes.draw do
   delete 'activity/:entry_id/action/:action_id/destroy', to:'activity#destroy_action'
   get 'activity/:entry_id/success', to: 'activity#new_success'
   post 'activity/:entry_id/success', to: 'activity#create_success'
+  get 'activity/:entry_id/retire', to: 'activity#new_retire'
+  post 'activity/:entry_id/retire', to: 'activity#create_retire'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
