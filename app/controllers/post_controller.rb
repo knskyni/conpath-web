@@ -186,6 +186,7 @@ class PostController < ApplicationController
       elsif params[:grade] == "4"
         @recruit_posts = @recruit_posts.where("salary_4year >= ?", params[:salary])
       end
+      @recruit_posts.group(:company_id)
     end
   end
 end
