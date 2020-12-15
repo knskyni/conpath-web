@@ -50,54 +50,60 @@
           <span class="text-muted mt-3 font-weight-bold font-size-sm">Recruit Activity</span>
         </h3>
       </div>
-      <div class="card-body pt-4">
-        <div class="timeline timeline-3">
-          <div class="timeline-items">
-            <% count = 1 %>
-            <% @actions.each do |action| %>
-              <div class="timeline-item">
-                <div class="timeline-media">
-                  <span class="text-primary font-weight-bolder h4 m-0"><%= count %></span>
-                </div>
-                <div class="timeline-content">
-                  <div class="d-flex align-items-center justify-content-between mb-3">
-                    <div class="mr-2">
-                      <a href="#" class="text-dark-75 text-hover-primary font-weight-bold"><%= action.title %></a>
-                      <span class="text-muted ml-2"><%= action.date %></span>
-                    </div>
-                    <% if @entry.status == 1 and @entry.student_id == @current_user.id %>
-                      <div class="dropdown ml-2" data-toggle="tooltip" title="" data-placement="left">
-                        <a href="#" class="btn btn-hover-light-secondary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="ki ki-more-hor font-size-lg text-secondary"></i>
-                        </a>
-                        <div class="dropdown-menu p-0 m-0 dropdown-menu-right" style="">
-                          <ul class="navi navi-hover">
-                            <li class="navi-item">
-                              <%= link_to("/activity/#{@entry.id}/action/#{action.id}/edit", {class: %w(navi-link)}) do %>
+      <div class="card-body">
+        <% if @actions.any? %>
+          <div class="timeline timeline-3">
+            <div class="timeline-items">
+              <% count = 1 %>
+              <% @actions.each do |action| %>
+                <div class="timeline-item">
+                  <div class="timeline-media">
+                    <span class="text-primary font-weight-bolder h4 m-0"><%= count %></span>
+                  </div>
+                  <div class="timeline-content">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                      <div class="mr-2">
+                        <a href="#" class="text-dark-75 text-hover-primary font-weight-bold"><%= action.title %></a>
+                        <span class="text-muted ml-2"><%= action.date %></span>
+                      </div>
+                      <% if @entry.status == 1 and @entry.student_id == @current_user.id %>
+                        <div class="dropdown ml-2" data-toggle="tooltip" title="" data-placement="left">
+                          <a href="#" class="btn btn-hover-light-secondary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="ki ki-more-hor font-size-lg text-secondary"></i>
+                          </a>
+                          <div class="dropdown-menu p-0 m-0 dropdown-menu-right" style="">
+                            <ul class="navi navi-hover">
+                              <li class="navi-item">
+                                <%= link_to("/activity/#{@entry.id}/action/#{action.id}/edit", {class: %w(navi-link)}) do %>
                               <span class="navi-text">
                                 編集
                               </span>
-                              <% end %>
-                            </li>
-                            <li class="navi-item">
-                              <%= link_to("/activity/#{@entry.id}/action/#{action.id}/destroy", {method: "delete", class: %w(navi-link), data: {confirm: "削除してもよろしいですか？"}}) do %>
+                                <% end %>
+                              </li>
+                              <li class="navi-item">
+                                <%= link_to("/activity/#{@entry.id}/action/#{action.id}/destroy", {method: "delete", class: %w(navi-link), data: {confirm: "削除してもよろしいですか？"}}) do %>
                               <span class="navi-text">
                                 削除
                               </span>
-                              <% end %>
-                            </li>
-                          </ul>
+                                <% end %>
+                              </li>
+                            </ul>
+                          </div>
                         </div>
-                      </div>
-                    <% end %>
+                      <% end %>
+                    </div>
+                    <p class="p-0"><%= action.comment %></p>
                   </div>
-                  <p class="p-0"><%= action.comment %></p>
                 </div>
-              </div>
-              <% count += 1 %>
-            <% end %>
+                <% count += 1 %>
+              <% end %>
+            </div>
           </div>
-        </div>
+        <% else %>
+          <div class="text-center">
+            現在、就職活動は何も報告されていません。
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
