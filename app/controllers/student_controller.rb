@@ -227,8 +227,7 @@ class StudentController < ApplicationController
 
     @student.password = params[:new_password]
 
-    unless @error_messages.any?
-      @student.save
+    if not @error_messages.any? and @student.save
       flash[:notice] = "パスワードを変更しました"
       redirect_to("/")
     else
