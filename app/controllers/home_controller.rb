@@ -13,6 +13,11 @@ class HomeController < ApplicationController
 
         render("home/index_student")
       elsif session[:user_type] == "teacher"
+        @students = Student.all
+        @companies = RecruitCompany.all
+        @posts = RecruitPost.all
+        @entries = Entry.all
+
         render("home/index_teacher")
       end
 
