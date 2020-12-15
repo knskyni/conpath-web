@@ -118,6 +118,10 @@
         <label>タグ</label>
         <input type ="text" name="recruit_company_tags" class="form-control" placeholder="web rails" value="<% @assign.each do |tag_assign| %><%= tag_assign.tag.name %> <% end %>">
       </div>
+      <div class="form-group">
+        <label>企業紹介文</label>
+        <%= f.text_area(:teacher_comment, {class: %w(form-control), rows: 8}) %>
+      </div>
       <div class="text-center">
         <%= f.submit("送信", {class: %w(btn btn-primary ml-3)}) %>
       </div>

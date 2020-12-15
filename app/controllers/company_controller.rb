@@ -147,6 +147,7 @@ class CompanyController < ApplicationController
     @company.business_details = params[:recruit_company][:business_details]
     @company.url = params[:recruit_company][:url]
     @company.recruit_url = params[:recruit_company][:recruit_url]
+    @company.teacher_comment = params[:recruit_company][:teacher_comment]
 
     if params[:icon]
       image_name = "/assets/media/company/#{@company.id}.png"
