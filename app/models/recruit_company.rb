@@ -21,6 +21,10 @@ class RecruitCompany < ApplicationRecord
     return RecruitCompanyTagAssign.where(company_id: self.id)
   end
 
+  def company_categories
+    return RecruitCompanyCategory.joins(:recruit_company_category_assigns).where(recruit_company_category_assigns: {company_id: self.id})
+  end
+
   def posts
     return RecruitPost.where(company_id: self.id)
   end
