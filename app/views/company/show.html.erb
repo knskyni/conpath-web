@@ -27,10 +27,12 @@
             </div>
           </div>
           <div class="my-lg-0 my-3">
-            <% if @favorite %>
-              <button id="favorite" class="btn btn-sm btn-light-warning font-weight-bolder text-uppercase mr-3">お気に入り解除</button>
-            <% else %>
-              <button id="favorite" class="btn btn-sm btn-light-warning font-weight-bolder text-uppercase mr-3">お気に入り登録</button>
+            <% if session[:user_type] == "student" %>
+              <% if @favorite %>
+                <button id="favorite" class="btn btn-sm btn-light-warning font-weight-bolder text-uppercase mr-3">お気に入り解除</button>
+              <% else %>
+                <button id="favorite" class="btn btn-sm btn-light-warning font-weight-bolder text-uppercase mr-3">お気に入り登録</button>
+              <% end %>
             <% end %>
           </div>
         </div>
