@@ -101,7 +101,7 @@ class CompanyController < ApplicationController
 
   def show
     @company = RecruitCompany.find_by(id: params[:id])
-    @favorite = RecruitStudentCompanyFavorite.find_by(company_id: params[:id],student_id: @current_user.id)
+    @favorite = RecruitStudentCompanyFavorite.find_by(company_id: params[:id], student_id: @current_user.id)
     @category_assigns = RecruitCompanyCategoryAssign.where(company_id: @company.id)
 
     # サブヘッダー

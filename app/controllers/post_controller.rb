@@ -68,6 +68,8 @@ class PostController < ApplicationController
     # URLの求人票IDから求人票情報を取得
     @post = RecruitPost.find_by(id: params[:id])
 
+    @favorite = RecruitStudentCompanyFavorite.find_by(company_id: params[:id], student_id: @current_user.id)
+
     # 求人票情報取得できなければ404
     render_404 and return if @post.nil?
 
@@ -75,6 +77,8 @@ class PostController < ApplicationController
     set_sub_header_title("#{@post.company.name}（#{@post.year}年）")
     add_sub_header_path("求人票", "/post")
     add_sub_header_path("#{@post.company.name}（#{@post.year}年）", nil)
+
+    add_custom_js("/assets/js/pages/favorite/favorite_edit.js")
   end
 
   def edit
