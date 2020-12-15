@@ -1,4 +1,7 @@
 class ActivityController < ApplicationController
+  def index
+    @entries = Entry.where(student_id: @current_user.id)
+  end
   def create
     post = RecruitPost.find_by(id: params[:post_id])
 

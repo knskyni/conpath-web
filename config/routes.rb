@@ -68,6 +68,7 @@ Rails.application.routes.draw do
   post 'post/:id/update', to: 'post#update'
 
   # 就職活動
+  get 'activity', to: 'activity#index'
   post 'activity/new/:post_id', to: 'activity#create'
   get 'activity/:id', to: 'activity#show'
   post 'activity/:id/action/create', to: 'activity#create_action'
