@@ -37,7 +37,7 @@
             </td>
             <td>
               <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
-                <% favorite.company.company_categories.each_with_index do |company_category, index| %>
+                <% favorite.company.company_categories.each do |company_category| %>
                   <span class="label label-outline-dark label-inline mr-2"><%= company_category.name %></span>
                 <% end %>
               </span>
