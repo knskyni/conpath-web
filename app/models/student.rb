@@ -27,7 +27,7 @@ class Student < ApplicationRecord
     result_occurrences = ActiveRecord::Base.connection.select_all("SELECT `recruit_company_tag_assigns`.`tag_id`, COUNT(*) FROM `recruit_student_company_favorites` INNER JOIN `recruit_companies` ON `recruit_student_company_favorites`.`company_id` = `recruit_companies`.`id` INNER JOIN `recruit_company_tag_assigns` ON `recruit_companies`.`id` = `recruit_company_tag_assigns`.`company_id` WHERE `recruit_student_company_favorites`.`student_id` = '#{self.id}' GROUP BY `recruit_company_tag_assigns`.`tag_id`")
     tags = []
     result_occurrences.rows.each do |result_occurrence|
-      if result_occurrence[1] > 3
+      if result_occurrence[1] >= 2
         tags.push(result_occurrence[0])
       end
     end
