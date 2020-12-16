@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   patch 'class/:id/update', to: 'school_class#update'
 
   # 企業
+  get 'company', to: 'company#index'
   get 'company/new', to: 'company#new'
   post 'company/create', to: 'company#create'
   get 'company/:id', to: 'company#show'

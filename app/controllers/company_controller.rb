@@ -2,6 +2,21 @@ class CompanyController < ApplicationController
   before_action :check_login
   before_action :check_teacher, {only: [:new, :create, :edit, :update]}
 
+  def index
+    @companies = RecruitCompany.all
+
+    # JavaScript追加
+    add_custom_js("/assets/plugins/custom/datatables/datatables.bundle.js")
+    add_custom_js("/assets/js/pages/datatable.js")
+
+    # CSS追加
+    add_custom_css("/assets/plugins/custom/datatables/datatables.bundle.css")
+
+    # サブヘッダー
+    set_sub_header_title("企業一覧")
+    add_sub_header_path("企業", nil)
+  end
+
   def new
     # view用
     @company = RecruitCompany.new(icon: "/assets/media/no-image.png")

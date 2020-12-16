@@ -1,0 +1,38 @@
+<div class="card card-custom">
+  <div class="card-header flex-wrap py-5">
+    <div class="card-title">
+      <h3 class="card-label">企業
+        <span class="d-block text-muted pt-2 font-size-sm">Companies</span></h3>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="table table-separate table-head-custom table-checkable" id="datatable">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>企業名</th>
+        <th>所在地</th>
+        <th>業種</th>
+        <th>事業内容</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @companies.each do |company| %>
+        <tr>
+          <td><%= company.id %></td>
+          <td><%= company.name %></td>
+          <td><%= company.prefecture.name %></td>
+          <td>
+            <% company.company_categories.each do |company_category| %>
+              <span class="label label-outline-dark label-inline mr-2"><%= company_category.name %></span>
+            <% end %>
+          </td>
+          <td><%= company.business_details %></td>
+          <td nowrap="nowrap"><%= link_to("詳細", "/company/#{company.id}", {class: %w(btn btn-sm btn-light-primary)}) %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
