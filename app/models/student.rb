@@ -33,8 +33,11 @@ class Student < ApplicationRecord
     end
 
     if tags.any?
-      result_companies = ActiveRecord::Base.connection.select_all("SELECT `recruit_company_tag_assigns`.`company_id` FROM `recruit_company_tag_assigns` WHERE `recruit_company_tag_assigns`.`tag_id` IN (#{tags.map(&:inspect).join(', ')}) GROUP BY `recruit_company_tag_assigns`.`company_id`")
+      entry_companies = RecruitPost.joins(:entries).where(entries: {student_id: self.id}).pluck(:company_id)
+      puts entry_companies
+      result_companies = ActiveRecord::Base.connection.select_all("SELECT `recruit_company_tag_assigns`.`company_id` FROM `recruit_company_tag_assigns` WHERE `recruit_company_tag_assigns`.`tag_id` IN (#{tags.map(&:inspect).join(', ')}) AND `recruit_company_tag_assigns`.`company_id` NOT IN(#{entry_companies.map(&:inspect).join(', ')}) GROUP BY `recruit_company_tag_assigns`.`company_id`")
       companies = []
+
       result_companies.rows.each do |result_company|
         companies.push(result_company[0])
       end
