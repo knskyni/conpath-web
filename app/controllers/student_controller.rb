@@ -194,7 +194,7 @@ class StudentController < ApplicationController
   def favorite_list
     # サブヘッダー
     set_sub_header_title("お気に入り企業")
-    add_sub_header_path("学生", "/student/#{@student.id}")
+    add_sub_header_path("学生", "/student/#{@current_user.id}")
     add_sub_header_path("お気に入り企業", nil)
   end
 
