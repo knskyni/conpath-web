@@ -138,7 +138,11 @@
           <div class="form-group row my-2">
             <label class="col-4 col-form-label">業種</label>
             <div class="col-8">
-              <span class="form-control-plaintext font-weight-bolder"><% @category_assigns.each do |category_assign| %><%= category_assign.category.name %>  <% end %></span>
+              <span class="form-control-plaintext font-weight-bolder">
+                <% @company.company_categories.each do |company_category| %>
+                  <span class="label label-outline-dark label-inline mr-2"><%= company_category.name %></span>
+                <% end %>
+              </span>
             </div>
           </div>
           <div class="form-group row my-2">
