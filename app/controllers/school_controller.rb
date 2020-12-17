@@ -1,6 +1,6 @@
 class SchoolController < ApplicationController
   before_action :check_login
-  before_action :check_teacher, {only: [:new, :create, :edit, :update]}
+  before_action :check_teacher
 
   def index
     # 学校一覧取得
