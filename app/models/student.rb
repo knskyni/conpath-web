@@ -23,6 +23,10 @@ class Student < ApplicationRecord
     return RecruitStudentCompanyFavorite.where(student_id: self.id)
   end
 
+  def entries
+    return Entry.where(student_id: self.id)
+  end
+
   def recommend_companies
     result_occurrences = ActiveRecord::Base.connection.select_all("SELECT `recruit_company_tag_assigns`.`tag_id`, COUNT(*) FROM `recruit_student_company_favorites` INNER JOIN `recruit_companies` ON `recruit_student_company_favorites`.`company_id` = `recruit_companies`.`id` INNER JOIN `recruit_company_tag_assigns` ON `recruit_companies`.`id` = `recruit_company_tag_assigns`.`company_id` WHERE `recruit_student_company_favorites`.`student_id` = '#{self.id}' GROUP BY `recruit_company_tag_assigns`.`tag_id`")
     tags = []

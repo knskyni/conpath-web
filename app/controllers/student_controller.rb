@@ -128,6 +128,18 @@ class StudentController < ApplicationController
     end
   end
 
+  def show
+    @student = Student.find_by(id: params[:id])
+
+    # 学生IDが存在していなければ404エラー
+    render_404 and return if @student.nil?
+
+    # サブヘッダー
+    set_sub_header_title("学生: #{@student.full_name}")
+    add_sub_header_path("学生", nil)
+    add_sub_header_path("詳細", nil)
+  end
+
   def edit
     @sub_header = {
         title: "登録ページ",

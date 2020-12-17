@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post 'student/logout', to: 'student#logout'
   get 'student/new', to: 'student#new'
   post 'student/new', to: 'student#create_temp'
+  get 'student/:id', to: 'student#show'
   get 'student/activate/:auth_key', to: 'student#activate'
   post 'student/activate/:auth_key', to: 'student#create'
   get 'student/my/edit', to: 'student#edit'
