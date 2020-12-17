@@ -55,6 +55,14 @@
             <span class="d-block text-muted pt-2 font-size-sm">Company information</span>
           </h3>
         </div>
+        <% if session[:user_type] == "teacher" %>
+          <div class="card-toolbar">
+            <ul class="nav nav-tabs nav-bold nav-tabs-line">
+              <li class="nav-item">
+                <%= link_to("修正","/company/#{@post.company.id}/edit", {class: %w(btn btn-success ml-3)}) %>
+            </ul>
+          </div>
+        <% end %>
       </div>
       <div class="card-body">
         <div class="tab-content">
@@ -128,6 +136,14 @@
             <span class="d-block text-muted pt-2 font-size-sm">Job Posting</span>
           </h3>
         </div>
+        <% if session[:user_type] == "teacher" %>
+          <div class="card-toolbar">
+            <ul class="nav nav-tabs nav-bold nav-tabs-line">
+              <li class="nav-item">
+                <%= link_to("修正","/post/#{@post.id}/edit", {class: %w(btn btn-success ml-3)}) %>
+            </ul>
+          </div>
+        <% end %>
       </div>
       <div class="card-body">
         <div class="tab-content">
