@@ -54,6 +54,9 @@ class SchoolClassController < ApplicationController
       return
     end
 
+    # JavaScript
+    add_custom_js("/assets/js/pages/crud/forms/widgets/clipboard.js")
+
     # サブヘッダー
     set_sub_header_title(@school_class.name)
     add_sub_header_path(@school_class.course.school.name, "/school/#{@school_class.course.school.id}")
