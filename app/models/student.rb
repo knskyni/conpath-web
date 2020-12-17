@@ -53,12 +53,12 @@ class Student < ApplicationRecord
   end
 
   def favorite_company_categories
-    company_categories = RecruitFavoriteStudentIndustry.where(student_id: self.id).pluck(:industry_id)
+    company_categories = RecruitFavoriteStudentIndustry.where(student_id: self.id)
     return company_categories
   end
 
   def favorite_job_categories
-    job_categories = RecruitFavoriteStudentJobCategory.where(student_id: self.id).pluck(:job_category_id)
+    job_categories = RecruitFavoriteStudentJobCategory.where(student_id: self.id)
     return job_categories
   end
 end
